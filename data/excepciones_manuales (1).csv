@@ -1,0 +1,26 @@
+ID,etapa,accion,columna,valor_nuevo,motivo,verificado
+563405,limpieza,reemplazar,Ambientes,1,Ambientes cargado en 0; el aviso corresponde a un monoambiente,no
+636809,limpieza,excluir,,,Publicación de alquiler cargada como venta,no
+588949,limpieza,excluir,,,Publicación de alquiler cargada como venta,no
+639645,limpieza,excluir,,,Publicación de alquiler cargada como venta,no
+583834,limpieza,excluir,,,Precio inconsistente con la superficie (USD/m² implausible),no
+594028,limpieza,excluir,,,USD/m² extremo por error de carga (revisión manual),no
+576765,limpieza,excluir,,,USD/m² extremo por error de carga (revisión manual),no
+626043,limpieza,excluir,,,PH cargado como departamento (revisión manual del texto),no
+593280,limpieza,excluir,,,PH cargado como departamento (revisión manual del texto),no
+560373,limpieza,excluir,,,PH cargado como departamento (revisión manual del texto),no
+523481,limpieza,excluir,,,PH cargado como departamento (revisión manual del texto),no
+629105,limpieza,reemplazar,Expensas,NaN,Expensas con valor implausible; se deja como faltante,no
+636330,limpieza,reemplazar,Moneda_Expensas,ARS,Moneda de expensas cargada como USD; la descripción indica pesos,no
+554586,limpieza,reemplazar,Moneda_Expensas,ARS,Moneda de expensas cargada como USD; la descripción indica pesos,no
+546897,limpieza,reemplazar,Barrio,Villa Urquiza,Barrio faltante; se completa según la ubicación del aviso,no
+546897,limpieza,reemplazar,Ubicacion,"Villa Urquiza, Capital Federal",Ubicación faltante; se completa según el aviso,no
+629386,estado,reemplazar,Estado_Propiedad,Reciclada_refaccionada,Lectura manual de la descripción,no
+627609,estado,reemplazar,Estado_Propiedad,Reciclada_refaccionada,Lectura manual de la descripción,no
+611305,estado,reemplazar,Estado_Propiedad,Reciclada_refaccionada,Lectura manual de la descripción,no
+610234,estado,reemplazar,Estado_Propiedad,Reciclada_refaccionada,Lectura manual de la descripción,no
+607641,estado,reemplazar,Estado_Propiedad,Reciclada_refaccionada,Lectura manual de la descripción,no
+557268,estado,reemplazar,Estado_Propiedad,Reciclada_refaccionada,Lectura manual de la descripción,no
+607842,estado,reemplazar,Estado_Propiedad,Necesita_obra,Lectura manual de la descripción,no
+606775,estado,reemplazar,Estado_Propiedad,Necesita_obra,Lectura manual de la descripción,no
+573714,estado,reemplazar,Estado_Propiedad,Necesita_obra,Lectura manual de la descripción,no

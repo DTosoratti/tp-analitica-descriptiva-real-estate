@@ -1,0 +1,22 @@
+ID,etapa,accion,columna,valor_nuevo,motivo,verificado
+588949,limpieza,excluir,,,Publicación de alquiler: el título y la descripción indican alquiler,si
+653003,limpieza,excluir,,,Venta conjunta de dos departamentos con un único precio,si
+650754,limpieza,excluir,,,Venta en bloque de dos departamentos independientes; el precio corresponde a ambos,si
+607308,limpieza,excluir,,,Venta en bloque de tres monoambientes con un único precio,si
+605031,limpieza,excluir,,,Venta en bloque de cuatro monoambientes con un único precio,si
+603044,limpieza,excluir,,,Venta en bloque de dos departamentos con un único precio,si
+603043,limpieza,excluir,,,Venta en bloque de dos monoambientes (piso dividido) con un único precio,si
+583875,limpieza,excluir,,,Venta en bloque de tres departamentos con un único precio,si
+528938,limpieza,excluir,,,Venta en bloque de dos departamentos con un único precio,si
+510075,limpieza,excluir,,,Venta en bloque de siete departamentos con renta,si
+479236,limpieza,excluir,,,Venta en bloque de tres departamentos en una sola escritura,si
+632341,limpieza,excluir,,,Venta de un edificio en bloque con renta,si
+629386,estado,reemplazar,Estado_Propiedad,Reciclada_refaccionada,Lectura manual de la descripción,no
+627609,estado,reemplazar,Estado_Propiedad,Reciclada_refaccionada,Lectura manual de la descripción,no
+611305,estado,reemplazar,Estado_Propiedad,Reciclada_refaccionada,Lectura manual de la descripción,no
+610234,estado,reemplazar,Estado_Propiedad,Reciclada_refaccionada,Lectura manual de la descripción,no
+607641,estado,reemplazar,Estado_Propiedad,Reciclada_refaccionada,Lectura manual de la descripción,no
+557268,estado,reemplazar,Estado_Propiedad,Reciclada_refaccionada,Lectura manual de la descripción,no
+607842,estado,reemplazar,Estado_Propiedad,Necesita_obra,Lectura manual de la descripción,no
+606775,estado,reemplazar,Estado_Propiedad,Necesita_obra,Lectura manual de la descripción,no
+573714,estado,reemplazar,Estado_Propiedad,Necesita_obra,Lectura manual de la descripción,no

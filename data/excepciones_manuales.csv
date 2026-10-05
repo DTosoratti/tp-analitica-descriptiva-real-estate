@@ -20,3 +20,4 @@ ID,etapa,accion,columna,valor_nuevo,motivo,verificado
 607842,estado,reemplazar,Estado_Propiedad,Necesita_obra,Lectura manual de la descripción,no
 606775,estado,reemplazar,Estado_Propiedad,Necesita_obra,Lectura manual de la descripción,no
 573714,estado,reemplazar,Estado_Propiedad,Necesita_obra,Lectura manual de la descripción,no
+537073,features,excluir,,,Propiedad ubicada en Ciudadela (provincia de Buenos Aires): fuera del alcance; lo confirman el título y las coordenadas,si

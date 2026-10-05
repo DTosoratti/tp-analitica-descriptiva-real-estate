@@ -113,7 +113,12 @@ RE/MAX
 
 ### `data/raw/`
 
-Contiene la base consolidada generada durante la extracción.
+Contiene la base consolidada generada durante la extracción
+(`remax_caba_propiedades.csv`, 17.023 avisos y 29 variables).
+
+Por su tamaño, el archivo no se versiona en el repositorio: se aloja en
+Google Drive y el notebook de limpieza lo descarga automáticamente en
+esta carpeta mediante `gdown`.
 
 Los archivos de esta carpeta no se modifican manualmente una vez generados,
 de manera de conservar un punto de partida reproducible para las etapas
@@ -124,6 +129,20 @@ posteriores del proyecto.
 Contiene los datasets resultantes de los procesos de limpieza,
 transformación, validación y selección del universo de análisis.
 
+- `remax_deptos_limpio.csv`: base analítica de departamentos usados en
+  venta en CABA (9.500 avisos y 41 variables). Es el insumo de las etapas
+  de ingeniería de variables y análisis.
+- `registro_limpieza.csv`: registro de cada exclusión y modificación
+  aplicada durante la limpieza, con su criterio y la cantidad de registros
+  afectados.
+
+### `data/excepciones_manuales.csv`
+
+Tabla de correcciones puntuales por aviso que no pueden resolverse con una
+regla general (por ejemplo, ventas en bloque o alquileres publicados como
+venta). Cada fila indica el ID afectado, la etapa, la acción (excluir o
+reemplazar), la columna, el valor nuevo y el motivo de la corrección.
+
 ### `notebooks/`
 
 Contiene los notebooks utilizados para ejecutar y documentar las distintas
@@ -131,17 +150,25 @@ etapas del proyecto.
 
 - `01_extraccion_remax.ipynb`: configuración, ejecución y controles de la
   extracción.
-- `02_Limpieza.ipynb`: limpieza, controles de calidad y generación de
-  variables derivadas.
+- `02_limpieza_remax.ipynb`: limpieza y auditoría de calidad. Define el
+  universo de análisis, trata valores imposibles, duplicados, monedas,
+  valores faltantes y outliers, y exporta la base analítica a
+  `data/processed/`.
 
 ### `src/`
 
-Contiene las funciones y módulos reutilizables del proyecto.
+Contiene las funciones y módulos reutilizables del proyecto, para evitar
+concentrar la lógica en los notebooks.
 
-La lógica completa del scraper se encuentra en `src/scraper_remax.py`.
-Las funciones repetitivas utilizadas en otras etapas del proyecto también
-se incorporan a esta carpeta para evitar concentrar toda la lógica en los
-notebooks.
+- `scraper_remax.py`: lógica completa del extractor (requests, reintentos,
+  paralelismo y normalización).
+- `limpieza.py`: funciones de auditoría (calidad, variables categóricas y
+  numéricas, reglas de consistencia), registro de pasos de limpieza y
+  aplicación de excepciones manuales.
+- `patrones.py`: expresiones regulares utilizadas en la limpieza y en la
+  ingeniería de variables, definidas en un único lugar.
+- `diagnostico.py`: funciones de diagnóstico (validación de ambientes contra
+  el título, diagnóstico de valores faltantes y detección de outliers).
 
 ### `reports/`
 
@@ -150,17 +177,64 @@ Contiene informes, gráficos y entregables del proyecto.
 
 ## Ejecución
 
+Los notebooks están preparados para ejecutarse en Google Colab. Al iniciar,
+clonan el repositorio (o lo actualizan si ya está clonado) y trabajan desde
+su raíz, de modo que los módulos de `src/` y las rutas de `data/` funcionan
+sin configuración adicional.
+
 El flujo debe ejecutarse respetando el siguiente orden:
 
-1. Ejecutar `01_extraccion_remax.ipynb`.
+1. Ejecutar `01_extraccion_remax.ipynb` (solo si se quiere generar una
+   nueva corrida de la extracción).
 2. Verificar los controles de la extracción.
-3. Ejecutar `02_Limpieza.ipynb`.
-4. Verificar los controles de calidad y los registros excluidos.
-5. Utilizar el dataset procesado resultante para el análisis.
+3. Ejecutar `02_limpieza_remax.ipynb`. El notebook descarga la base raw,
+   aplica la limpieza y exporta los resultados a `data/processed/`.
+4. Verificar el registro de limpieza y los controles finales de calidad.
+5. Utilizar `data/processed/remax_deptos_limpio.csv` para las etapas
+   siguientes.
 
 El notebook de extracción contiene principalmente la configuración,
 ejecución y controles del proceso. La lógica reutilizable del scraper se
 encuentra separada en `src/scraper_remax.py`.
+
+
+## Limpieza y auditoría de calidad
+
+A partir de los 17.023 avisos de la base raw se construyó una base analítica
+de **9.500 departamentos usados en venta** (55,8 % de la extracción).
+
+| Paso | Avisos excluidos | Avisos restantes |
+| --- | ---: | ---: |
+| Base raw | — | 17.023 |
+| Tipologías distintas de departamento | 5.358 | 11.665 |
+| PH clasificados como departamento | 53 | 11.612 |
+| Propiedades nuevas (pozo, preventa, a estrenar) | 1.963 | 9.649 |
+| Duplicados | 132 | 9.517 |
+| Excepciones manuales (ventas en bloque y alquiler) | 12 | 9.505 |
+| Precio publicado en pesos | 2 | 9.503 |
+| Superficies imposibles | 3 | 9.500 |
+
+La mayor parte de la reducción responde a la definición del alcance
+(43,3 % de la base raw) y no a problemas de calidad (0,9 %).
+
+Criterios principales:
+
+- **Valores imposibles o de relleno** (expensas o antigüedad iguales a 0,
+  superficie cubierta nula) se reemplazan por faltantes en lugar de
+  excluir el aviso.
+- **Valores faltantes**: se diagnostica su mecanismo (tests t de Welch,
+  chi-cuadrado y regresión logística). Como ninguno resulta completamente
+  aleatorio, no se imputan en la base limpia y se agregan indicadores de
+  dato informado.
+- **Outliers**: se detectan con Box-Cox y regla de Tukey, y con la distancia
+  de Mahalanobis. Solo se excluyen los errores comprobados; los valores
+  atípicos genuinos (segmento de lujo, unidades a reciclar) se conservan y
+  se marcan, porque los precios por m² inusualmente bajos pueden
+  corresponder a las oportunidades que se busca identificar.
+- **Casos dudosos** se conservan con indicadores de calidad
+  (`Flag_Ambientes_Dudoso`, `Flag_Dormitorios_Inconsistente`,
+  `Flag_Posible_Republicacion`, `Flag_Atipico_Bajo`, `Flag_Atipico_Alto`,
+  `Flag_Extremo`, `Flag_Outlier_Multivariado`).
 
 
 ## Criterio de conservación de datos
@@ -173,11 +247,13 @@ modifica manualmente una vez generada. A partir de esta base se construyen
 los datasets procesados, manteniendo separadas las etapas de extracción y
 limpieza.
 
-Las exclusiones, correcciones y transformaciones analíticas se realizan
-posteriormente y deben quedar documentadas mediante reglas reproducibles.
+Las exclusiones, correcciones y transformaciones analíticas se aplican
+mediante reglas reproducibles, y cada una queda anotada en
+`data/processed/registro_limpieza.csv`.
 
 Las excepciones particulares detectadas durante la limpieza se registran
-explícitamente para mantener la trazabilidad del proceso y evitar
+explícitamente en `data/excepciones_manuales.csv`, indicando el motivo de
+cada corrección, para mantener la trazabilidad del proceso y evitar
 correcciones aisladas mediante valores hardcodeados dentro de los notebooks.
 
 

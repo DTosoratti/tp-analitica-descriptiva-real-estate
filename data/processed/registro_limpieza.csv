@@ -1,0 +1,22 @@
+Paso,Tipo,Criterio,Registros_afectados,Filas_antes,Filas_despues
+Alcance: tipología,Exclusión,"Se excluyen tipologías que no son departamento (casa, PH, cochera, terreno, etc.)",5358,17023,11665
+Error de carga: PH,Exclusión,El título indica PH y el texto lo confirma con un patrón fuerte,53,11665,11612
+Alcance: stock usado,Exclusión,"Pozo, preventa, en construcción o a estrenar (título con antigüedad ≤ 5 años o sin dato)",1963,11612,9649
+Valores de relleno: expensas,Modificación (Expensas),Expensas = 0 sin mención de 'sin expensas' → dato no informado,1013,9649,9649
+Valores de relleno: antigüedad,Modificación (Antiguedad),Antigüedad = 0 en un departamento usado → dato no informado,287,9649,9649
+Valor imposible: superficie cubierta,Modificación (Superficie_Cubierta_m2),Superficie cubierta = 0,1,9649,9649
+Valor imposible: superficie cubierta,Modificación (Precio_m2_Cubierto),USD/m² cubierto calculado sobre superficie cubierta = 0,1,9649,9649
+Unificación de criterio: dormitorios,Modificación (Dormitorios),Unidades de 1 ambiente → 0 dormitorios,536,9649,9649
+Marca de calidad: ambientes,Modificación (Flag_Ambientes_Dudoso),La cantidad de ambientes declarada en el título difiere de la variable Ambientes,275,9649,9649
+Marca de calidad: dormitorios,Modificación (Flag_Dormitorios_Inconsistente),Dormitorios >= Ambientes en unidades de 2 o más ambientes,163,9649,9649
+Duplicados,Exclusión,"Misma propiedad publicada más de una vez (mismas coordenadas, superficies, ambientes y precio, o misma descripción y ubicación); se conserva el ID más reciente",132,9649,9517
+Marca de calidad: republicación,Modificación (Flag_Posible_Republicacion),"Mismas coordenadas, superficies y ambientes con distinto precio",295,9517,9517
+Excepciones manuales (limpieza),Exclusión,Exclusiones documentadas en excepciones_manuales.csv,12,9517,9505
+Normalización: moneda del precio,Exclusión,Precio en pesos con valor incompatible con una compraventa; no se puede recuperar el precio en USD,2,9505,9503
+Normalización: moneda de expensas,Modificación (Moneda_Expensas),Expensas en USD mayores a 5000 → monto en pesos con moneda mal cargada,4,9503,9503
+Normalización: moneda de expensas,Modificación (Expensas),Expensas en USD menores o iguales a 5000; sin tipo de cambio definido → faltante,2,9503,9503
+Outliers: superficie imposible,Exclusión,"Superficie total mayor a 1000 m² (error de carga, separador decimal perdido)",3,9503,9500
+Marca de outliers: atípico bajo,Modificación (Flag_Atipico_Bajo),"Debajo de Q1 − 1,5 IQR (Box-Cox) en USD/m², precio o superficie",129,9500,9500
+Marca de outliers: atípico alto,Modificación (Flag_Atipico_Alto),"Encima de Q3 + 1,5 IQR (Box-Cox) en USD/m², precio o superficie",120,9500,9500
+Marca de outliers: extremo,Modificación (Flag_Extremo),"Fuera de 3 IQR (Box-Cox) en USD/m², precio o superficie",3,9500,9500
+Marca de outliers: multivariado,Modificación (Flag_Outlier_Multivariado),"Distancia de Mahalanobis² mayor al percentil 97,5 de chi² con 3 gl",379,9500,9500

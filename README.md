@@ -417,12 +417,14 @@ para explicar diferencias de precio dentro de un mismo estrato.
 
 ### Complementarias (Pre-Entrega 3)
 
-| Fuente | Granularidad y mecanismo de unión | Variable derivada | Comparación que permite |
-| --- | --- | --- | --- |
-| [BA Data — Estaciones de subte](https://data.buenosaires.gob.ar/dataset/subte-estaciones) y [ferrocarril](https://data.buenosaires.gob.ar/dataset/estaciones-ferrocarril) | Puntos; distancia a la estación más cercana | Distancia en metros | Diferencias de USD/m² dentro de un mismo estrato |
-| [BA Data — Espacios verdes](https://data.buenosaires.gob.ar/dataset/espacios-verdes) | Polígonos o puntos; distancia al más cercano, según tamaño o tipo | Distancia en metros | Ídem |
-| [BA Data — Establecimientos educativos](https://data.buenosaires.gob.ar/dataset/establecimientos-educativos) | Puntos; distancia por tipo de institución (gestión y nivel) | Distancia en metros | Ídem |
+Todas las fuentes complementarias tienen cobertura de CABA y granularidad de punto o polígono, por lo que son compatibles con la unidad de análisis (aviso individual con coordenadas): permiten calcular una variable distinta para cada propiedad y explicar diferencias de precio dentro de un mismo barrio.
 
+| Fuente | Cobertura y período | Granularidad y mecanismo de unión | Variable derivada | Aporta a | Limitaciones |
+| --- | --- | --- | --- | --- | --- |
+| [BA Data — Estaciones de subte](https://data.buenosaires.gob.ar/dataset/subte-estaciones) | CABA; red vigente a la fecha de descarga | Puntos; distancia de cada aviso a la estación más cercana | Distancia al subte (m) | Pregunta diagnóstica 1: diferencias de USD/m² dentro de un estrato | Foto de la red actual: no refleja obras futuras ni la frecuencia del servicio |
+| [BA Data — Estaciones de ferrocarril](https://data.buenosaires.gob.ar/dataset/estaciones-ferrocarril) | CABA; red vigente a la fecha de descarga | Puntos; distancia a la estación más cercana | Distancia al tren (m) | Pregunta diagnóstica 1 | No distingue líneas ni calidad del servicio |
+| [BA Data — Espacios verdes](https://data.buenosaires.gob.ar/dataset/espacios-verdes) | CABA; inventario vigente a la fecha de descarga | Polígonos; distancia al espacio verde más cercano, según tamaño o tipo | Distancia a plaza o parque (m) | Pregunta diagnóstica 1 | Una plaza pequeña y un parque grande no tienen el mismo efecto: requiere clasificar por tamaño |
+| [BA Data — Establecimientos educativos](https://data.buenosaires.gob.ar/dataset/establecimientos-educativos) | CABA; padrón vigente a la fecha de descarga | Puntos; distancia por tipo de gestión y nivel educativo | Distancia a escuelas (m) | Pregunta diagnóstica 1 | No informa la calidad de las instituciones; el efecto puede diferir entre gestión pública y privada |
 
 ## Estructura del repositorio
 

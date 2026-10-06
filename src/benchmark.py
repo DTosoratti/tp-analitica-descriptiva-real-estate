@@ -96,3 +96,37 @@ def benchmark_jerarquico(df, valor, niveles, mask_referencia, mask_objetivo=None
         salida.loc[tabla.index, nombres + ["N"]] = tabla[nombres + ["N"]].values
         salida.loc[tabla.index, "Nivel"] = tabla["Nivel"].astype("Int64")
     return salida
+
+
+# BANDAS PARA LOS GRUPOS DE COMPARABLES
+
+
+def grupo_ambientes(ambientes, maximo=5):
+    """Agrupa la cantidad de ambientes: 1, 2, 3, 4 y '5+' (según `maximo`)."""
+    return ambientes.apply(
+        lambda x: pd.NA if pd.isna(x) else (f"{maximo}+" if x >= maximo else str(int(x)))
+    )
+
+
+def terciles_por_grupo(valores, grupos, etiquetas=("Chica", "Media", "Grande")):
+    """
+    Terciles de `valores` calculados dentro de cada grupo (p. ej. superficie
+    dentro de cada cantidad de ambientes). Los empates se ordenan por aparición,
+    para que los tres terciles tengan el mismo tamaño.
+    """
+    salida = pd.Series(pd.NA, index=valores.index, dtype="object")
+    for _, idx in valores.dropna().groupby(grupos).groups.items():
+        if len(idx) < len(etiquetas):
+            continue
+        ranking = valores.loc[idx].rank(method="first")
+        salida.loc[idx] = pd.qcut(ranking, q=len(etiquetas), labels=list(etiquetas)).astype(str)
+    return salida
+
+
+def banda_antiguedad(antiguedad,
+                     cortes=(10, 30, 50),
+                     etiquetas=("Hasta_10", "11_30", "31_50", "Mas_50")):
+    """Bandas de antigüedad; los faltantes forman la categoría 'Sin_dato'."""
+    bandas = pd.cut(antiguedad, bins=[-np.inf, *cortes, np.inf],
+                    labels=list(etiquetas), include_lowest=True).astype("object")
+    return bandas.where(antiguedad.notna(), "Sin_dato")

@@ -83,8 +83,10 @@ def clasificar_estado(texto):
 
 
 # Negación: si alguna de estas palabras aparece en las 3 palabras previas
-# a un match, el match no cuenta ("no requiere refacción", "sin reciclar")
-NEGACION = r"\b(?:no|sin|ni|nunca|tampoco)\b(?:\s+\S+){0,2}\s*$"
+# a un match, el match no cuenta ("no requiere refacción", "sin reciclar").
+# La ventana se corta en signos de puntuación: en "sin expensas, recientemente
+# refaccionada" el "sin" no niega a "refaccionada".
+NEGACION = r"\b(?:no|sin|ni|nunca|tampoco)\b(?:\s+[^\s,.;:!?]+){0,2}\s*$"
 
 
 # Variables booleanas descriptivas extraídas del texto del aviso
@@ -97,7 +99,7 @@ TEXTO_BOOLEANAS = {
     ),
     "Silencioso": r"\b(?:silencios[oa]|muy tranquil[oa])\b",
     "Contrafrente": r"\bcontra ?frente\b",
-    "Al_Frente": r"\b(?:al frente|a la calle)\b",
+    "Al_Frente": r"\b(?:al frente|a la calle)\b(?!\s+de[l ])",  # excluye "al frente del edificio"
     "Apto_Profesional": r"\bapto (?:profesional|prof\.?)\b",
     "Reciclado_Texto": (
         r"\b(?:reciclad[oa]s?|refaccionad[oa]s?|reciclado a nuevo|refaccionado a nuevo|"

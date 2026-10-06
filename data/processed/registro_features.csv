@@ -1,0 +1,7 @@
+Paso,Tipo,Criterio,Registros_afectados,Filas_antes,Filas_despues
+Excepciones manuales (features),Exclusión,Exclusiones documentadas en excepciones_manuales.csv,1,9500,9499
+Barrio oficial: coordenadas inválidas,Modificación (Flag_Coordenadas_Invalidas),Coordenadas fuera de los límites de CABA en una propiedad de la Ciudad,3,9499,9499
+Barrio oficial: coordenadas inválidas,Modificación (Latitud),Se eliminan las coordenadas erróneas para excluirlas de los análisis espaciales,3,9499,9499
+Barrio oficial: coordenadas inválidas,Modificación (Longitud),Se eliminan las coordenadas erróneas para excluirlas de los análisis espaciales,3,9499,9499
+Excepciones manuales (estado),Modificación (varias columnas),Reemplazos documentados en excepciones_manuales.csv,8,9499,9499
+Expensas: valores de relleno o desactualizados,Modificación (Expensas),"Expensas entre ARS 1 y ARS 30,000 → relleno o monto desactualizado",189,9499,9499

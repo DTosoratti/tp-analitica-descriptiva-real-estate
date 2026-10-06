@@ -148,6 +148,12 @@ limitación explícita del análisis.
 - Criterio de aceptación inicial: MAPE menor al 15 %. Los estratos que no lo
   cumplen se tratan con cautela o se excluyen de la regla de decisión.
 
+**Resultado de la validación (notebook 03, sección 11):** el benchmark tiene un
+error porcentual mediano (MdAPE) de 14,7 % y un MAPE de 19,5 %; el PER, de
+14,0 % y 17,6 %. El MAPE supera el criterio inicial porque está influido por
+propiedades muy alejadas de sus comparables; el error típico se ubica cerca del
+15 %. El umbral de gap del 25 % supera ambas medidas de error.
+
 ### Regla de decisión
 
 Se recomienda comprar una propiedad si y solo si se cumplen simultáneamente:
@@ -429,22 +435,28 @@ para explicar diferencias de precio dentro de un mismo estrato.
 │   ├── processed/
 │   │   ├── remax_deptos_limpio.csv              # base analítica (9.500 × 41)
 │   │   ├── registro_limpieza.csv                # registro de cada paso de limpieza
-│   │   └── remax_deptos_features.csv            # base con variables derivadas y KPIs (notebook 03)
+│   │   ├── remax_deptos_features.csv            # base con variables derivadas y KPIs (9.499 × 99)
+│   │   └── registro_features.csv                # registro de pasos del notebook 03
 │   ├── external/                                # fuentes externas (se descargan al ejecutar el notebook 03)
 │   │   └── barrios_caba.geojson
 │   ├── excepciones_manuales.csv                 # correcciones puntuales documentadas
-│   └── diccionario_datos.md                     # diccionario de variables
+│   ├── diccionario_variables.csv                # descripciones de las variables (insumo del diccionario)
+│   └── diccionario_datos.md                     # diccionario de datos (99 variables)
 ├── notebooks/
 │   ├── 01_extraccion_remax.ipynb
 │   ├── 02_limpieza_remax.ipynb
-│   └── 03_features_kpis.ipynb
+│   ├── 03_features_kpis.ipynb
+│   └── 04_eda.ipynb
 ├── src/
 │   ├── scraper_remax.py                         # extractor (requests, reintentos, paralelismo)
 │   ├── limpieza.py                              # auditorías, registro de pasos, excepciones, texto
 │   ├── patrones.py                              # expresiones regulares (limpieza, texto, estado, amenities)
 │   ├── diagnostico.py                           # validación de ambientes, faltantes y outliers
-│   └── benchmark.py                             # bandas, benchmark jerárquico, PER y clasificación
+│   ├── benchmark.py                             # bandas, benchmark jerárquico, PER y clasificación
+│   └── eda.py                                   # estadísticos robustos y tests no paramétricos
 └── reports/
+    ├── validacion_benchmark.csv                 # métricas de la validación del benchmark y del PER
+    └── validacion_estado_muestra.csv            # muestra para la validación manual del estado
 ```
 
 La base raw completa (36 MB) no se versiona por su tamaño. En `data/raw/` se
@@ -470,7 +482,47 @@ No se usan rutas personales.
 4. **Ingeniería de variables y KPIs.** `03_features_kpis.ipynb` parte de
    `data/processed/remax_deptos_limpio.csv`, descarga los límites de barrios
    de BA Data en `data/external/`, construye las variables derivadas y los
-   KPIs, y exporta `data/processed/remax_deptos_features.csv`.
+   KPIs, y exporta `data/processed/remax_deptos_features.csv`, el registro de
+   pasos, el diccionario de datos y la validación del benchmark.
+5. **Análisis exploratorio.** `04_eda.ipynb` parte de
+   `data/processed/remax_deptos_features.csv` y responde las preguntas
+   descriptivas y diagnósticas, con evidencia preliminar sobre las hipótesis.
+
+
+## Principales hallazgos del análisis exploratorio
+
+El detalle está en `notebooks/04_eda.ipynb`, sección 12.
+
+- **La ubicación es el principal determinante del precio.** La mediana del
+  USD/m² va de USD 917 en Villa Lugano a USD 5.110 en Puerto Madero, con un
+  gradiente norte–sur. La antigüedad es la variable física más asociada con el
+  precio por m² (Spearman ρ = −0,48).
+- **El descuento por necesitar obra es real y homogéneo.** Las unidades que
+  necesitan obra se publican, en la mediana, 17,4 % por debajo del benchmark de
+  sus comparables (Mann-Whitney, p < 0,001), y el descuento no difiere
+  significativamente entre comunas (Kruskal-Wallis, p = 0,26).
+- **La categoría del edificio explica diferencias que el benchmark no captura.**
+  Los avisos con gimnasio, pileta, SUM o seguridad se publican entre 15 y 27
+  puntos por encima de sus comparables. Las amenities aparecen juntas y en
+  edificios más nuevos, por lo que conviene resumirlas en un índice de
+  categoría del edificio.
+- **El mercado toma las oportunidades.** Los avisos reservados o en negociación
+  están 8,4 puntos más baratos respecto de su benchmark que los activos, y las
+  propiedades clasificadas como baratas tienen más operaciones en curso (34 %
+  contra 23 %). Las que requieren verificación se comportan como las de precio
+  de mercado, lo que sugiere que una parte son errores de carga.
+- **Hay candidatas a flipping.** 290 unidades que necesitan obra tienen un
+  potencial bruto superior a los costos de transacción en el escenario base.
+
+### Estado de las hipótesis
+
+| Hipótesis | Evidencia preliminar |
+| --- | --- |
+| **H1.** Descuento por condición | **A favor.** Descuento de 17,4 % respecto de comparables, significativo y similar entre comunas |
+| **H2.** Dispersión condicional | **Parcialmente a favor.** La dispersión difiere entre barrios y los estratos más dispersos concentran más oportunidades (3,5 % contra 11,7 %), pero también más casos con indicadores de error |
+| **H3.** Oportunidades de flipping | **Preliminarmente a favor.** 290 unidades superan los costos de transacción; falta descontar el costo de la obra y de tenencia |
+
+La validación formal de las hipótesis corresponde a la Pre-Entrega 3.
 
 
 ## Cambios a partir de la devolución de la PreEntrega 1
@@ -491,20 +543,13 @@ No se usan rutas personales.
 
 ## Observaciones pendientes y plan
 
-**Avance del notebook 03:** ya se construyeron el barrio y la comuna oficiales,
-las variables derivadas del texto (con control de negación), las amenities, el
-estado de la propiedad, la superficie homogeneizada, el benchmark de
-comparables, el gap de subvaluación con la clasificación de oportunidades y el
-Precio Esperado Reciclado.
-
 | Pendiente | Plan |
 | --- | --- |
-| Imputación de expensas | KNN, previo tratamiento de los valores de relleno, solo para el costo de tenencia |
-| Validación del clasificador de estado | Lectura manual de 50 avisos por categoría (precisión mínima de 80 % en Necesita_obra y Reciclada_refaccionada) |
-| Validación del benchmark y del PER | Holdout 80/20 estratificado por barrio, MAE, MAPE y cobertura; el umbral de gap debe superar el error típico |
-| Exportación y diccionario | `remax_deptos_features.csv` y `data/diccionario_datos.md` |
-| Costo de refacción y margen de flipping | Cotizaciones por nivel de obra (liviana, media, integral), actualizadas con el ICC y convertidas a USD |
-| Tipo de cambio y brecha de cierre | Definir la fuente del tipo de cambio y confirmar la disponibilidad de estadísticas de escrituras |
+| Validación del clasificador de estado | La muestra estratificada de 200 avisos está preparada en `reports/validacion_estado_muestra.csv`; falta la lectura manual y el cálculo de la precisión (mínimo 80 % en Necesita_obra y Reciclada_refaccionada) |
+| Categoría del edificio en los comparables | Construir un índice de amenities mediante reducción de dimensionalidad e incorporarlo al benchmark, para reducir su error |
+| Costo de refacción y margen de flipping | Cotizaciones por nivel de obra (liviana, media, integral), actualizadas con el ICC y convertidas a USD, para pasar del potencial bruto al margen y evaluar H3 |
+| Tipo de cambio y brecha de cierre | Definir la fuente del tipo de cambio (también para convertir las expensas) y confirmar la disponibilidad de estadísticas de escrituras |
+| Detección contextual de outliers | La detección global marca como atípicos a los segmentos de menor precio (por ejemplo, la comuna 8); evaluar una detección por segmento |
 | Sensibilidad de la superficie homogeneizada | Recalcular el benchmark con coeficientes de 0,3 a 0,7 para la superficie descubierta |
-| Permanencia en el mercado | Nuevas capturas del extractor (agregando una columna con la fecha de extracción) para medir la primera y la última aparición de cada aviso |
-| EDA y validación preliminar de hipótesis | Estadísticos robustos, distribuciones por barrio y estado, análisis espacial y tests de H1 y H2 |
+| Permanencia en el mercado | Nuevas capturas del extractor (con una columna de fecha de extracción) para medir la primera y la última aparición de cada aviso |
+| Validación formal de hipótesis y micromercados | Tests formales de H1 a H3, fuentes externas complementarias y clustering de micromercados (Pre-Entrega 3) |

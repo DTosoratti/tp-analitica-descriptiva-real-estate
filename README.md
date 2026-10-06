@@ -455,6 +455,9 @@ para explicar diferencias de precio dentro de un mismo estrato.
 │   ├── benchmark.py                             # bandas, benchmark jerárquico, PER y clasificación
 │   └── eda.py                                   # estadísticos robustos y tests no paramétricos
 └── reports/
+    ├── informe_preentrega_1.docx                # informe ejecutivo de la Pre-Entrega 1 (editable)
+    ├── informe_preentrega_1.pdf                 # informe ejecutivo de la Pre-Entrega 1
+    ├── hallazgos_negocio.md                     # hallazgos que cambian el rumbo del negocio
     ├── validacion_benchmark.csv                 # métricas de la validación del benchmark y del PER
     └── validacion_estado_muestra.csv            # muestra para la validación manual del estado
 ```
@@ -491,7 +494,9 @@ No se usan rutas personales.
 
 ## Principales hallazgos del análisis exploratorio
 
-El detalle está en `notebooks/04_eda.ipynb`, sección 12.
+El detalle está en `notebooks/04_eda.ipynb`, sección 12. Las implicancias para
+el fondo de inversión se desarrollan en
+[`reports/hallazgos_negocio.md`](reports/hallazgos_negocio.md).
 
 - **La ubicación es el principal determinante del precio.** La mediana del
   USD/m² va de USD 917 en Villa Lugano a USD 5.110 en Puerto Madero, con un

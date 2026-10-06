@@ -179,6 +179,38 @@ confiabilidad del margen.
 | Inversión total (USD) | Precio de compra + Costos de compra + Costo de obra + Costo de tenencia | Capital total comprometido |
 | Margen potencial de flipping (%) | (PER × (1 − Costos de venta) − Inversión total) / Inversión total | Ganancia potencial relativa, antes de impuestos no modelados |
 
+### Costo de la operación de flipping
+
+El costo no es un único valor por m²: se descompone en cinco dimensiones.
+
+| Dimensión | Qué incluye | Cómo se estima |
+| --- | --- | --- |
+| Calidad | Nivel de terminaciones | Tres niveles de obra con costo propio por m² |
+| Alcance | Partes de la unidad intervenidas | Superficie cubierta intervenida × costo por m² del nivel |
+| Tiempo | Duración de la obra y de la venta | Meses de obra y de comercialización, con expensas y capital inmovilizado |
+| Transacción | Costos de compra y de venta | Porcentajes sobre el precio |
+| Contingencias | Desvíos e imprevistos de obra | Porcentaje sobre el costo de obra |
+
+**Origen del costo de refacción.** El índice de costo de la construcción del INDEC no es un costo por m², sino un índice para actualizar un valor base. Por eso se triangula con tres fuentes:
+
+1. **Costo base por nivel de obra (USD/m²):** al menos tres cotizaciones de profesionales o empresas por nivel, verificadas contra informes de costos de la cámara del sector. Niveles: liviana (pintura, pisos, iluminación), media (liviana más cocina y baño) e integral (media más instalaciones y carpinterías).
+2. **Actualización con el ICC del INDEC:** el costo base se lleva a la fecha de análisis con la variación del índice y se convierte a USD con el tipo de cambio definido.
+3. **Cota implícita del mercado:** la diferencia entre la mediana de USD/m² de las unidades recicladas y la de las que necesitan obra, dentro de un mismo estrato, indica cuánto paga el mercado por la obra. Si el costo estimado la supera, el flipping no cierra en ese estrato.
+
+El nivel de obra se asigna según la evidencia del aviso ("a reciclar" → integral; "a actualizar" → media). Sin evidencia, se usa el nivel integral como caso conservador. Para obras de nivel liviano, el valor post-obra se toma del escenario conservador del PER.
+
+**Parámetros iniciales (supuestos a validar con un escribano o corredor):**
+
+| Parámetro | Valor inicial |
+| --- | --- |
+| Costos de compra (escritura, sellos, comisión) | 6 % a 8 % del precio |
+| Costos de venta (comisión e impuestos) | 4 % a 6 % del precio de reventa |
+| Contingencia de obra | 10 % a 20 % del costo de obra |
+| Plazo de obra | 2 a 6 meses según nivel |
+| Plazo de comercialización | 3 a 9 meses |
+
+Todos se tratan como hiperparámetros. Se informa cuántas oportunidades siguen siendo positivas en el escenario más desfavorable.
+
 
 ## Definición operativa de propiedad "barata"
 
@@ -218,10 +250,10 @@ clasificados como "necesita obra".
 
 Una propiedad es barata si cumple las tres condiciones:
 
-1. **Gap de subvaluación ≥ 15 %.**
+1. **Gap de subvaluación ≥ 25 %.**
 2. **USD/m² en el cuartil inferior de su grupo** (por debajo del percentil 25).
    Esta condición controla la dispersión: en un grupo heterogéneo, un descuento
-   del 15 % respecto de la mediana puede estar dentro del rango habitual.
+   del 25 % respecto de la mediana puede estar dentro del rango habitual.
 3. **No está clasificada como "necesita obra"**, porque esos casos son más
    baratos por una razón identificable y se evalúan con el margen de flipping.
 
@@ -236,9 +268,13 @@ error de carga, se revisan manualmente antes de incluirlas en el ranking.
 | **Precio de mercado** | No cumple el criterio de subvaluación |
 | **Sin benchmark** | Ningún nivel de comparación alcanza 10 propiedades |
 
-El umbral del 15 % y el coeficiente de 0,5 de la superficie descubierta son
-supuestos iniciales. Se evaluará la sensibilidad con umbrales del 10 % y del
-20 % y coeficientes entre 0,3 y 0,7.
+El umbral inicial del 15 % se recalibró a **25 %** a partir del análisis de
+sensibilidad (notebook 03, sección 7.3). Con 15 %, el 18,6 % de los avisos
+resultaba barato, lo que refleja la dispersión normal del mercado más que una
+subvaluación (el percentil 75 del gap es 13,8 %). El umbral de 25 % se aproxima
+al percentil 90 del gap e identifica al 8,8 % de los avisos. El coeficiente de
+0,5 de la superficie descubierta sigue siendo un supuesto inicial, cuya
+sensibilidad se evaluará entre 0,3 y 0,7.
 
 
 ## Tratamiento de la variable `Estado_Propiedad`
@@ -261,8 +297,16 @@ Decisión adoptada:
 - Se validará manualmente una muestra estratificada de 50 avisos por categoría
   (precisión mínima inicial: 80 % en Necesita_obra y Reciclada_refaccionada).
 
-La columna `Estado` de la base raw corresponde al estado de la publicación y no
-a la condición física del inmueble; se renombra como `Estado_Publicacion`.
+Resultado de la clasificación: 63,5 % sin clasificar, 21,6 % buen estado,
+10,3 % reciclada o refaccionada y 4,6 % necesita obra (439 avisos). Además,
+343 avisos mencionan el reciclado de un solo ambiente y se marcan como
+`Reciclado_Parcial`.
+
+La columna `Estado` de la base raw no describe la condición física del inmueble,
+sino el estado comercial de la publicación (`active`, `reserved` o
+`negotiation`). Para evitar confusiones se renombra como `Estado_Publicacion`
+en el notebook 03, y se conserva como indicador de liquidez: una reserva o
+negociación indica que hubo demanda al precio publicado.
 
 
 ## Hipótesis
@@ -296,7 +340,7 @@ descripción, antigüedad y apto crédito).
 
 | Característica | Valor |
 | --- | --- |
-| Fecha de corte | **[completar: fecha de la corrida del extractor]** |
+| Fecha de corte | 26 de septiembre de 2026 (aproximada, según la fecha de creación del archivo de la extracción) |
 | Cobertura geográfica | CABA |
 | Registros raw | 17.023 avisos, 29 variables |
 | Registros en la base analítica | 9.500 departamentos usados, 41 variables |
@@ -360,7 +404,7 @@ para explicar diferencias de precio dentro de un mismo estrato.
 
 | Fuente | Cobertura y período | Granularidad y mecanismo de unión | Variable derivada | Aporta a | Limitaciones |
 | --- | --- | --- | --- | --- | --- |
-| [BA Data — Barrios](https://data.buenosaires.gob.ar/dataset/barrios) | CABA; límites vigentes | Polígonos de barrio. Unión espacial punto en polígono con la latitud y longitud de cada aviso | `Barrio_Oficial`, `Comuna` | Estratos del benchmark y del PER (niveles 1 a 4) | Avisos con coordenadas faltantes o fuera de CABA no pueden asignarse |
+| [BA Data — Barrios](https://data.buenosaires.gob.ar/dataset/barrios) — **integrada** | CABA; versión actualizada el 29/07/2026 (licencia CC-BY-2.5-AR) | Polígonos de barrio. Unión espacial punto en polígono con la latitud y longitud de cada aviso | `Barrio_Oficial`, `Comuna` | Estratos del benchmark y del PER (niveles 1 a 4) | 4 avisos con coordenadas fuera de CABA: uno excluido (propiedad en provincia) y tres asignados por su etiqueta y marcados con `Flag_Coordenadas_Invalidas`. La etiqueta de la fuente coincide con el barrio oficial en el 83,8 % de los avisos |
 | [INDEC — Índice del Costo de la Construcción](https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-5-33) | Gran Buenos Aires; serie mensual | Serie temporal; se une por fecha (cotización y fecha de análisis) | Factor de actualización del costo de obra | Costo de refacción | Es un índice, no un costo por m²; está en pesos |
 | Tipo de cambio histórico (BCRA; MEP como alternativa) | Argentina; serie diaria | Serie temporal; se une por fecha de referencia | Costos de obra y expensas en USD | Inversión total y margen | El margen cambia según el tipo de cambio elegido; se informa la sensibilidad |
 | Estadísticas de escrituras o precios de cierre (por ejemplo, Colegio de Escribanos de CABA) | CABA; mensual | Agregado por zona o ciudad (desagregación a confirmar) | Brecha estimada entre precio publicado y de cierre | Ajuste del gap y del valor post-obra | Disponibilidad y nivel de desagregación por confirmar |
@@ -384,17 +428,22 @@ para explicar diferencias de precio dentro de un mismo estrato.
 │   │   └── (base completa: se descarga desde Drive, ver Reproducción)
 │   ├── processed/
 │   │   ├── remax_deptos_limpio.csv              # base analítica (9.500 × 41)
-│   │   └── registro_limpieza.csv                # registro de cada paso de limpieza
+│   │   ├── registro_limpieza.csv                # registro de cada paso de limpieza
+│   │   └── remax_deptos_features.csv            # base con variables derivadas y KPIs (notebook 03)
+│   ├── external/                                # fuentes externas (se descargan al ejecutar el notebook 03)
+│   │   └── barrios_caba.geojson
 │   ├── excepciones_manuales.csv                 # correcciones puntuales documentadas
 │   └── diccionario_datos.md                     # diccionario de variables
 ├── notebooks/
 │   ├── 01_extraccion_remax.ipynb
-│   └── 02_limpieza_remax.ipynb
+│   ├── 02_limpieza_remax.ipynb
+│   └── 03_features_kpis.ipynb
 ├── src/
 │   ├── scraper_remax.py                         # extractor (requests, reintentos, paralelismo)
-│   ├── limpieza.py                              # auditorías, registro de pasos, excepciones
-│   ├── patrones.py                              # expresiones regulares
-│   └── diagnostico.py                           # validación de ambientes, faltantes y outliers
+│   ├── limpieza.py                              # auditorías, registro de pasos, excepciones, texto
+│   ├── patrones.py                              # expresiones regulares (limpieza, texto, estado, amenities)
+│   ├── diagnostico.py                           # validación de ambientes, faltantes y outliers
+│   └── benchmark.py                             # bandas, benchmark jerárquico, PER y clasificación
 └── reports/
 ```
 
@@ -418,8 +467,10 @@ No se usan rutas personales.
    exporta los resultados a `data/processed/`.
 3. **Controles.** Verificar el registro de limpieza y los controles finales del
    notebook (9.500 avisos, sin identificadores duplicados).
-4. **Análisis.** Las etapas siguientes parten de
-   `data/processed/remax_deptos_limpio.csv`.
+4. **Ingeniería de variables y KPIs.** `03_features_kpis.ipynb` parte de
+   `data/processed/remax_deptos_limpio.csv`, descarga los límites de barrios
+   de BA Data en `data/external/`, construye las variables derivadas y los
+   KPIs, y exporta `data/processed/remax_deptos_features.csv`.
 
 
 ## Cambios a partir de la devolución de la PreEntrega 1
@@ -431,7 +482,7 @@ No se usan rutas personales.
 | Mayor dispersión no implica más oportunidades | H2 se reformuló en términos condicionales a estratos homogéneos, descartando errores de carga como causa alternativa |
 | El valor post-obra y el costo de flipping no diferenciaban sus componentes | El costo se descompone en calidad, alcance, tiempo, transacción y contingencias; el valor post-obra se estima con tres escenarios |
 | La variable "estado" es ruidosa | Se decidió usarla como señal imperfecta con categorías agrupadas, sin imputar, con validación manual |
-| Definir operativamente qué es una propiedad "barata" | Benchmark de comparables con mínimo de casos, ampliación jerárquica, control de dispersión y separación de las unidades que necesitan obra |
+| Definir operativamente qué es una propiedad "barata" | Benchmark de comparables con mínimo de casos, ampliación jerárquica, control de dispersión y separación de las unidades que necesitan obra; el umbral de gap se recalibró de 15 % a 25 % con un análisis de sensibilidad |
 | Fuentes externas sin nivel ni comparación | Se separaron indispensables y complementarias, indicando nivel, mecanismo de unión y aporte a la regla |
 | El scraper ocupaba una celda muy extensa | La lógica se trasladó a `src/scraper_remax.py`; el notebook contiene configuración, ejecución y controles |
 | Chequeos repetidos, patrones redefinidos y correcciones hardcodeadas en la limpieza | Auditorías encapsuladas en `src/limpieza.py`, patrones únicos en `src/patrones.py`, excepciones en `data/excepciones_manuales.csv` y registro de cada paso |
@@ -440,14 +491,20 @@ No se usan rutas personales.
 
 ## Observaciones pendientes y plan
 
+**Avance del notebook 03:** ya se construyeron el barrio y la comuna oficiales,
+las variables derivadas del texto (con control de negación), las amenities, el
+estado de la propiedad, la superficie homogeneizada, el benchmark de
+comparables, el gap de subvaluación con la clasificación de oportunidades y el
+Precio Esperado Reciclado.
+
 | Pendiente | Plan |
 | --- | --- |
-| Barrio oficial y comuna | Unión espacial con los polígonos de BA Data, antes de construir los comparables |
-| Variables derivadas del texto | Booleanas con expresiones regulares (reciclado a nuevo, a refaccionar, luminoso, vista, etc.), amenities binarias, cochera, `Estado_Propiedad`, `Estado_Agrupado` y `Reciclado_Parcial` |
-| Cálculo de KPIs | Superficie homogeneizada, benchmark, gap de subvaluación, PER y categorías de la definición de propiedad barata |
-| Imputación de expensas | KNN después del tratamiento de outliers, solo para el costo de tenencia |
-| Validación del clasificador de estado | Lectura manual de 50 avisos por categoría |
-| Costo de refacción | Cotizaciones por nivel de obra (liviana, media, integral), actualizadas con el ICC y convertidas a USD |
+| Imputación de expensas | KNN, previo tratamiento de los valores de relleno, solo para el costo de tenencia |
+| Validación del clasificador de estado | Lectura manual de 50 avisos por categoría (precisión mínima de 80 % en Necesita_obra y Reciclada_refaccionada) |
+| Validación del benchmark y del PER | Holdout 80/20 estratificado por barrio, MAE, MAPE y cobertura; el umbral de gap debe superar el error típico |
+| Exportación y diccionario | `remax_deptos_features.csv` y `data/diccionario_datos.md` |
+| Costo de refacción y margen de flipping | Cotizaciones por nivel de obra (liviana, media, integral), actualizadas con el ICC y convertidas a USD |
 | Tipo de cambio y brecha de cierre | Definir la fuente del tipo de cambio y confirmar la disponibilidad de estadísticas de escrituras |
-| Permanencia en el mercado | Nuevas capturas del extractor para medir la primera y la última aparición de cada aviso |
+| Sensibilidad de la superficie homogeneizada | Recalcular el benchmark con coeficientes de 0,3 a 0,7 para la superficie descubierta |
+| Permanencia en el mercado | Nuevas capturas del extractor (agregando una columna con la fecha de extracción) para medir la primera y la última aparición de cada aviso |
 | EDA y validación preliminar de hipótesis | Estadísticos robustos, distribuciones por barrio y estado, análisis espacial y tests de H1 y H2 |

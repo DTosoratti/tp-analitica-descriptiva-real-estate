@@ -1,0 +1,100 @@
+Variable,Descripcion,Unidad,Fuente,Transformacion
+ID,Identificador del aviso en RE/MAX,—,RE/MAX (base raw),Sin cambios
+ID_Entidad,Identificador interno de la entidad en la API,—,RE/MAX (base raw),Sin cambios
+Operacion,Tipo de operación (constante: venta),—,RE/MAX (base raw),Sin cambios
+Tipo_Propiedad,Tipología homogeneizada (constante: departamento),—,RE/MAX (base raw),Subcategorías de departamento unificadas; la original se conserva en Tipo_Propiedad_Original
+Titulo,Título del aviso,Texto,RE/MAX (base raw),Sin cambios
+Descripcion,Descripción del aviso,Texto,RE/MAX (base raw),Sin cambios; falta en 54 avisos por falla del endpoint de detalle
+Fecha_Publicacion,Fecha de publicación (no informada por la fuente),Fecha,RE/MAX (base raw),100% faltante; se conserva para documentar la limitación
+Antiguedad,Antigüedad del edificio,Años,RE/MAX (base raw),Valores 0 en stock usado reemplazados por faltante
+Apto_Credito,Indica si el aviso declara apto crédito hipotecario,Booleano,RE/MAX (base raw),Sin cambios
+Amenities,Lista de amenities informada por la fuente,Texto,RE/MAX (base raw),Sin cambios
+Moneda,Moneda del precio (constante: USD),—,RE/MAX (base raw),Se excluyeron los avisos con precio en pesos
+Precio_Valor,Precio publicado,USD,RE/MAX (base raw),Sin cambios
+Moneda_Expensas,Moneda de las expensas,—,RE/MAX (base raw),Corregida a ARS cuando el monto en USD era inverosímil
+Expensas,Expensas mensuales informadas,ARS,RE/MAX (base raw),"Ceros sin mención de 'sin expensas', valores de relleno y montos menores a ARS 30.000 reemplazados por faltante"
+Precio_m2_Total,Precio por m² sobre la superficie total,USD/m²,RE/MAX (base raw),Sin cambios
+Precio_m2_Cubierto,Precio por m² sobre la superficie cubierta,USD/m²,RE/MAX (base raw),Faltante si la superficie cubierta es 0
+Ambientes,Cantidad de ambientes,Unidades,RE/MAX (base raw),Validada contra el título (ver Flag_Ambientes_Dudoso)
+Dormitorios,Cantidad de dormitorios,Unidades,RE/MAX (base raw),Monoambientes unificados con 0 dormitorios
+Baños,Cantidad de baños,Unidades,RE/MAX (base raw),Sin cambios
+Superficie_Total_m2,Superficie total,m²,RE/MAX (base raw),Se excluyeron superficies mayores a 1.000 m² (errores de carga)
+Superficie_Cubierta_m2,Superficie cubierta,m²,RE/MAX (base raw),Valor 0 reemplazado por faltante
+Direccion,Dirección informada,Texto,RE/MAX (base raw),Sin cambios
+Barrio,Etiqueta de ubicación de la fuente (incluye subzonas informales),Texto,RE/MAX (base raw),Sin cambios; para el análisis se usa Barrio_Oficial
+Ubicacion,Ubicación informada por la fuente,Texto,RE/MAX (base raw),Sin cambios
+Latitud,Latitud del aviso,Grados (WGS84),RE/MAX (base raw),Eliminada en 3 avisos con coordenadas fuera de CABA
+Longitud,Longitud del aviso,Grados (WGS84),RE/MAX (base raw),Eliminada en 3 avisos con coordenadas fuera de CABA
+Estado_Publicacion,"Estado comercial de la publicación: active, reserved o negotiation",Categoría,RE/MAX (base raw),Renombrada (en la fuente se llama Estado)
+ID_Interno,Identificador interno de la publicación,—,RE/MAX (base raw),Sin cambios
+Link,URL del aviso,Texto,RE/MAX (base raw),Sin cambios
+Tipo_Propiedad_Original,Subcategoría de departamento según RE/MAX,Categoría,Notebook 02 (limpieza),Copia de Tipo_Propiedad antes de homogeneizarla
+Ambientes_Titulo,Cantidad de ambientes declarada en el título,Unidades,Notebook 02 (limpieza),Extraída del título con expresiones regulares
+Flag_Ambientes_Dudoso,El título contradice la variable Ambientes,Booleano,Notebook 02 (limpieza),Comparación Ambientes vs. Ambientes_Titulo
+Flag_Dormitorios_Inconsistente,Dormitorios mayor o igual que ambientes en unidades de 2 o más ambientes,Booleano,Notebook 02 (limpieza),Regla de consistencia
+Flag_Posible_Republicacion,"Mismas coordenadas, superficies y ambientes que otro aviso, con distinto precio",Booleano,Notebook 02 (limpieza),Detección de duplicados (nivel 3)
+Expensas_Informadas,El aviso informa expensas válidas,Booleano,Notebook 03 (variables y KPIs),"Expensas no faltantes, después de tratar los valores de relleno"
+Antiguedad_Informada,El aviso informa la antigüedad,Booleano,Notebook 02 (limpieza),Antiguedad no faltante
+Amenities_Informadas,El aviso informa la lista de amenities,Booleano,Notebook 02 (limpieza),Amenities no faltante
+Flag_Atipico_Bajo,"Valor atípicamente bajo en precio, superficie o USD/m²",Booleano,Notebook 02 (limpieza),"Debajo de Q1 − 1,5 IQR en escala Box-Cox"
+Flag_Atipico_Alto,"Valor atípicamente alto en precio, superficie o USD/m²",Booleano,Notebook 02 (limpieza),"Encima de Q3 + 1,5 IQR en escala Box-Cox"
+Flag_Extremo,"Valor extremo en precio, superficie o USD/m²",Booleano,Notebook 02 (limpieza),Fuera de 3 IQR en escala Box-Cox
+Flag_Outlier_Multivariado,"Combinación inusual de USD/m², superficie y ambientes",Booleano,Notebook 02 (limpieza),"Distancia de Mahalanobis² mayor al percentil 97,5 de chi² con 3 gl"
+Barrio_Oficial,Barrio oficial de CABA,Categoría,BA Data — Barrios,Unión espacial punto en polígono; 3 avisos asignados por su etiqueta
+Comuna,Comuna oficial de CABA,1 a 15,BA Data — Barrios,Unión espacial punto en polígono
+Flag_Coordenadas_Invalidas,Coordenadas fuera de CABA en una propiedad de la Ciudad,Booleano,Notebook 03 (variables y KPIs),Barrio asignado por la etiqueta y coordenadas eliminadas
+Luminoso,El aviso menciona luminosidad,Booleano,Notebook 03 (variables y KPIs),"RegEx sobre título y descripción, con control de negación"
+Vista,"El aviso menciona vista abierta, panorámica o al río",Booleano,Notebook 03 (variables y KPIs),RegEx sobre título y descripción
+Silencioso,El aviso menciona que la unidad o el entorno son silenciosos o tranquilos,Booleano,Notebook 03 (variables y KPIs),RegEx con control de negación
+Contrafrente,El aviso menciona orientación al contrafrente,Booleano,Notebook 03 (variables y KPIs),RegEx sobre título y descripción
+Al_Frente,El aviso menciona orientación al frente o a la calle,Booleano,Notebook 03 (variables y KPIs),RegEx; excluye 'al frente de…'
+Apto_Profesional,El aviso declara apto profesional,Booleano,Notebook 03 (variables y KPIs),RegEx sobre título y descripción
+Reciclado_Texto,El aviso menciona reciclado o refacción (de la unidad o de un ambiente),Booleano,Notebook 03 (variables y KPIs),RegEx con control de negación
+A_Refaccionar,El aviso indica que la unidad debe refaccionarse o reciclarse,Booleano,Notebook 03 (variables y KPIs),RegEx con control de negación
+Pileta,Disponibilidad de pileta,Booleano,Notebook 03 (variables y KPIs),Lista de amenities de la fuente o mención en el texto
+SUM,Disponibilidad de salón de usos múltiples,Booleano,Notebook 03 (variables y KPIs),Lista de amenities o texto
+Parrilla,Disponibilidad de parrilla (propia o del edificio),Booleano,Notebook 03 (variables y KPIs),Lista de amenities o texto
+Gimnasio,Disponibilidad de gimnasio,Booleano,Notebook 03 (variables y KPIs),Lista de amenities o texto
+Laundry,Disponibilidad de laundry o lavadero,Booleano,Notebook 03 (variables y KPIs),Lista de amenities o texto
+Seguridad,Seguridad o vigilancia 24 horas,Booleano,Notebook 03 (variables y KPIs),Lista de amenities o texto
+Solarium,Disponibilidad de solarium,Booleano,Notebook 03 (variables y KPIs),Lista de amenities o texto
+Balcon,Disponibilidad de balcón,Booleano,Notebook 03 (variables y KPIs),Lista de amenities o texto
+Terraza,Disponibilidad de terraza (propia o común),Booleano,Notebook 03 (variables y KPIs),Lista de amenities o texto
+Patio,Disponibilidad de patio,Booleano,Notebook 03 (variables y KPIs),Lista de amenities o texto
+Ascensor,Disponibilidad de ascensor,Booleano,Notebook 03 (variables y KPIs),Lista de amenities o texto
+Baulera,Disponibilidad de baulera,Booleano,Notebook 03 (variables y KPIs),Lista de amenities o texto
+Cochera_Mencion,El aviso menciona una cochera,Booleano,Notebook 03 (variables y KPIs),RegEx (incluye plurales)
+Cochera_No_Incluida,El aviso aclara que la cochera es opcional o no está incluida,Booleano,Notebook 03 (variables y KPIs),RegEx
+Cochera_Incluida,Cochera incluida en el precio,Booleano,Notebook 03 (variables y KPIs),Cochera_Mencion y no Cochera_No_Incluida
+Reciclado_Parcial,Menciona el reciclado de un solo ambiente sin evidencia de reciclado integral,Booleano,Notebook 03 (variables y KPIs),"RegEx (cocina, baño) sin señal de reciclado integral"
+Estado_Propiedad,"Estado de conservación: Necesita_obra, Reciclada_refaccionada, Buen_estado o Sin_clasificar",Categoría,Notebook 03 (variables y KPIs),Jerarquía de señales RegEx con control de negación y excepciones manuales
+Estado_Agrupado,"Estado agrupado: Necesita_obra, Buen_o_reciclada o Sin_clasificar",Categoría,Notebook 03 (variables y KPIs),Agrupa Buen_estado y Reciclada_refaccionada
+Superficie_Descubierta_m2,Superficie descubierta,m²,Notebook 03 (variables y KPIs),Superficie total − superficie cubierta
+Flag_Superficie_Homogeneizada_Imputada,La superficie homogeneizada se calculó con la total por falta de la cubierta,Booleano,Notebook 03 (variables y KPIs),—
+Superficie_Homogeneizada_m2,Superficie homogeneizada,m²,Notebook 03 (variables y KPIs),"Cubierta + 0,5 × descubierta"
+USD_m2_Homogeneizado,Precio por m² homogeneizado,USD/m²,Notebook 03 (variables y KPIs),Precio_Valor / Superficie_Homogeneizada_m2
+Ambientes_Grupo,"Grupo de ambientes: 1, 2, 3, 4, 5+",Categoría,Notebook 03 (variables y KPIs),Agrupación de Ambientes
+Banda_Superficie,"Tercil de superficie dentro del grupo de ambientes: Chica, Media, Grande",Categoría,Notebook 03 (variables y KPIs),Terciles de Superficie_Homogeneizada_m2 por Ambientes_Grupo
+Banda_Antiguedad,"Banda de antigüedad: Hasta_10, 11_30, 31_50, Mas_50, Sin_dato",Categoría,Notebook 03 (variables y KPIs),"Cortes en 10, 30 y 50 años"
+Flag_Comparable_Valido,Puede actuar como comparable en el benchmark,Booleano,Notebook 03 (variables y KPIs),"Excluye necesita obra, extremos y ambientes dudosos"
+Benchmark_USD_m2,Mediana del USD/m² de los comparables,USD/m²,Notebook 03 (variables y KPIs),"Benchmark jerárquico (4 niveles, mínimo 10 comparables, leave-one-out)"
+P25_USD_m2_Comparable,Percentil 25 del USD/m² de los comparables,USD/m²,Notebook 03 (variables y KPIs),Benchmark jerárquico
+N_Comparables,Cantidad de comparables usados en el benchmark,Unidades,Notebook 03 (variables y KPIs),Benchmark jerárquico
+Nivel_Benchmark,"Nivel de la jerarquía usado (1 = más fino, 4 = más amplio)",1 a 4,Notebook 03 (variables y KPIs),Benchmark jerárquico
+Precio_Esperado,Precio esperado según comparables,USD,Notebook 03 (variables y KPIs),Benchmark_USD_m2 × Superficie_Homogeneizada_m2
+Gap_Subvaluacion_pct,Gap de subvaluación,%,Notebook 03 (variables y KPIs),(Precio_Esperado − Precio_Valor) / Precio_Esperado × 100
+Clasificacion_Oportunidad,Categoría según la definición de propiedad barata (umbral de gap 25%),Categoría,Notebook 03 (variables y KPIs),"Gap, cuartil inferior del grupo, estado e indicadores de verificación"
+PER_USD_m2_P25,Percentil 25 del USD/m² de comparables en buen estado o reciclados,USD/m²,Notebook 03 (variables y KPIs),Benchmark jerárquico sobre Buen_o_reciclada; solo para Necesita_obra
+PER_USD_m2_Base,Mediana del USD/m² de comparables en buen estado o reciclados,USD/m²,Notebook 03 (variables y KPIs),Ídem
+PER_USD_m2_P75,Percentil 75 del USD/m² de comparables en buen estado o reciclados,USD/m²,Notebook 03 (variables y KPIs),Ídem
+PER_N_Comparables,Cantidad de comparables usados en el PER,Unidades,Notebook 03 (variables y KPIs),Ídem
+PER_Nivel,Nivel de la jerarquía usado en el PER,1 a 4,Notebook 03 (variables y KPIs),Ídem
+PER_Conservador,"Valor post-obra, escenario conservador",USD,Notebook 03 (variables y KPIs),PER_USD_m2_P25 × Superficie_Homogeneizada_m2
+PER_Base,"Valor post-obra, escenario base",USD,Notebook 03 (variables y KPIs),PER_USD_m2_Base × Superficie_Homogeneizada_m2
+PER_Optimista,"Valor post-obra, escenario optimista",USD,Notebook 03 (variables y KPIs),PER_USD_m2_P75 × Superficie_Homogeneizada_m2
+Potencial_Bruto_Conservador_pct,"Revalorización bruta, escenario conservador (no descuenta costos)",%,Notebook 03 (variables y KPIs),(PER_Conservador − Precio_Valor) / Precio_Valor × 100
+Potencial_Bruto_Base_pct,"Revalorización bruta, escenario base (no descuenta costos)",%,Notebook 03 (variables y KPIs),(PER_Base − Precio_Valor) / Precio_Valor × 100
+Potencial_Bruto_Optimista_pct,"Revalorización bruta, escenario optimista (no descuenta costos)",%,Notebook 03 (variables y KPIs),(PER_Optimista − Precio_Valor) / Precio_Valor × 100
+Expensas_por_m2,Expensas por m² homogeneizado,ARS/m²,Notebook 03 (variables y KPIs),Expensas / Superficie_Homogeneizada_m2
+Expensas_Imputadas,Expensas con faltantes imputados,ARS,Notebook 03 (variables y KPIs),"KNN (k = 20) sobre el logaritmo, con factor de ajuste de nivel 1,119; los valores observados no se modifican"
+Flag_Expensas_Imputadas,Las expensas fueron imputadas,Booleano,Notebook 03 (variables y KPIs),—

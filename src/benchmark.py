@@ -130,3 +130,44 @@ def banda_antiguedad(antiguedad,
     bandas = pd.cut(antiguedad, bins=[-np.inf, *cortes, np.inf],
                     labels=list(etiquetas), include_lowest=True).astype("object")
     return bandas.where(antiguedad.notna(), "Sin_dato")
+
+
+# CLASIFICACIÓN DE OPORTUNIDADES (definición operativa de propiedad "barata")
+
+# Indicadores de posible error de carga: si una propiedad cumple el criterio de
+# "barata" pero tiene alguno de estos, se revisa manualmente antes del ranking
+FLAGS_VERIFICACION = ["Flag_Atipico_Bajo", "Flag_Outlier_Multivariado", "Flag_Coordenadas_Invalidas"]
+
+
+def clasificar_oportunidad(df, umbral_gap=15, flags_verificacion=FLAGS_VERIFICACION):
+    """
+    Clasifica cada propiedad según la definición operativa de propiedad barata.
+
+    Requiere las columnas Gap_Subvaluacion_pct, USD_m2_Homogeneizado,
+    P25_USD_m2_Comparable, Benchmark_USD_m2, Estado_Propiedad, Descripcion
+    y las de `flags_verificacion`.
+
+    Categorías: Sin_benchmark, A_refaccionar_con_descuento,
+    Barata_requiere_verificacion, Barata, Precio_de_mercado.
+    """
+    necesita_obra = df["Estado_Propiedad"].eq("Necesita_obra")
+    criterio = (
+        (df["Gap_Subvaluacion_pct"] >= umbral_gap)
+        & (df["USD_m2_Homogeneizado"] <= df["P25_USD_m2_Comparable"])
+    )
+    verificar = (
+        df[flags_verificacion].fillna(False).astype(bool).any(axis=1)
+        | df["Descripcion"].isna()
+    )
+    categorias = np.select(
+        [
+            df["Benchmark_USD_m2"].isna(),
+            necesita_obra & (df["Gap_Subvaluacion_pct"] > 0),
+            ~necesita_obra & criterio & verificar,
+            ~necesita_obra & criterio,
+        ],
+        ["Sin_benchmark", "A_refaccionar_con_descuento",
+         "Barata_requiere_verificacion", "Barata"],
+        default="Precio_de_mercado",
+    )
+    return pd.Series(categorias, index=df.index, name="Clasificacion_Oportunidad")

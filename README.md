@@ -454,13 +454,13 @@ Todas las fuentes complementarias tienen cobertura de CABA y granularidad de pun
 │   ├── processed/
 │   │   ├── remax_deptos_limpio.csv              # base analítica (9.500 × 41)
 │   │   ├── registro_limpieza.csv                # registro de cada paso de limpieza
-│   │   ├── remax_deptos_features.csv            # base con variables derivadas y KPIs (9.499 × 99)
+│   │   ├── remax_deptos_features.csv            # base con variables derivadas y KPIs (9.499 × 100)
 │   │   └── registro_features.csv                # registro de pasos del notebook 03
 │   ├── external/                                # fuentes externas (se descargan al ejecutar el notebook 03)
 │   │   └── barrios_caba.geojson
 │   ├── excepciones_manuales.csv                 # correcciones puntuales documentadas
 │   ├── diccionario_variables.csv                # descripciones de las variables (insumo del diccionario)
-│   └── diccionario_datos.md                     # diccionario de datos (99 variables)
+│   └── diccionario_datos.md                     # diccionario de datos (100 variables)
 ├── notebooks/
 │   ├── 01_extraccion_remax.ipynb
 │   ├── 02_limpieza_remax.ipynb
@@ -564,6 +564,16 @@ La validación formal de las hipótesis corresponde a la Pre-Entrega 3.
 | El scraper ocupaba una celda muy extensa | La lógica se trasladó a `src/scraper_remax.py`; el notebook contiene configuración, ejecución y controles |
 | Chequeos repetidos, patrones redefinidos y correcciones hardcodeadas en la limpieza | Auditorías encapsuladas en `src/limpieza.py`, patrones únicos en `src/patrones.py`, excepciones en `data/excepciones_manuales.csv` y registro de cada paso |
 | El README mencionaba Argenprop | Se corrigió la fuente (RE/MAX) y se documentaron la ejecución, las salidas de cada notebook y la ubicación de los datos |
+
+
+## Limitaciones
+
+- **Una sola fuente.** Los avisos provienen de RE/MAX; no representan a todo el mercado, y un mismo inmueble puede estar publicado por otras inmobiliarias.
+- **Precio de publicación.** Se analizan precios pedidos, no de cierre. La brecha entre ambos no está medida (ver pendientes).
+- **Una única captura.** La base es una foto a la fecha de corte; no se observa la permanencia ni la evolución del precio de cada aviso.
+- **Estado inferido del texto.** El 63,5 % de los avisos no informa el estado y la precisión del clasificador no está validada manualmente. Se midieron el sesgo de declaración y las inconsistencias, pero no reemplazan esa validación.
+- **Potencial bruto.** El PER estima el valor post-obra, no el margen de flipping: faltan el costo de obra, la tenencia y el tipo de cambio.
+- **Umbral de gap.** El 25 % surge de un análisis de sensibilidad (aproximadamente el percentil 90 del gap) y no de una validación externa; como evidencia indirecta, las propiedades clasificadas como baratas tienen más operaciones en curso.
 
 
 ## Observaciones pendientes y plan

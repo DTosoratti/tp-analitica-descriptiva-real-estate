@@ -303,13 +303,43 @@ Decisión adoptada:
 - **Sin_clasificar** es una categoría propia: no se imputa ni se asume buen estado.
 - `Reciclado_Parcial` marca menciones de reciclado de un solo ambiente; esos
   avisos no se cuentan como reciclada integral al construir el PER.
-- Se validará manualmente una muestra estratificada de 50 avisos por categoría
-  (precisión mínima inicial: 80 % en Necesita_obra y Reciclada_refaccionada).
+- La precisión del clasificador se valida manualmente (ver "Criterio de revisión
+  manual"). Criterio inicial: al menos 80 % de precisión en Necesita_obra y
+  Reciclada_refaccionada.
 
 Resultado de la clasificación: 63,5 % sin clasificar, 21,6 % buen estado,
 10,3 % reciclada o refaccionada y 4,6 % necesita obra (439 avisos). Además,
 343 avisos mencionan el reciclado de un solo ambiente y se marcan como
 `Reciclado_Parcial`.
+
+### Criterio de revisión manual
+
+La validación compara la clasificación automática con la lectura de una persona
+sobre el título y la descripción del aviso (las fotos no se usan para decidir; si
+aportan información, se anota en una columna de notas). Los cuatro integrantes
+aplican el mismo criterio:
+
+- **Necesita_obra:** el aviso ofrece la unidad para reciclar, refaccionar o hacer
+  flipping de forma explícita ("a reciclar", "oportunidad de reciclar", "ideal
+  flipping"), aunque diga que es habitable.
+- **Buen_o_reciclada:** el aviso dice explícitamente que está en buen estado o que
+  ya fue reciclado o refaccionado.
+- **Sin_clasificar:** todo lo demás, incluidas las señales mezcladas y los detalles
+  sueltos (por ejemplo, una cocina vieja).
+- **Señales opuestas en el mismo aviso:** si la descripción del estado es específica
+  y repetida (ambientes, baño, pisos) y la frase de reciclar es genérica o de cierre
+  comercial, prevalece el estado descripto; si se describe obra concreta, prevalece
+  Necesita_obra; si no se puede decidir, Sin_clasificar.
+
+Este criterio es un protocolo de revisión y no cambia la clasificación automática,
+que da prioridad a las señales de obra. Las diferencias entre ambos son lo que la
+validación mide. Se revisan en primer lugar los 78 avisos con
+`Flag_Senal_Contradictoria` (`reports/validacion_estado_contradictorios.csv`,
+repartidos entre los cuatro integrantes) y, si hay tiempo, una muestra de la
+estratificada de 200 avisos. Los errores de precisión (clasificó mal) se reportan
+por separado de los de cobertura (no detectó una frase que indica obra, por
+ejemplo "oportunidad de reciclar" o "ideal flipping"), ya que estos últimos
+indican que el clasificador subestima la cantidad de unidades que necesitan obra.
 
 ### Qué se midió sobre la calidad de la señal (notebook 03)
 
@@ -319,14 +349,17 @@ Resultado de la clasificación: 63,5 % sin clasificar, 21,6 % buen estado,
 | Sesgo de declaración (sección 6.4) | % de `Sin_clasificar` por antigüedad, cuartil de USD/m², comuna y amenities, con chi-cuadrado | El estado se informa de forma desigual. Casi no lo informan los edificios de hasta 10 años (87 % sin clasificar) ni los avisos sin dato de antigüedad (99 %), frente a 51–55 % en los de más de 30 años. Los avisos más caros lo informan menos (75 % sin clasificar en el cuartil superior contra 57 % en el inferior). Por comuna varía entre 52 % y 73 %. Informar amenities casi no influye (3 puntos de diferencia) |
 | Cruce con señales no textuales (sección 6.5) | Antigüedad, amenities y expensas por m² según el estado | Los `Necesita_obra` son los más antiguos (mediana de 56 años contra 47 y 36) y tienen las expensas por m² más bajas, y el 31 % tiene perfil de edificio viejo sin amenities (22 % y 14 % en los otros grupos). Kruskal-Wallis (sección 6.6) rechaza que los tres grupos tengan la misma distribución en antigüedad, amenities y expensas por m² (esta última con diferencia chica), y Mann-Whitney confirma que los `Necesita_obra` son más antiguos que los `Buen_o_reciclada` (56 contra 47 años). Es un respaldo indirecto y no reemplaza la validación manual |
 | Sensibilidad a la definición de "reciclada" (sección 8.3) | PER con una definición estricta, la base y dos más laxas; clasificación con comparables solo de avisos con estado informado | El potencial bruto mediano se mantiene entre 21 % y 31 % y el 66–74 % de las propiedades con PER supera el 12 %. Usar solo comparables con estado informado reduce las `Barata` de 716 a 663 y deja sin benchmark a 174 avisos (antes 49) |
+| Revisión manual de los avisos con señales contradictorias (sección 10.3) | Los cuatro integrantes revisaron los 78 avisos con `Flag_Senal_Contradictoria` según el criterio de revisión manual | Coincidencia global de 79,5 % (62 de 78). De los 68 clasificados como `Necesita_obra`, 59 se confirmaron (86,8 %); los otros 9 eran buen estado o reciclado (4) o no permitían decidir (5). De los 10 clasificados como `Reciclada_refaccionada`, solo 3 se confirmaron (30 %): 7 eran en realidad unidades a renovar, con frases como "gran potencial de reciclado", "ideal para modernizar" o "invita a una renovación integral", que la expresión regular de reciclada interpreta como reciclado ya hecho. Son los casos más dudosos (0,8 % de la base) y no hubo una segunda lectura independiente, por lo que los porcentajes son indicativos |
 
 Implicancias: los comparables en buen estado o reciclados provienen sobre todo
 de edificios más antiguos y de menor precio, por lo que el PER no debe
 extrapolarse a unidades nuevas o de precio alto. Para las unidades que
 necesitan obra, que también son antiguas, el sesgo es menos grave. Las
 conclusiones sobre el PER y la clasificación de oportunidades no dependen de la
-definición adoptada. Lo que sigue sin medirse es la precisión del clasificador
-(validación manual, ver pendientes).
+definición adoptada. La revisión manual de los casos contradictorios muestra que la
+categoría `Reciclada_refaccionada`, que alimenta el PER, puede incluir unidades
+que en realidad necesitan obra (7 de 10 en ese subconjunto). Falta medir cuánto se
+extiende ese error en una muestra aleatoria (ver pendientes).
 
 La columna `Estado` de la base raw no describe la condición física del inmueble,
 sino el estado comercial de la publicación (`active`, `reserved` o
@@ -482,7 +515,8 @@ Todas las fuentes complementarias tienen cobertura de CABA y granularidad de pun
     ├── informe_preentrega_1.pdf                 # informe ejecutivo de la Pre-Entrega 1
     ├── hallazgos_negocio.md                     # hallazgos que cambian el rumbo del negocio
     ├── validacion_benchmark.csv                 # métricas de la validación del benchmark y del PER
-    └── validacion_estado_muestra.csv            # muestra para la validación manual del estado
+    ├── validacion_estado_muestra.csv            # muestra estratificada para la validación manual del estado
+    └── validacion_estado_contradictorios.csv    # avisos con señales contradictorias, con la revisión manual
 ```
 
 La base raw completa (36 MB) no se versiona por su tamaño. En `data/raw/` se
@@ -561,7 +595,7 @@ La validación formal de las hipótesis corresponde a la Pre-Entrega 3.
 | Lo predictivo y prescriptivo quedó como intención futura | Se definió la variable a estimar (PER), su validación (holdout, MAE, MAPE, cobertura) y una regla de decisión con umbrales, presupuesto y mínimo de comparables |
 | Mayor dispersión no implica más oportunidades | H2 se reformuló en términos condicionales a estratos homogéneos, descartando errores de carga como causa alternativa |
 | El valor post-obra y el costo de flipping no diferenciaban sus componentes | El costo se descompone en calidad, alcance, tiempo, transacción y contingencias; el valor post-obra se estima con tres escenarios |
-| La variable "estado" es ruidosa | Se usa como señal imperfecta con categorías agrupadas, sin imputar. Se midieron el sesgo de declaración, las señales contradictorias, el cruce con variables no textuales y la sensibilidad del PER a la definición; la validación manual de la precisión sigue pendiente |
+| La variable "estado" es ruidosa | Se usa como señal imperfecta con categorías agrupadas, sin imputar. Se midieron el sesgo de declaración, las señales contradictorias, el cruce con variables no textuales y la sensibilidad del PER a la definición; la validación manual cubrió los 78 casos más dudosos y detectó un problema en la categoría de reciclada; falta medirlo en una muestra aleatoria |
 | Definir operativamente qué es una propiedad "barata" | Benchmark de comparables con mínimo de casos, ampliación jerárquica, control de dispersión y separación de las unidades que necesitan obra; el umbral de gap se recalibró de 15 % a 25 % con un análisis de sensibilidad |
 | Fuentes externas sin nivel ni comparación | Se separaron indispensables y complementarias, indicando nivel, mecanismo de unión y aporte a la regla |
 | El scraper ocupaba una celda muy extensa | La lógica se trasladó a `src/scraper_remax.py`; el notebook contiene configuración, ejecución y controles |
@@ -574,7 +608,8 @@ La validación formal de las hipótesis corresponde a la Pre-Entrega 3.
 - **Una sola fuente.** Los avisos provienen de RE/MAX; no representan a todo el mercado, y un mismo inmueble puede estar publicado por otras inmobiliarias.
 - **Precio de publicación.** Se analizan precios pedidos, no de cierre. La brecha entre ambos no está medida (ver pendientes).
 - **Una única captura.** La base es una foto a la fecha de corte; no se observa la permanencia ni la evolución del precio de cada aviso.
-- **Estado inferido del texto.** El 63,5 % de los avisos no informa el estado y la precisión del clasificador no está validada manualmente. Se midieron el sesgo de declaración y las inconsistencias, pero no reemplazan esa validación.
+- **Estado inferido del texto.** El 63,5 % de los avisos no informa el estado y la precisión del clasificador solo se validó manualmente sobre los 78 avisos con
+  señales contradictorias, donde `Reciclada_refaccionada` tuvo baja precisión (3 de 10). Se midieron el sesgo de declaración y las inconsistencias, pero no reemplazan esa validación.
 - **Potencial bruto.** El PER estima el valor post-obra, no el margen de flipping: faltan el costo de obra, la tenencia y el tipo de cambio.
 - **Umbral de gap.** El 25 % surge de un análisis de sensibilidad (aproximadamente el percentil 90 del gap) y no de una validación externa; como evidencia indirecta, las propiedades clasificadas como baratas tienen más operaciones en curso.
 
@@ -583,7 +618,7 @@ La validación formal de las hipótesis corresponde a la Pre-Entrega 3.
 
 | Pendiente | Plan |
 | --- | --- |
-| Validación del clasificador de estado | La muestra estratificada de 200 avisos está preparada en `reports/validacion_estado_muestra.csv`; falta la lectura manual y el cálculo de la precisión (mínimo 80 % en Necesita_obra y Reciclada_refaccionada). Los 66 avisos con señales contradictorias pueden revisarse primero |
+| Validación del clasificador de estado | Los 78 avisos con señales contradictorias ya fueron revisados (resultados en "Qué se midió sobre la calidad de la señal"). Falta revisar la muestra estratificada de 200 avisos (`reports/validacion_estado_muestra.csv`), en particular los 50 `Reciclada_refaccionada`, que alimentan el PER. Según el resultado, se ajustará el patrón de reciclada para que expresiones como "potencial de reciclado" o "ideal para modernizar" no cuenten como reciclado ya hecho, y se repetirán los notebooks 03 y 04 (la clasificación del estado se construye en el 03) |
 | Categoría del edificio en los comparables | Construir un índice de amenities mediante reducción de dimensionalidad e incorporarlo al benchmark, para reducir su error |
 | Costo de refacción y margen de flipping | Cotizaciones por nivel de obra (liviana, media, integral), actualizadas con el ICC y convertidas a USD, para pasar del potencial bruto al margen y evaluar H3 |
 | Tipo de cambio y brecha de cierre | Definir la fuente del tipo de cambio (también para convertir las expensas) y confirmar la disponibilidad de estadísticas de escrituras |

@@ -279,8 +279,11 @@ sensibilidad (notebook 03, sección 7.3). Con 15 %, el 18,6 % de los avisos
 resultaba barato, lo que refleja la dispersión normal del mercado más que una
 subvaluación (el percentil 75 del gap es 13,8 %). El umbral de 25 % se aproxima
 al percentil 90 del gap e identifica al 8,8 % de los avisos. El coeficiente de
-0,5 de la superficie descubierta sigue siendo un supuesto inicial, cuya
-sensibilidad se evaluará entre 0,3 y 0,7.
+0,5 de la superficie descubierta es un supuesto; su sensibilidad se evaluó
+entre 0,3 y 0,7 (notebook 03, sección 7.4): la clasificación coincide con la
+base en el 97,3 % y el 97,7 % de los avisos, y las propiedades baratas
+(incluidas las que requieren verificación) son 853, 836 y 851 con los
+coeficientes 0,3, 0,5 y 0,7.
 
 
 ## Tratamiento de la variable `Estado_Propiedad`
@@ -312,9 +315,9 @@ Resultado de la clasificación: 63,5 % sin clasificar, 21,6 % buen estado,
 
 | Aspecto | Qué se hizo | Resultado |
 | --- | --- | --- |
-| Señales contradictorias (sección 5.4) | Conteo de avisos con señales opuestas en el texto; se resuelven dando prioridad a las señales de obra | 66 de los 439 `Necesita_obra` (15 %) también mencionan buen estado o reciclado integral; otros 20 avisos combinan reciclado integral con "a actualizar". La regla es conservadora: ante la duda, el aviso queda fuera de los comparables |
+| Señales contradictorias (sección 5.4) | Conteo de avisos con señales opuestas en el texto; se resuelven dando prioridad a las señales de obra | 66 de los 439 `Necesita_obra` (15 %) también mencionan buen estado o reciclado integral; otros 20 avisos combinan reciclado integral con "a actualizar" (78 avisos en total, marcados con `Flag_Senal_Contradictoria`). La regla es conservadora: ante la duda, el aviso queda fuera de los comparables |
 | Sesgo de declaración (sección 6.4) | % de `Sin_clasificar` por antigüedad, cuartil de USD/m², comuna y amenities, con chi-cuadrado | El estado se informa de forma desigual. Casi no lo informan los edificios de hasta 10 años (87 % sin clasificar) ni los avisos sin dato de antigüedad (99 %), frente a 51–55 % en los de más de 30 años. Los avisos más caros lo informan menos (75 % sin clasificar en el cuartil superior contra 57 % en el inferior). Por comuna varía entre 52 % y 73 %. Informar amenities casi no influye (3 puntos de diferencia) |
-| Cruce con señales no textuales (sección 6.5) | Antigüedad, amenities y expensas por m² según el estado | Los `Necesita_obra` son los más antiguos (mediana de 56 años contra 47 y 36) y tienen las expensas por m² más bajas, y el 31 % tiene perfil de edificio viejo sin amenities (22 % y 14 % en los otros grupos). Respaldo indirecto, descriptivo y no inferencial |
+| Cruce con señales no textuales (sección 6.5) | Antigüedad, amenities y expensas por m² según el estado | Los `Necesita_obra` son los más antiguos (mediana de 56 años contra 47 y 36) y tienen las expensas por m² más bajas, y el 31 % tiene perfil de edificio viejo sin amenities (22 % y 14 % en los otros grupos). Kruskal-Wallis (sección 6.6) rechaza que los tres grupos tengan la misma distribución en antigüedad, amenities y expensas por m² (esta última con diferencia chica), y Mann-Whitney confirma que los `Necesita_obra` son más antiguos que los `Buen_o_reciclada` (56 contra 47 años). Es un respaldo indirecto y no reemplaza la validación manual |
 | Sensibilidad a la definición de "reciclada" (sección 8.3) | PER con una definición estricta, la base y dos más laxas; clasificación con comparables solo de avisos con estado informado | El potencial bruto mediano se mantiene entre 21 % y 31 % y el 66–74 % de las propiedades con PER supera el 12 %. Usar solo comparables con estado informado reduce las `Barata` de 716 a 663 y deja sin benchmark a 174 avisos (antes 49) |
 
 Implicancias: los comparables en buen estado o reciclados provienen sobre todo
@@ -585,6 +588,5 @@ La validación formal de las hipótesis corresponde a la Pre-Entrega 3.
 | Costo de refacción y margen de flipping | Cotizaciones por nivel de obra (liviana, media, integral), actualizadas con el ICC y convertidas a USD, para pasar del potencial bruto al margen y evaluar H3 |
 | Tipo de cambio y brecha de cierre | Definir la fuente del tipo de cambio (también para convertir las expensas) y confirmar la disponibilidad de estadísticas de escrituras |
 | Detección contextual de outliers | La detección global marca como atípicos a los segmentos de menor precio (por ejemplo, la comuna 8); evaluar una detección por segmento |
-| Sensibilidad de la superficie homogeneizada | Recalcular el benchmark con coeficientes de 0,3 a 0,7 para la superficie descubierta |
 | Permanencia en el mercado | Nuevas capturas del extractor (con una columna de fecha de extracción) para medir la primera y la última aparición de cada aviso |
 | Validación formal de hipótesis y micromercados | Tests formales de H1 a H3, fuentes externas complementarias y clustering de micromercados (Pre-Entrega 3) |

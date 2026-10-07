@@ -13,6 +13,20 @@ Licenciatura en Analítica Empresarial y Social del ITBA.
 - Tomás Agustín Picciolo
 
 
+### Guía de lectura
+
+| Si busca… | Vaya a… |
+| --- | --- |
+| Qué se hizo y para quién | [Descripción](#descripción-del-proyecto), [Interlocutor](#interlocutor) |
+| KPIs, hipótesis y su estado | [KPIs](#kpis), [Hipótesis](#hipótesis), [Estado de las hipótesis](#estado-de-las-hipótesis) |
+| Cómo se trató el estado de la propiedad | [Tratamiento de `Estado_Propiedad`](#tratamiento-de-la-variable-estado_propiedad) |
+| Datos, limpieza y fuentes externas | [Datos](#datos), [Fuentes externas](#fuentes-externas) |
+| Hallazgos del análisis | [Principales hallazgos](#principales-hallazgos-del-análisis-exploratorio) |
+| Qué cambió desde la PreEntrega 1 | [Cambios a partir de la devolución](#cambios-a-partir-de-la-devolución-de-la-preentrega-1) |
+| Cómo reproducir el análisis | [Reproducción](#reproducción), [Estructura del repositorio](#estructura-del-repositorio) |
+| Limitaciones y pendientes | [Limitaciones](#limitaciones), [Observaciones pendientes](#observaciones-pendientes-y-plan) |
+
+
 ## Descripción del proyecto
 
 El proyecto analiza la oferta de departamentos usados en venta en la Ciudad
@@ -184,6 +198,16 @@ confiabilidad del margen.
 | Costo de tenencia (USD) | Expensas mensuales en USD × (meses de obra + meses de venta) + costo de oportunidad del capital | Costo de mantener la unidad durante la operación |
 | Inversión total (USD) | Precio de compra + Costos de compra + Costo de obra + Costo de tenencia | Capital total comprometido |
 | Margen potencial de flipping (%) | (PER × (1 − Costos de venta) − Inversión total) / Inversión total | Ganancia potencial relativa, antes de impuestos no modelados |
+
+**Estado de cada KPI en esta entrega.** Los KPIs que dependen solo de los avisos están calculados y materializados en `data/processed/remax_deptos_features.csv`. Los que requieren cotizaciones de obra, tipo de cambio y plazos quedan definidos, con sus parámetros iniciales, para la Pre-Entrega 3.
+
+| KPI | Estado | Dónde |
+| --- | --- | --- |
+| Superficie homogeneizada, USD/m² homogeneizado, benchmark, precio esperado y gap de subvaluación | Calculado | Notebook 03 (`Superficie_Homogeneizada_m2`, `USD_m2_Homogeneizado`, `Benchmark_USD_m2`, `Precio_Esperado`, `Gap_Subvaluacion_pct`) |
+| Gap de estado | Calculado | Notebook 04 (por comuna y global) |
+| PER en tres escenarios | Calculado | Notebook 03 (`PER_Conservador`, `PER_Base`, `PER_Optimista`) |
+| Potencial bruto (PER frente al precio publicado) | Calculado, como paso previo al margen | Notebook 03 (`Potencial_Bruto_*_pct`) |
+| Costo de obra, costo de tenencia, inversión total y margen potencial de flipping | **Pendiente**: faltan cotizaciones por nivel de obra, tipo de cambio y plazos validados | Pre-Entrega 3 (ver pendientes) |
 
 ### Costo de la operación de flipping
 

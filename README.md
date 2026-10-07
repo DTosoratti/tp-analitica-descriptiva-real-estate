@@ -308,6 +308,23 @@ Resultado de la clasificación: 63,5 % sin clasificar, 21,6 % buen estado,
 343 avisos mencionan el reciclado de un solo ambiente y se marcan como
 `Reciclado_Parcial`.
 
+### Qué se midió sobre la calidad de la señal (notebook 03)
+
+| Aspecto | Qué se hizo | Resultado |
+| --- | --- | --- |
+| Señales contradictorias (sección 5.4) | Conteo de avisos con señales opuestas en el texto; se resuelven dando prioridad a las señales de obra | 66 de los 439 `Necesita_obra` (15 %) también mencionan buen estado o reciclado integral; otros 20 avisos combinan reciclado integral con "a actualizar". La regla es conservadora: ante la duda, el aviso queda fuera de los comparables |
+| Sesgo de declaración (sección 6.4) | % de `Sin_clasificar` por antigüedad, cuartil de USD/m², comuna y amenities, con chi-cuadrado | El estado se informa de forma desigual. Casi no lo informan los edificios de hasta 10 años (87 % sin clasificar) ni los avisos sin dato de antigüedad (99 %), frente a 51–55 % en los de más de 30 años. Los avisos más caros lo informan menos (75 % sin clasificar en el cuartil superior contra 57 % en el inferior). Por comuna varía entre 52 % y 73 %. Informar amenities casi no influye (3 puntos de diferencia) |
+| Cruce con señales no textuales (sección 6.5) | Antigüedad, amenities y expensas por m² según el estado | Los `Necesita_obra` son los más antiguos (mediana de 56 años contra 47 y 36) y tienen las expensas por m² más bajas, y el 31 % tiene perfil de edificio viejo sin amenities (22 % y 14 % en los otros grupos). Respaldo indirecto, descriptivo y no inferencial |
+| Sensibilidad a la definición de "reciclada" (sección 8.3) | PER con una definición estricta, la base y dos más laxas; clasificación con comparables solo de avisos con estado informado | El potencial bruto mediano se mantiene entre 21 % y 31 % y el 66–74 % de las propiedades con PER supera el 12 %. Usar solo comparables con estado informado reduce las `Barata` de 716 a 663 y deja sin benchmark a 174 avisos (antes 49) |
+
+Implicancias: los comparables en buen estado o reciclados provienen sobre todo
+de edificios más antiguos y de menor precio, por lo que el PER no debe
+extrapolarse a unidades nuevas o de precio alto. Para las unidades que
+necesitan obra, que también son antiguas, el sesgo es menos grave. Las
+conclusiones sobre el PER y la clasificación de oportunidades no dependen de la
+definición adoptada. Lo que sigue sin medirse es la precisión del clasificador
+(validación manual, ver pendientes).
+
 La columna `Estado` de la base raw no describe la condición física del inmueble,
 sino el estado comercial de la publicación (`active`, `reserved` o
 `negotiation`). Para evitar confusiones se renombra como `Estado_Publicacion`
@@ -451,6 +468,7 @@ Todas las fuentes complementarias tienen cobertura de CABA y granularidad de pun
 │   └── 04_eda.ipynb
 ├── src/
 │   ├── scraper_remax.py                         # extractor (requests, reintentos, paralelismo)
+│   ├── scrapers_alternativos.py                 # pruebas con Cabaprop y Zonaprop (fuentes descartadas, ver anexo del notebook 01)
 │   ├── limpieza.py                              # auditorías, registro de pasos, excepciones, texto
 │   ├── patrones.py                              # expresiones regulares (limpieza, texto, estado, amenities)
 │   ├── diagnostico.py                           # validación de ambientes, faltantes y outliers
@@ -540,7 +558,7 @@ La validación formal de las hipótesis corresponde a la Pre-Entrega 3.
 | Lo predictivo y prescriptivo quedó como intención futura | Se definió la variable a estimar (PER), su validación (holdout, MAE, MAPE, cobertura) y una regla de decisión con umbrales, presupuesto y mínimo de comparables |
 | Mayor dispersión no implica más oportunidades | H2 se reformuló en términos condicionales a estratos homogéneos, descartando errores de carga como causa alternativa |
 | El valor post-obra y el costo de flipping no diferenciaban sus componentes | El costo se descompone en calidad, alcance, tiempo, transacción y contingencias; el valor post-obra se estima con tres escenarios |
-| La variable "estado" es ruidosa | Se decidió usarla como señal imperfecta con categorías agrupadas, sin imputar, con validación manual |
+| La variable "estado" es ruidosa | Se usa como señal imperfecta con categorías agrupadas, sin imputar. Se midieron el sesgo de declaración, las señales contradictorias, el cruce con variables no textuales y la sensibilidad del PER a la definición; la validación manual de la precisión sigue pendiente |
 | Definir operativamente qué es una propiedad "barata" | Benchmark de comparables con mínimo de casos, ampliación jerárquica, control de dispersión y separación de las unidades que necesitan obra; el umbral de gap se recalibró de 15 % a 25 % con un análisis de sensibilidad |
 | Fuentes externas sin nivel ni comparación | Se separaron indispensables y complementarias, indicando nivel, mecanismo de unión y aporte a la regla |
 | El scraper ocupaba una celda muy extensa | La lógica se trasladó a `src/scraper_remax.py`; el notebook contiene configuración, ejecución y controles |
@@ -552,7 +570,7 @@ La validación formal de las hipótesis corresponde a la Pre-Entrega 3.
 
 | Pendiente | Plan |
 | --- | --- |
-| Validación del clasificador de estado | La muestra estratificada de 200 avisos está preparada en `reports/validacion_estado_muestra.csv`; falta la lectura manual y el cálculo de la precisión (mínimo 80 % en Necesita_obra y Reciclada_refaccionada) |
+| Validación del clasificador de estado | La muestra estratificada de 200 avisos está preparada en `reports/validacion_estado_muestra.csv`; falta la lectura manual y el cálculo de la precisión (mínimo 80 % en Necesita_obra y Reciclada_refaccionada). Los 66 avisos con señales contradictorias pueden revisarse primero |
 | Categoría del edificio en los comparables | Construir un índice de amenities mediante reducción de dimensionalidad e incorporarlo al benchmark, para reducir su error |
 | Costo de refacción y margen de flipping | Cotizaciones por nivel de obra (liviana, media, integral), actualizadas con el ICC y convertidas a USD, para pasar del potencial bruto al margen y evaluar H3 |
 | Tipo de cambio y brecha de cierre | Definir la fuente del tipo de cambio (también para convertir las expensas) y confirmar la disponibilidad de estadísticas de escrituras |

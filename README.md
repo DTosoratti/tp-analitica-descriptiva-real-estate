@@ -333,10 +333,10 @@ aplican el mismo criterio:
 
 Este criterio es un protocolo de revisión y no cambia la clasificación automática,
 que da prioridad a las señales de obra. Las diferencias entre ambos son lo que la
-validación mide. Se revisan en primer lugar los 78 avisos con
+validación mide. Se revisaron los 78 avisos con
 `Flag_Senal_Contradictoria` (`reports/validacion_estado_contradictorios.csv`,
-repartidos entre los cuatro integrantes) y, si hay tiempo, una muestra de la
-estratificada de 200 avisos. Los errores de precisión (clasificó mal) se reportan
+repartidos entre los cuatro integrantes) y 50 avisos `Reciclada_refaccionada`
+de la muestra estratificada de 200 (`reports/validacion_reciclada_muestra.csv`). Los errores de precisión (clasificó mal) se reportan
 por separado de los de cobertura (no detectó una frase que indica obra, por
 ejemplo "oportunidad de reciclar" o "ideal flipping"), ya que estos últimos
 indican que el clasificador subestima la cantidad de unidades que necesitan obra.

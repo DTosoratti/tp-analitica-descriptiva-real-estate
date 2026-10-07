@@ -75,6 +75,6 @@ El análisis confirma que existen oportunidades, pero también muestra que **bus
 ## Limitaciones
 
 - Los precios son de publicación, no de cierre: el descuento es relativo a la oferta.
-- El estado de la propiedad se infiere del texto de los avisos; su validación manual está pendiente. Además, el estado se informa de forma desigual (casi no lo declaran los edificios de hasta 10 años ni los avisos más caros), por lo que el precio esperado de reciclado es más confiable para unidades antiguas que para unidades nuevas o de precio alto. Las conclusiones no cambian con definiciones más estrictas o más laxas de "reciclada" (potencial bruto mediano entre 21 % y 31 %).
+- El estado de la propiedad se infiere del texto de los avisos; su validación manual cubrió solo los 78 casos más dudosos, donde la categoría de reciclada resultó poco confiable (3 de 10 confirmadas), por lo que el precio esperado de reciclado debe tomarse como una estimación preliminar hasta revisar una muestra aleatoria. Además, el estado se informa de forma desigual (casi no lo declaran los edificios de hasta 10 años ni los avisos más caros), por lo que el precio esperado de reciclado es más confiable para unidades antiguas que para unidades nuevas o de precio alto. Las conclusiones no cambian con definiciones más estrictas o más laxas de "reciclada" (potencial bruto mediano entre 21 % y 31 %).
 - El margen de flipping todavía no descuenta el costo de la obra, que se definirá con cotizaciones por nivel de obra.
 - La base corresponde a una sola red inmobiliaria y a una única captura.

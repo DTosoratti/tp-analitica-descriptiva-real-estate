@@ -13,6 +13,7 @@ al menos `min_n` comparables y se calculan los cuantiles del valor en ese grupo.
 import numpy as np
 import pandas as pd
 
+from src.config import MIN_COMPARABLES, UMBRAL_GAP
 
 # Jerarquía de grupos de comparables (de más fino a más amplio)
 NIVELES_COMPARABLES = {
@@ -24,7 +25,7 @@ NIVELES_COMPARABLES = {
 
 
 def benchmark_jerarquico(df, valor, niveles, mask_referencia, mask_objetivo=None,
-                         min_n=10, leave_one_out=True, cuantiles=(0.25, 0.50, 0.75)):
+                         min_n=MIN_COMPARABLES, leave_one_out=True, cuantiles=(0.25, 0.50, 0.75)):
     """
     Cuantiles de `valor` entre comparables, con ampliación jerárquica.
 
@@ -139,7 +140,7 @@ def banda_antiguedad(antiguedad,
 FLAGS_VERIFICACION = ["Flag_Atipico_Bajo", "Flag_Outlier_Multivariado", "Flag_Coordenadas_Invalidas"]
 
 
-def clasificar_oportunidad(df, umbral_gap=15, flags_verificacion=FLAGS_VERIFICACION):
+def clasificar_oportunidad(df, umbral_gap=UMBRAL_GAP, flags_verificacion=FLAGS_VERIFICACION):
     """
     Clasifica cada propiedad según la definición operativa de propiedad barata.
 

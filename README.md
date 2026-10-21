@@ -523,6 +523,7 @@ Todas las fuentes complementarias tienen cobertura de CABA y granularidad de pun
 │   │   └── registro_features.csv                # registro de pasos del notebook 03
 │   ├── external/                                # fuentes externas (se descargan al ejecutar el notebook 03)
 │   │   └── barrios_caba.geojson
+│   ├── supuestos_flipping.csv                   # supuestos de costos por componente y escenario, con fuente
 │   ├── excepciones_manuales.csv                 # correcciones puntuales documentadas
 │   ├── diccionario_variables.csv                # descripciones de las variables (insumo del diccionario)
 │   └── diccionario_datos.md                     # diccionario de datos (100 variables)
@@ -532,6 +533,8 @@ Todas las fuentes complementarias tienen cobertura de CABA y granularidad de pun
 │   ├── 03_features_kpis.ipynb
 │   └── 04_eda.ipynb
 ├── src/
+│   ├── config.py                                # parámetros, rutas y supuestos centralizados
+│   ├── datos.py                                 # descarga de la base raw y verificación SHA-256
 │   ├── scraper_remax.py                         # extractor (requests, reintentos, paralelismo)
 │   ├── scrapers_alternativos.py                 # pruebas con Cabaprop y Zonaprop (fuentes descartadas, ver anexo del notebook 01)
 │   ├── limpieza.py                              # auditorías, registro de pasos, excepciones, texto
@@ -556,17 +559,33 @@ diccionario de datos.
 
 ## Reproducción
 
-Los notebooks se ejecutan en Google Colab. Al iniciar, clonan el repositorio
-(o lo actualizan si ya está clonado) y trabajan desde su raíz, de modo que los
-módulos de `src/` y las rutas de `data/` funcionan sin configuración adicional.
-No se usan rutas personales.
+Los notebooks se ejecutan sobre la copia local del repositorio (Jupyter,
+VS Code o Colab con el repositorio ya descargado). No clonan ni actualizan el
+repositorio: la primera celda ubica la raíz del proyecto (la carpeta que
+contiene `src/`) y trabaja desde ahí, de modo que los módulos de `src/` y las
+rutas de `data/` funcionan sin configuración adicional. No se usan rutas
+personales.
+
+**Parámetros centralizados.** Todos los umbrales, rutas y supuestos que
+afectan los resultados (umbral de gap de 25 %, mínimo de 10 comparables,
+escenarios del PER, costos de transacción) están en `src/config.py`. Los
+módulos y los notebooks los importan desde ahí; ningún valor se escribe a
+mano en un notebook. Los supuestos de costos de la operación de flipping, por
+componente y escenario y con su fuente, están en
+`data/supuestos_flipping.csv`.
+
+**Versión de la base raw.** La base raw completa se descarga desde Google
+Drive solo si no está en `data/raw/`, y se verifica con su huella SHA-256
+(`RAW_SHA256` en `src/config.py`, función `obtener_raw()` de `src/datos.py`).
+Si el archivo no coincide con la extracción de referencia, la ejecución se
+detiene.
 
 1. **Extracción (opcional).** `01_extraccion_remax.ipynb` genera una nueva
    corrida del extractor. Para reproducir el análisis no es necesario: se usa
    la corrida publicada.
-2. **Limpieza.** `02_limpieza_remax.ipynb` descarga la base raw desde Google
-   Drive con `gdown` (ID definido al inicio del notebook), aplica la limpieza y
-   exporta los resultados a `data/processed/`.
+2. **Limpieza.** `02_limpieza_remax.ipynb` obtiene la base raw con
+   `obtener_raw()` (descarga desde Google Drive si falta y verificación del
+   hash), aplica la limpieza y exporta los resultados a `data/processed/`.
 3. **Controles.** Verificar el registro de limpieza y los controles finales del
    notebook (9.500 avisos, sin identificadores duplicados).
 4. **Ingeniería de variables y KPIs.** `03_features_kpis.ipynb` parte de

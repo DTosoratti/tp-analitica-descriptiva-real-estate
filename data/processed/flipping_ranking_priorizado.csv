@@ -1,0 +1,1046 @@
+﻿Ranking,ID,ID_Entidad,Operacion,Tipo_Propiedad,Titulo,Descripcion,Fecha_Publicacion,Antiguedad,Apto_Credito,Amenities,Moneda,Precio_Valor,Moneda_Expensas,Expensas,Precio_m2_Total,Precio_m2_Cubierto,Ambientes,Dormitorios,Baños,Superficie_Total_m2,Superficie_Cubierta_m2,Direccion,Barrio,Ubicacion,Latitud,Longitud,Estado_Publicacion,ID_Interno,Link,Tipo_Propiedad_Original,Ambientes_Titulo,Flag_Ambientes_Dudoso,Flag_Dormitorios_Inconsistente,Flag_Posible_Republicacion,Expensas_Informadas,Antiguedad_Informada,Amenities_Informadas,Flag_Atipico_Bajo,Flag_Atipico_Alto,Flag_Extremo,Flag_Outlier_Multivariado,Barrio_Oficial,Comuna,Flag_Coordenadas_Invalidas,Luminoso,Vista,Silencioso,Contrafrente,Al_Frente,Apto_Profesional,Reciclado_Texto,A_Refaccionar,Pileta,SUM,Parrilla,Gimnasio,Laundry,Seguridad,Solarium,Balcon,Terraza,Patio,Ascensor,Baulera,Cochera_Mencion,Cochera_No_Incluida,Cochera_Incluida,Reciclado_Parcial,Estado_Propiedad,Estado_Agrupado,Flag_Senal_Contradictoria,Superficie_Descubierta_m2,Flag_Superficie_Homogeneizada_Imputada,Superficie_Homogeneizada_m2,USD_m2_Homogeneizado,Ambientes_Grupo,Banda_Superficie,Banda_Antiguedad,Flag_Comparable_Valido,Benchmark_USD_m2,P25_USD_m2_Comparable,N_Comparables,Nivel_Benchmark,Precio_Esperado,Gap_Subvaluacion_pct,Clasificacion_Oportunidad,PER_USD_m2_P25,PER_USD_m2_Base,PER_USD_m2_P75,PER_N_Comparables,PER_Nivel,PER_Conservador,PER_Base,PER_Optimista,Potencial_Bruto_Conservador_pct,Potencial_Bruto_Base_pct,Potencial_Bruto_Optimista_pct,Expensas_por_m2,Expensas_Imputadas,Flag_Expensas_Imputadas,Expensas_USD_Mensuales,Costo_Expensas_Tenencia_USD,Precio_Compra_Efectivo,Gastos_Compra_USD,Otros_Gastos_Tenencia_USD,Costo_Mantenimiento_USD,Refaccion_Conservador_USD,Inversion_Total_Conservador_USD,Gastos_Venta_Conservador_USD,Ganancia_Neta_Conservador_USD,ROI_Conservador_pct,Refaccion_Base_USD,Inversion_Total_Base_USD,Gastos_Venta_Base_USD,Ganancia_Neta_Base_USD,ROI_Base_pct,Refaccion_Optimista_USD,Inversion_Total_Optimista_USD,Gastos_Venta_Optimista_USD,Ganancia_Neta_Optimista_USD,ROI_Optimista_pct,Robustez_Economica,Alerta_Uso_No_Residencial,Alerta_Superficie_Alta,Alerta_ROI_Extremo,Alerta_PER_Nivel_4,Cantidad_Alertas,Requiere_Revision,Prioridad_Analisis,Ranking_Priorizado
+4,612831,5f2f5736-445c-4aba-8add-96570a0cbce1,sale,departamento,Dúplex Piso alto al frente a refaccionar cochera,"Gran oportunidad: Dúplex a refaccionar en piso 13 y 14 al frente con balcón terraza y cochera.
+
+En planta baja: 
+Living comedor con amplios ventanales y salida al balcón terraza. Quincho 
+Cocina independiente muy cómoda. Comedor diario. Lavadero.
+Doble acceso: principal y de servicio. 
+
+Escalera de madera muy cómoda y de calidad para acceder a la segunda planta de la unidad (piso 14).
+Tres dormitorios, el principal en suite con baño y vestidor. Dependencia de servicio o escritorio con baño y salida (de servicio) en piso 14.
+
+Cochera.
+
+Balcón terraza con vista increíble de la ciudad y del rio. Quincho vidriado muy práctico y con hermosas vistas. Ideal para disfrutar con amigos y familia.
+
+Todos los medios de transporte (subte linea D, Metrobús, trenes) y acceso directo desde zona norte y sur (a metros de Av. Bullrich, Juan B. Justo, Luis M. Campos.
+
+Las superficies cubiertas y descubiertas declaradas son aproximadas las que surgen de la escritura son:
+Cubierta: 135.78m2
+Semicubierta. 1.71m2
+Descubierta: 19.70m2
+Balcón. 12.93m2
+Total. 170.12m2",,47.0,False,"Ascensor | Terraza | Quincho | Orientación Este | Acceso de cochera, Rampa fija | Disposición Frente",USD,310000.0,ARS,480000.0,1822.24,2029.06,4,3,3,170.12,152.78,Avenida Santa Fe 4900,Palermo Hollywood,"Palermo Hollywood, Palermo, Capital Federal",-34.577185685082,-58.42964887619,reserved,420991017-456,https://www.remax.com.ar/listings/duplex-piso-alto-al-frente-a-refaccionar-cochera,departamento_duplex,,False,False,False,True,True,True,False,False,False,False,Palermo,14,False,False,False,False,False,True,False,False,True,False,False,False,False,False,False,False,True,True,False,True,False,True,False,True,False,Necesita_obra,Necesita_obra,False,17.340000000000003,False,161.45,1920.09910188913,4,Grande,31_50,False,3145.125056162948,2574.8502994011974,29.0,1.0,507780.4403175079,38.9499918889823,A_refaccionar_con_descuento,3208.643568629016,3471.948236408112,3932.702346649832,11.0,1.0,518035.5041551545,560546.0427680896,634934.7938666153,67.10822714682404,80.82130411873857,104.81767544084364,2973.0566738928464,480000.0,False,304.76190476190476,1828.5714285714284,310000.0,12400.0,600,2428.5714285714284,76390.0,401218.5714285714,15541.065124654635,101275.86760192848,25.24206874106737,45834.0,370662.5714285714,16816.381283042687,173067.09005647543,46.69127756532233,22917.0,347745.5714285714,19048.04381599846,268141.1786220454,77.10843808031724,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,1
+11,641943,0f44cdbb-e253-48d0-9466-95d543ae8ec6,sale,departamento,venta tres ambientes a reciclar en Boedo,"Excelente oportunidad para transformar a tu gusto esta única propiedad.
+La unidad se encuentra a reciclar y ofrece la posibilidad  de diseñar y renovar cada ambiente de acuerdo a tus necesidades y estilo.
+
+Es un departamento de tres ambientes con generosas dimensiones y muy luminoso. Su disposición al contrafrente garantiza un entorno tranquilo y silencioso, alejado del movimiento de la calle.
+
+Son 93 metros totales conformados por un amplio living con salida a balcón corrido, dos dormitorios, un baño completo, cocina comedor y lavadero independiente. 
+
+Ideal para reciclar tu nuevo hogar o para inversión!
+",,56.0,True,Electricidad | Agua | Gas | Internet | Desague Cloacal | Televisión por Cable | Televisión Satelital | Agua Corriente | Ascensor | Dormitorio | Comedor | Baño | Cocina | Living | Lavadero | Placard | Disposición Contrafrente | Balcón | Cocina/Comedor | ComYAmenCalefacción | Living/Comedor,USD,95000.0,ARS,220000.0,1021.51,1091.95,3,2,1,93.0,87.0,Castro 1300,Boedo,"Boedo, Capital Federal",-34.6288148,-58.4197372,negotiation,181705-13,https://www.remax.com.ar/listings/venta-tres-ambientes-a-reciclar-en-boedo,departamento_estandar,3.0,False,False,False,True,True,True,False,False,False,False,Boedo,5,False,True,False,True,True,False,False,False,True,False,False,False,False,False,False,False,True,False,False,True,False,False,False,False,False,Necesita_obra,Necesita_obra,False,6.0,False,90.0,1055.5555555555557,3,Grande,Mas_50,False,1845.096484271742,1693.058460312718,45.0,3.0,166058.68358445677,42.79130850047755,A_refaccionar_con_descuento,1848.0593944241757,1909.647070902149,1996.6434872186985,14.0,3.0,166325.3454981758,171868.2363811934,179697.91384968284,75.07931105071137,80.91393303283515,89.15569878913982,2444.4444444444443,220000.0,False,139.68253968253967,838.0952380952381,95000.0,3800.0,600,1438.095238095238,43500.0,143738.09523809524,4989.760364945274,17597.48989513528,12.242745992971372,26100.0,126338.09523809524,5156.047091435801,40374.09405166234,31.95718122516713,13050.0,113288.09523809524,5390.937415490485,61018.88119609712,53.86168870423235,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,2
+12,511218,26ce9dfa-3776-4c61-9713-41d29ab223aa,sale,departamento,Depto 152m² 4Amb Dep Belgrano Cabildo Oportunidad,"Departamento de 4 ambientes con balcón terraza y gran potencial de modernización en Belgrano.
+
+Ubicado sobre Av. Cabildo al 2200, en una de las zonas más consolidadas y demandadas del barrio, este departamento se destaca por su amplitud, luminosidad y excelente distribución.
+
+Con una superficie total aproximada de 152 m², se encuentra en un 4° piso al frente, con orientación noreste, lo que asegura luz natural durante todo el día y una agradable vista abierta.
+
+El living-comedor, de generosas dimensiones, cuenta con salida a un balcón terraza, un espacio ideal para disfrutar del exterior. La unidad ofrece tres dormitorios cómodos, dos baños completos y dependencia de servicio con baño, fácilmente adaptable como escritorio, cuarto adicional o espacio multifunción.
+
+Posee baulera.
+
+La propiedad presenta estructura sólida y ambientes bien definidos, brindando una excelente base para una modernización que permita actualizarla y personalizarla, potenciando aún más sus cualidades. Cocina independiente con lavadero separado, pisos de madera y calefacción por losa radiante, garantizando confort todo el año.
+
+Edificio con seguridad las 24 horas.
+
+Una propuesta ideal para quienes buscan metros, ubicación y proyección, a pasos de Subte línea D, Metrobus, comercios, colegios y servicios, en uno de los sectores más valorados de Belgrano.
+
+Cocheras disponibles en alquiler/venta a  de 100 metros"" .
+",,61.0,True,Losa Radiante | Seguridad | Recepción | Dormitorio | Comedor | Baño | Cocina | Living | Lavadero | Placard | Disposición Frente | Disposición Lateral | Balcón | Orientación Noreste | Cocina/Comedor | Habitación de Servicio | Otro | Permite Mascotas | Living/Comedor,USD,249000.0,ARS,450000.0,1634.72,1758.1,4,3,3,152.32,141.63,Avenida Cabildo 2200,Belgrano,"Belgrano, Capital Federal",-34.560663,-58.4581872,active,420261163-38,https://www.remax.com.ar/listings/depto-152m-4amb-dep-belgrano-cabildo-oportunidad,departamento_estandar,4.0,False,False,False,True,True,True,False,False,False,False,Belgrano,13,False,False,True,False,False,True,False,False,False,False,False,False,False,False,True,False,True,True,False,False,True,True,False,True,False,Necesita_obra,Necesita_obra,False,10.689999999999998,False,146.975,1694.1656744344275,4,Grande,Mas_50,False,2606.0005735382574,2364.8812882985767,18.0,1.0,383016.9342957854,34.98981958648612,A_refaccionar_con_descuento,2602.419473100601,2672.7572457719616,2846.952126335699,14.0,2.0,382490.6020589608,392828.496197334,418430.7887681894,53.6106835578156,57.76244827202169,68.04449348120055,3061.745194761014,450000.0,False,285.7142857142857,1714.2857142857142,249000.0,9960.0,600,2314.285714285714,70815.0,332089.28571428574,11474.718061768825,38926.598282906285,11.721726643236822,42489.0,303763.28571428574,11784.85488592002,77280.35559712828,25.440979615231306,21244.5,282518.78571428574,12552.923663045682,123359.07939085795,43.66402718281973,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,3
+13,580233,6cc9e354-2e17-442a-a308-3c164fc14839,sale,departamento,3 AMBIENTES LUMINOSO- A REFACCIONAR - CONSTITUCIÓN,"Si estás buscando una propiedad con potencial para renovar y revalorizar, esta puede ser una excelente oportunidad.
+
+Ubicado sobre Salta al 1700, este departamento de 3 ambientes se encuentra en un primer piso por escalera, dentro del segundo cuerpo de un sólido edificio de aproximadamente 70 años de antigüedad.
+
+La unidad cuenta con 52 m² cubiertos muy bien distribuidos en living-comedor, cocina independiente, baño completo y dos dormitorios con placard. Su distribución funcional permite múltiples posibilidades de  modernización según las necesidades de cada proyecto.
+
+Dispone de servicios de gas, agua corriente y electricidad. No presenta problemas estructurales. 
+
+Ideal tanto para quienes buscan su primera vivienda como para inversores que quieran desarrollar una refacción con potencial de renta o reventa.
+
+Características:
+• 3 ambientes muy luminoso contrafrente
+• 52 m² cubiertos
+• Living-comedor
+• Cocina independiente
+• Conexión para lavarropas
+• 2 dormitorios con placard
+• Baño completo
+• Primer piso por escalera
+• Expensas aproximadas: $126.000
+
+Ubicación estratégica con excelente conectividad, cercanía a múltiples medios de transporte, comercios y zona de hospitales. 
+
+Una propiedad con gran potencial para transformar y poner en valor.
+
+Consultanos para coordinar una visita.
+
+*Se transmite por tracto abreviado.-
+",,74.0,False,,USD,39500.0,ARS,126000.0,747.96,747.96,3,2,1,52.81,52.81,Salta 1700,Constitución,"Constitución, Capital Federal",-34.6284717,-58.3826551,reserved,420991167-7,https://www.remax.com.ar/listings/3-ambientes-luminoso-a-refaccionar-constitucion,departamento_estandar,3.0,False,False,False,True,True,False,True,False,False,False,Constitucion,1,False,True,False,False,True,False,False,False,True,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,0.0,False,52.81,747.9644006816891,3,Chica,Mas_50,False,1402.2138746803068,1274.6995994659546,10.0,1.0,74050.91472186701,46.658322657646025,A_refaccionar_con_descuento,1489.4524259173202,1684.2530425109892,1976.8253089835823,24.0,3.0,78657.98261269368,88945.40317500534,104396.144567423,99.13413319669286,125.17823588608948,164.2940368795519,2385.911759136527,126000.0,False,80.0,480.0,39500.0,1580.0,600,1080.0,26405.0,68565.0,2359.7394783808104,7733.24313431287,11.278703616003602,15843.0,58003.0,2668.36209525016,28274.041079755174,48.74582535343892,7921.5,50081.5,3131.88433702269,51182.76023040031,102.1989361948031,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,4
+14,518133,07635958-df95-4786-8f98-c74d9c60bcd8,sale,departamento,DEPARTAMENTO 2 AMBIENTES PATIO A REFACCIONAR,"OPORTUNIDAD
+
+
+Este encantador departamento de 35 m² cubiertos más 11 m² de patio ofrece una distribución práctica y funcional. Cuenta con un living comedor luminoso, perfecto para disfrutar de momentos de descanso o reuniones, con espacio suficiente para un comedor pequeño. La cocina está integrada y se encuentra equipada con muebles de alto y bajo mesada, ideal para quienes buscan comodidad en un espacio compacto.
+
+El dormitorio es amplio, permite disfrutar de un ambiente tranquilo y confortable. El baño es completo.
+
+Uno de los grandes atractivos es su amplio patio de 11 m², un espacio exterior ideal para disfrutar de desayunos al aire libre.
+
+Ubicado en una zona tranquila y accesible, cerca de transporte público, comercios y servicios, este departamento es ideal tanto para vivir como para invertir.
+
+SE PUEDE FINANCIAR HASTA EL 30% DEL VALOR DE LA PROPIEDAD CON CREDITOS LENDAR
+
+LAS MEDIDAS SON APROXIMADAS LAS MISMAS SURGIRAN DE LA ESCRITURA",,46.0,False,,USD,54900.0,ARS,140000.0,1167.59,1536.95,2,1,1,47.02,35.72,Avenida Juan Bautista Justo 5600,Villa Santa Rita,"Villa Santa Rita, Capital Federal",-34.6173654,-58.4756751,reserved,421031077-42,https://www.remax.com.ar/listings/departamento-2-ambientes-patio-a-refaccionar,departamento_estandar,2.0,False,False,False,True,True,False,False,False,False,False,Villa Santa Rita,11,False,True,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,11.300000000000004,False,41.370000000000005,1327.0485859318346,2,Media,31_50,False,2238.9818524628795,2015.732546705998,13.0,2.0,92626.67923638932,40.729819472539205,A_refaccionar_con_descuento,2058.8577586206898,2217.006501209353,2497.635919892017,18.0,3.0,85174.94547413794,91717.55895503094,103327.19800593276,55.14562017147166,67.06294891626766,88.209832433393,3384.0947546531297,140000.0,False,88.88888888888889,533.3333333333333,54900.0,2196.0,600,1133.3333333333333,17860.0,76089.33333333333,2555.248364224138,6530.363776580474,8.582495719829947,10716.0,68945.33333333333,2751.526768650928,20020.698853046677,29.038511941412537,5358.0,63587.333333333336,3099.8159401779826,36640.04873242144,57.62161551947679,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,5
+15,634847,258ab068-c740-439b-a015-f619967b9411,sale,departamento,Venta departamento  2 amb  balcon a reciclar Boedo,"Oportunidad!
+Venta departamento 2 amb con balcon a la calle, a reciclar, muy luminso!
+Vista abierta.
+Orientacion este a la calle.
+Segundo piso por escalera.
+
+Living con salida al balcon.
+Dormitorio con placard.
+Baño amplio con bañera.
+Cocina con ventana.
+Lavadero independiente.",,55.0,False,,USD,52000.0,ARS,175000.0,1073.94,1201.2,2,1,1,48.42,43.29,Maza 1200,Boedo,"Boedo, Capital Federal",-34.6264366,-58.4148411,active,61202-292,https://www.remax.com.ar/listings/venta-departamento-2-amb-balcon-a-reciclar-boedo,departamento_estandar,2.0,False,False,False,True,True,False,False,False,False,False,Boedo,5,False,False,True,False,False,True,False,False,True,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,5.130000000000003,False,45.855,1134.009377385236,2,Media,Mas_50,False,1901.240630390865,1699.7495998351797,18.0,2.0,87181.3891065731,40.35424242158648,A_refaccionar_con_descuento,1872.2222222222224,2312.06007529874,2564.5073110899534,18.0,3.0,85850.75,106019.5147528237,117595.48275002984,65.09759615384615,103.88368221696864,126.14515913467277,3816.37771235416,175000.0,False,111.11111111111111,666.6666666666667,52000.0,2080.0,600,1266.6666666666667,21645.0,76991.66666666667,2575.5225,6283.560833333322,8.16135187790885,12987.0,68333.66666666667,3180.585442584711,34505.26264357232,50.49525998932539,6493.5,61840.166666666664,3527.864482500895,52227.45160086228,84.45554793275505,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,6
+16,655658,5750feb7-792d-4dd6-93b3-0ecc27464b82,sale,departamento,Venta Colegiales 3 ambientes a reciclar,"Venta departamento a reciclar en Colegiales, 3 ambientes con balcón. Vista al contrafrente. 
+Zona de facil acceso a transportes públicos. Buena Oportunidad para inversores!",,57.0,False,Dormitorio | Comedor | Baño | Cocina,USD,80000.0,ARS,230000.0,1403.51,1570.78,3,2,1,57.0,50.93,Palpa 2900,Colegiales,"Colegiales, Capital Federal",-34.5746922,-58.4505339,reserved,422361007-26,https://www.remax.com.ar/listings/venta-colegiales-3-ambientes-a-reciclar,departamento_estandar,3.0,False,False,False,True,True,True,False,False,False,False,Colegiales,13,False,False,False,False,True,False,False,False,True,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,6.07,False,53.965,1482.4423237283424,3,Chica,Mas_50,False,2633.5698555673125,2396.438604254433,18.0,2.0,142120.59725569002,43.70977779099006,A_refaccionar_con_descuento,2264.2812583548703,2655.024236777791,2817.6151884902565,24.0,3.0,122191.9381071206,143278.3829377135,152052.6036468767,52.73992263390074,79.09797867214186,90.06575455859587,4262.0216807189845,230000.0,False,146.03174603174602,876.1904761904761,80000.0,3200.0,600,1476.1904761904761,25465.0,110141.19047619047,3665.758143213618,8384.989487716506,7.612946120760436,15279.0,99955.19047619047,4298.351488131405,39024.840973391605,39.04233565808411,7639.5,92315.69047619047,4561.5781094063,55175.33506127991,59.76810093351402,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,7
+17,604042,818a3146-a32d-4c0f-aabc-3e418d2b0d5d,sale,departamento,Venta Monoambiente con patio en Palermo aRefac,"Oportunidad para quienes buscan invertir o crear un espacio a medida en una de las zonas con mayor crecimiento de Palermo.
+
+Monoambiente de 28 m² con patio y disposición interna, que se destaca por su buena luminosidad y una distribución funcional que permite aprovechar cada metro cuadrado.
+
+La unidad se encuentra a refaccionar, lo que representa una excelente oportunidad para renovar los ambientes según las necesidades y el estilo de su futuro propietario. Su ubicación estratégica, sobre la calle Dr. Emilio Ravignani al 1300, ofrece cercanía a una amplia oferta gastronómica, comercial y de transporte, convirtiéndolo en una opción ideal tanto para vivienda como para inversión.
+
+Características principales:
+• Monoambiente de 28 m².
+• Patio.
+• Disposición interna.
+• Muy luminoso.
+• Gran potencial de renovación.
+• Excelente ubicación en Palermo.
+
+Una propiedad con mucho potencial para quienes valoran la ubicación y buscan la posibilidad de revalorizar su inversión mediante una refacción.
+Expensas ordinarias $85.000 Mayo 2026.",,36.0,True,Dormitorio | Baño | Patio | Disposición Interno | Cocina/Comedor | Living/Comedor,USD,45000.0,ARS,85000.0,1583.95,1890.76,1,0,1,28.41,23.8,Doctor Emilio Ravignani 1300,Palermo,"Palermo, Capital Federal",-34.5849224,-58.4432109,reserved,421101184-30,https://www.remax.com.ar/listings/venta-monoambiente-con-patio-en-palermo-arefac,departamento_estandar,1.0,False,False,False,True,True,True,False,False,False,False,Palermo,14,False,True,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,4.609999999999999,False,26.105,1723.807699674392,1,Chica,31_50,False,2803.5087719298244,2392.8571428571427,25.0,1.0,73185.59649122806,38.51249131324133,A_refaccionar_con_descuento,2506.649902063322,2846.315701893055,3140.168243204741,10.0,1.0,65436.095693363015,74303.0713979182,81974.09198885977,45.41354598525115,65.11793643981824,82.16464886413283,3256.0812104960737,85000.0,False,53.96825396825397,323.8095238095238,45000.0,1800.0,600,923.8095238095239,11900.0,59623.80952380953,1963.0828708008903,3849.2032987525963,6.455815771408395,7140.0,54863.80952380953,2229.092141937546,17210.169732171125,31.368893049073343,3570.0,51293.80952380953,2459.222759665793,28221.059705384454,55.01845148055307,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,8
+19,505452,5bb4849c-1755-4787-83da-645efdb688c0,sale,departamento,OPORTUNIDAD VENTA DPTO 3 AMBIENTES VILLA CRESPO,"Equipo Remax Vende Departamento 3 Ambientes a Reciclar en Villa Crespo – Ideal inversión o proyecto personal  , APTO CREDITO 
+
+Oportunidad para quienes buscan reciclar y agregar valor en una de las zonas con mayor crecimiento de la ciudad.
+
+El Departamento cuenta con pisos de parquet originales en buen estado, que pueden pulirse y lustrarse, recuperando su estética clásica y sumando carácter al proyecto.
+
+La cocina es amplia, con sector de lavadero , y requiere reciclaje completo, al igual que el baño, donde es necesario actualizar instalaciones y cañerías, permitiendo una renovación integral y moderna.
+
+Cuenta con dos dormitorios con placares empotrados, ambientes bien definidos y ventanales en todos los espacios, lo que aporta buena luminosidad y ventilación natural.
+
+Ubicado sobre Juan B. Justo, a metros de Corrientes, en el corazón de Villa Crespo, con excelente conectividad, múltiples medios de transporte y cercanía a polos comerciales y gastronómicos.
+
+SU CONSULTA NO MOLESTA!
+
+",,56.0,True,Ascensor | Dormitorio | Baño | Cocina | Placard | Disposición Interno | Living/Comedor,USD,60000.0,ARS,100000.0,1363.64,1363.64,3,2,1,44.0,44.0,Avenida Juan B. Justo 2300,Villa Crespo,"Villa Crespo, Capital Federal",-34.5933567,-58.4426003,negotiation,421631025-46,https://www.remax.com.ar/listings/oportunidad-venta-dpto-3-ambientes-villa-crespo,departamento_estandar,3.0,False,False,False,True,True,True,False,False,False,False,Villa Crespo,15,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,False,False,True,False,False,False,False,False,Necesita_obra,Necesita_obra,True,0.0,False,44.0,1363.6363636363635,3,Chica,Mas_50,False,1904.7380952380952,1815.909090909091,17.0,1.0,83808.47619047618,28.408196011541047,A_refaccionar_con_descuento,2107.960798679117,2192.2769821449806,2405.275311785532,12.0,2.0,92750.27514188115,96460.18721437914,105832.1137185634,54.58379190313526,60.7669786906319,76.38685619760565,2272.7272727272725,100000.0,False,63.492063492063494,380.95238095238096,60000.0,2400.0,600,980.952380952381,22000.0,85380.95238095238,2782.5082542564346,4586.814506672337,5.372175384278812,13200.0,76580.95238095238,2893.805616431374,16985.429216995384,22.179704859899456,6600.0,69980.95238095238,3174.963411556902,32676.197926054112,46.692988326560716,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,9
+20,567781,ff6c4e77-a96a-49d1-9858-5e66c7e03c3f,sale,departamento,VENTA DEPTO 3+DEP AMB EN CABALLITO MUY LUMINOSO,"Venta  departamento a refaccionar, 3 ambientes amplio y luminoso con dependencia
+
+PROPIEDAD A RECICLAR
+
+AV. RIVADAVIA 5500 - CABALLITO
+
+APTO CRÉDITO
+
+- Oportunidad única en el corazón de Caballito, este departamento ofrece un lienzo en blanco para que lo transformes a tu gusto.
+- Ubicación estratégica con fácil acceso a transporte público, cercanía a comercios y supermercados. 
+
+Superficie por escritura:
+- Cubierta: 69,05 y m2. 
+- Total superficie: 69,05 m2.
+
+Distribución de ambientes: 
+- Living comedor luminoso con ventana.
+- Cocina independiente amplia con ventana y conexión a gas.
+- 1er dormitorio, luminoso con placard empotrado y ventana.
+- 2do dormitorio luminoso con placard empotrado y ventana.
+- 3er dormitorio con placard empotrado y ventana.
+- 1 baño completo.
+
+Descripción del edificio: 
+- 60 años de antigüedad. 
+- Edificio de 14 pisos y 4 unidades por piso. 
+- Ubicado en un piso 12
+
+Gastos: 
+- Expensas: $ 170.000
+Entrega:
+- Entrega inmediata.
+- La documentación de la propiedad está en condiciones para la compraventa. 
+
+Accesibilidad:
+- Colectivos: 1, 2, 5, 8, 25, 26, 36, 49, 53, 55, 85, 86, 88, 96, 103, 104, 132, 136, 141, 163, 180
+- Subtes (Metro): PRIMERA JUNTA (Línea A), PUAN (Línea A)
+Descripción del barrio:
+- La propiedad se encuentra en el barrio de Caballito, que pertenece a la comuna 06 de la ciudad de Buenos Aires, muy cercana a las avenidas Juan Bautista Alberdi, Jose Maria Moreno y Directorio.
+",,62.0,True,Dormitorio | Comedor | Baño | Cocina | Living,USD,89000.0,ARS,170000.0,1288.92,1288.92,4,3,1,69.05,69.05,Avenida Rivadavia 5500,Caballito,"Caballito, Capital Federal",-34.6219615,-58.4437107,reserved,420261248-3,https://www.remax.com.ar/listings/venta-depto-3-dep-amb-en-caballito-muy-luminoso,departamento_estandar,,False,False,False,True,True,True,False,False,False,False,Caballito,6,False,True,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,0.0,False,69.05,1288.9210716871833,4,Chica,Mas_50,False,1890.5405405405409,1674.7328791341745,11.0,1.0,130541.82432432432,31.82261665128552,A_refaccionar_con_descuento,2016.7922556283245,2302.310703355809,2435.438624767635,20.0,2.0,139259.5052511358,158974.55406671864,168167.03704020518,56.47135421475932,78.62309445698725,88.9517270114665,2461.9840695148446,170000.0,False,107.93650793650794,647.6190476190476,89000.0,3560.0,600,1247.6190476190477,34525.0,128332.61904761905,4177.785157534074,6749.101045982679,5.259069047346693,20715.0,114522.61904761905,4769.236622001559,39682.69839709802,34.650533429206476,10357.5,104165.11904761905,5045.011111206155,58956.90688137998,56.59947151255869,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,10
+22,620425,1f2a2d2b-cdc6-49f3-b664-4b0b8d3e2625,sale,departamento,Venta departamento dos ambientes en Recoleta,"Excelente oportunidad para vivir o invertir 
+- living comedor
+- cocina independiente
+- dormitorio
+A reciclar ideal inversión por su ubicación cerca del Alto Palermo, Hospital de niños Ricardo Gutierrez,  diversos medios de transporte, línea D subte
+",,66.0,False,,USD,60000.0,ARS,,1714.29,1714.29,2,1,1,35.0,35.0,Billinghurst 1400,Recoleta,"Recoleta, Capital Federal",-34.593988434213,-58.412974505613,active,421531019-368,https://www.remax.com.ar/listings/venta-departamento-dos-ambientes-en-recoleta,departamento_estandar,2.0,False,False,False,False,True,False,False,False,False,False,Recoleta,2,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,0.0,False,35.0,1714.2857142857142,2,Chica,Mas_50,False,2586.254946769968,2272.0171649045533,30.0,1.0,90518.92313694888,33.7155172413793,A_refaccionar_con_descuento,2507.4387452586043,2635.871237766972,3052.5368235409387,12.0,1.0,87760.35608405115,92255.49332184404,106838.78882393286,46.26726014008525,53.75915553640671,78.0646480398881,0.0285714285714285,149018.69397994687,True,94.61504379679167,567.69026278075,60000.0,2400.0,600,1167.69026278075,17500.0,81067.69026278074,2632.8106825215345,4059.8551387488696,5.00798175646655,10500.0,74067.69026278074,2767.664799655321,15420.138259407977,20.818980860210036,5250.0,68817.69026278074,3205.1636647179857,34815.93489643413,50.59154813753454,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,11
+23,569872,c3a4e192-d56f-4426-9801-a40b41ab6bbc,sale,departamento,Venta Depto 4 amb dependencia a reciclar Balvanera,"Venta Semipiso de 4 ambientes con dependencia de servicio, Balvanera
+Posee: 
+Living comedor con pisos de madera de 4,12 x 3,5 m, hoy en día se utiliza como dormitorio de 3,22 x 4,83 con salida al balcón al frente
+Hall distribuidor
+Dormitorio de 3,77 x 2,65 con pisos de madera, placard y ventana al pulmón del edificio
+Dormitorio de 3,36 x 3,18 con piso de madera, placard y ventana a la calle
+Baño completo
+Cocina con muebles bajo mesada y alacenas
+Lavadero independiente
+Toilette 
+Dependencia de servicio de 2,98 x 2,39
+
+La propiedad se encuentra a reciclar.
+
+Expensas: $ 235.000.-
+
+La propiedad está ubicado sobre la calle Sarmiento entre las calles Paso y Castelli, a una cuadra y media de la Av Pueyrredon y a dos cudras de la Av Corrientes. 
+
+Transporte Cercano: 
+Colectivos: 5, 7, 8, 19, 24, 26, 31, 32, 41, 57, 61, 62, 64, 68, 71, 75, 86, 88,90, 95, 98, 101, 104, 105, 115, 118, 124, 129, 132, 146, 151, 164, 168, 180, 188, 194.
+
+Subtes:	ALBERTI (Línea A), CORRIENTES (Línea H), PASTEUR (Línea B), PLAZA DE MISERERE (Línea A), PLAZA ONCE (Línea H), PUEYRREDON (Línea B)
+
+Trenes:	Estación Once (SARMIENTO)",,61.0,True,Electricidad | Gas | Desague Cloacal | Agua Corriente | Dormitorio | Baño | Cocina | Lavadero | Orientación Oeste | Disposición Frente | Balcón | Toilet | Habitación de Servicio | Living/Comedor,USD,90000.0,ARS,238000.0,792.25,856.33,4,3,1,113.6,105.1,Sarmiento 2600,Balvanera,"Balvanera, Capital Federal",-34.606117032829,-58.403960595606,reserved,421071048-351,https://www.remax.com.ar/listings/venta-depto-4-amb-dependencia-a-reciclar-balvanera,departamento_estandar,4.0,False,False,False,True,True,True,True,False,False,False,Balvanera,3,False,False,False,False,False,True,False,False,True,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,8.5,False,109.35,823.0452674897119,4,Media,Mas_50,False,1459.587666484218,1269.0082451674282,27.0,1.0,159605.91133004925,43.61111111111111,A_refaccionar_con_descuento,1446.0199004975125,1679.5580110497235,1831.8010304020936,11.0,2.0,158122.276119403,183659.6685082873,200307.4426744689,75.69141791044777,104.06629834254142,122.56382519385438,2176.4974851394604,238000.0,False,151.11111111111111,906.6666666666667,90000.0,3600.0,600,1506.6666666666667,52550.0,147656.66666666666,4743.668283582089,5721.941169154248,3.8751661528913353,31530.0,126636.66666666667,5509.790055248618,51513.21178637199,40.677959348034,15765.0,110871.66666666667,6009.223280234067,83426.55272756818,75.24605269837636,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,12
+29,603420,01405d52-d719-45dd-b5bf-a4326c56c678,sale,departamento,VENTA SEMIPISO 3 4 AMBIENTES CABALITO  REFACCIONAR,"El equipo RE/MAX vende
+Semipiso en  duplex octavo y noveno piso  al frente en excelente zona de Caballito.
+Yerbal y Nicolas Repetto
+Orientacion norte  con vista abierta
+La propiedad se destaca por su luminosidad, y cantidad de  balcones 
+
+PROPIEDAD A REFACCIONAR CON MUCHO POTENCIAL 
+
+En primer planta:
+
+Espacio de Cocina
+Living comedor
+Estudio o dormitorio
+Toilette
+Actualmente el balcón terraza se encuentra techado.
+
+Segunda planta:
+
+Dormitorio principal con balcon terraza y dos placards empotrados
+Dormitorio secundario con balcón terraza , placard y baulera 
+Hall de distribucion con salida a  balcón corrido al contrafrente
+Baño completo
+Termotanque electrico.
+Pisos de parquet y porcelanato
+Edificio en  muy buen estado  
+Encargado
+Amplio ascensor
+
+A una cuadra de Rivadavia, Primera Junta, Subte A,   Tren Sarmiento estacion   Caballito.
+Zona de Colegios.
+
+Los metros  informados surgen de la escritura presentada por los propietarios.
+
+NO es apto credito###
+
+Solicita una visita!! 
+
+",,46.0,False,Electricidad | Agua | Gas | Agua Corriente | Aire Acondicionado | Ascensor | Dormitorio | Comedor | Baño | Cocina | Living | Terraza | Estudio | Orientación Norte | Disposición Frente | Balcón | Toilet | Permite Mascotas | Living/Comedor | Agua Potable,USD,115000.0,ARS,379000.0,1035.97,1495.06,4,3,1,111.007,76.92,Yerbal 896 800,Caballito,"Caballito, Capital Federal",-34.6199128,-58.443092,negotiation,420261161-159,https://www.remax.com.ar/listings/venta-semipiso-3-4-ambientes-cabalito-refaccionar,departamento_duplex,4.0,False,False,False,True,True,True,False,False,False,False,Caballito,6,False,False,True,False,True,True,False,False,True,False,False,False,False,False,False,False,True,True,False,True,True,False,False,False,False,Necesita_obra,Necesita_obra,True,34.087,False,93.9635,1223.8794851192215,4,Media,31_50,False,1996.128176883701,1834.2743636508212,16.0,1.0,187563.1899486117,38.68732983720976,A_refaccionar_con_descuento,1793.4347791983685,2030.183010938535,2433.3960135389243,30.0,2.0,168517.4088752059,190763.10134832305,228650.40631816475,46.53687728278774,65.88095769419395,98.826440276665,4033.481085740739,379000.0,False,240.63492063492063,1443.8095238095239,115000.0,4600.0,600,2043.8095238095239,38460.0,160103.80952380953,5055.522266256177,3358.0770851401903,2.0974373408902554,23076.0,144719.80952380953,5722.893040449691,40320.398784063844,27.86100874284959,11538.0,133181.80952380953,6859.512189544942,88609.08460481028,66.53242279980377,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,13
+30,640160,3ccc4b17-46a0-45b9-83c1-5b3857774981,sale,departamento,Monoambiente Palermo Hollywood para reciclar,"DEPARTAMENTO MONOAMBIENTE EN VENTA PALERMO HOLLYWOOD CAPITAL FEDERAL
+
+Oportunidad de inversión en Palermo, una de las zonas más dinámicas y valoradas de la ciudad. Este departamento se ubica en la calle Guatemala entre Humboldt y Fitz Roy, en el séptimo piso de un edificio con décadas de trayectoria, posicionándose en una ubicación estratégica con excelente conectividad y acceso a comercios, gastronomía y transporte público.
+
+La propiedad cuenta con 19 m² de superficie construida, distribuidos en un ambiente funcional que integra dormitorio, living, cocina y baño completo. Su configuración compacta la convierte en una alternativa viable para inversores que buscan rentabilidad en el segmento de monoambientes, muy demandados en la zona por estudiantes, profesionales jóvenes y trabajadores que valoran la proximidad al centro porteño.
+
+El inmueble requiere refacción, lo que representa una oportunidad para adecuarlo según necesidades específicas o preferencias de diseño. Cuenta con todos los servicios esenciales: electricidad, agua, gas y desagüe cloacal en funcionamiento. La antigüedad de la construcción, datada en 1970, no representa limitación en una zona consolidada como Palermo, donde la ubicación y el potencial de revalorización son factores determinantes.
+
+Esta propiedad se presenta como una alternativa accesible para quienes buscan ingresar al mercado inmobiliario porteño o ampliar su cartera de inversiones en un barrio de reconocida demanda y proyección.",,56.0,False,Electricidad | Agua | Gas | Desague Cloacal | Agua Corriente | Dormitorio | Baño | Cocina | Living,USD,35000.0,ARS,155000.0,1825.77,1825.77,1,0,1,19.17,19.17,Guatemala 5500,Palermo Hollywood,"Palermo Hollywood, Palermo, Capital Federal",-34.5807378,-58.4313332,reserved,420281213-28,https://www.remax.com.ar/listings/monoambiente-palermo-hollywood-para-reciclar,departamento_estandar,1.0,False,False,False,True,True,True,False,False,False,True,Palermo,14,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,0.0,False,19.17,1825.769431403234,1,Chica,Mas_50,False,2536.139905507369,2378.1016825164597,14.0,1.0,48617.80198857627,28.009908781511854,A_refaccionar_con_descuento,2587.799043062201,2786.2925996399763,2963.701602136181,16.0,2.0,49608.10765550239,53413.22913509835,56814.159712950604,41.73745044429255,52.609226100281006,62.326170608430296,8085.550339071465,155000.0,False,98.41269841269842,590.4761904761905,35000.0,1400.0,600,1190.4761904761904,9585.0,47175.47619047619,1488.2432296650716,944.3882353611261,2.0018626447946266,5751.000000000001,43341.47619047619,1602.3968740529504,8469.356070569207,19.54099586582668,2875.5000000000005,40465.97619047619,1704.424791388518,14643.758731085894,36.18783014687869,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,14
+31,653571,6b9fef9d-b7ac-4a0a-9299-93be70660d76,sale,departamento,VENTA DEPTO 2 AMBIENTES CONSTITUCION OPORTUNIDAD,"Le presentamos este departamento de 2 ambientes a refaccionar ubicado en primer piso, en el barrio de Constitución.
+
+Características de la unidad:
+
+ - Cocina independiente c/ventana al pulmón del edificio (2,2 x 2,0m)*
+ - Living (3,4m x 2,8m)*
+ - Baño completo con ducha (2,0m x 1,5m)*
+ - Dormitorio con acceso al balcón (3,3m x 2,6m)*
+ - Balcón con vista a la calle
+
+Transportes Cercanos
+Colectivos:	4, 6, 9, 10, 12, 17, 28, 39, 45, 46, 50, 51, 53, 57, 59, 60, 61, 62, 65, 67, 70, 79, 84, 90, 91, 95, 96, 97, 98, 100, 102, 126, 129, 133, 143, 148, 150, 151, 154, 168, 195
+
+Subtes: San Jose (Linea E)
+
+*Se deja constancia que las medidas (tanto totales como parciales), superficies, m2 y proporciones indicadas en el presente son aproximadas y sujetas a verificación, variación y/o ajuste.
+",,65.0,False,Dormitorio | Comedor | Baño | Cocina | Living | Placard | Orientación Norte | Disposición Frente | Balcón | Cocina/Comedor | Living/Comedor,USD,30000.0,ARS,,867.05,958.47,2,1,1,34.6,31.3,Cochabamba 1300,Constitución,"Constitución, Capital Federal",-34.6237027,-58.3852954,active,151267-300,https://www.remax.com.ar/listings/venta-depto-2-ambientes-constitucion-oportunidad,departamento_estandar,2.0,False,False,False,False,True,True,True,False,False,False,Constitucion,1,False,False,False,False,False,True,False,False,True,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,3.3000000000000007,False,32.95,910.4704097116844,2,Chica,Mas_50,False,1420.271734600317,1308.568677792041,10.0,1.0,46797.95365508044,35.89463286982173,A_refaccionar_con_descuento,1526.3157894736842,1769.2307692307693,2055.498458376156,41.0,3.0,50292.1052631579,58296.15384615385,67728.67420349435,67.640350877193,94.32051282051285,125.76224734498116,,131672.1237993315,True,83.60134844401999,501.6080906641199,30000.0,1200.0,600,1101.60809066412,15650.0,47951.60809066412,1508.7631578947369,831.7340145990383,1.734527887003172,9390.0,41691.60809066412,1748.8846153846155,14855.661140105112,35.63225747445251,4695.0,36996.60809066412,2031.8602261048302,28700.205886725387,77.57523559022623,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,15
+33,490504,9a0baf05-2f90-40e9-9538-af94d5585d52,sale,departamento,"DEPTO. PALERMO CHICO A REFACCIONAR, 4 AMB.","DEPTO. 4 AMBIENTES PALERMO CHICO, ZONA DE LUJO IDEAL.
+
+IMAGENES INTERVENIDAS CON IA 
+
+Tiene Cuarto principal con placares y con balcón vista abierta, da a pulmón de manzana. Baño en suitte
+2do. cuarto con placares,  baño completo en pasillo distribuidor.
+3er. cuarto como escritorio.
+Amplia cocina comedor.
+Amplio living comedor con balcón francés que da hacia pulmón de manzana.
+Pallier privado, puerta principal.
+Puerta de Servicio ingresa hacia la cocina.
+Portero que vive en edificio en el 9no, piso.
+
+Servicios de Agua por calefón, Gas con todo renovado hace pocos años  y Electricidad.
+Calefacción por Losa Radiante que viene por expensas.
+Tiene 1 Aire Acondicionado.
+Orientación NorOeste.
+
+INFORMACION SOBRE EL BARRIO:
+
+Palermo Chico es un vecindario pequeño, tranquilo y prestigioso donde celebridades, atletas, diplomáticos y millonarios viven en mansiones de estilo Tudor o amplios departamentos. Las opciones gastronómicas globales bordean la Avenida Figueroa Alcorta, hogar del museo de arte latinoamericano MALBA y la frondosa Plaza República del Perú, un sitio popular para pícnics y mercados al aire libre. Muy cerca, el elegante centro comercial Alcorta cuenta con tiendas de estilo de vida y moda
+
+Barrio Parque o Palermo Chico es una subzona residencial del barrio Palermo de la ciudad de Buenos Aires, Argentina. Colindante por el sur con el barrio de Recoleta, la subzona palermitana está delimitada aproximadamente por la Avenida del Libertador, entre las calles Tagle y Cavia, y las vías del ferrocarril.
+
+Es una de las zonas más cotizadas de la ciudad.",,46.0,True,Electricidad | Agua | Gas | Ascensor | Dormitorio | Baño | Lavadero | Placard | Orientación Norte | Disposición Contrafrente | Balcón | Cocina/Comedor | Living/Comedor,USD,275000.0,ARS,,2412.28,2500.0,4,2,2,114.0,110.0,Pereyra Lucena 2500,Palermo,"Palermo, Capital Federal",-34.5833185,-58.4009614,active,422361014-133,https://www.remax.com.ar/listings/depto-palermo-chico-a-refaccionar-4-amb,departamento_semipiso,4.0,False,False,False,False,True,True,False,False,False,False,Palermo,14,False,False,True,False,False,False,False,False,True,False,False,False,False,False,False,False,True,False,False,True,False,False,False,False,False,Necesita_obra,Necesita_obra,True,4.0,False,112.0,2455.3571428571427,4,Grande,31_50,False,3145.125056162948,2574.8502994011974,29.0,1.0,352254.0062902501,21.931335034013603,A_refaccionar_con_descuento,3208.643568629016,3471.948236408112,3932.702346649832,11.0,1.0,359368.0796864497,388858.2024777085,440462.6628247812,30.67930170416353,41.40298271916673,60.16824102719315,0.0357142857142857,427895.27679473546,True,271.67954082205426,1630.0772449323256,275000.0,11000.0,600,2230.077244932326,55000.0,343230.0772449323,10781.042390593491,5356.960050923924,1.5607490153321109,33000.0,321230.0772449323,11665.746074331255,55962.379158444935,17.42127625109482,16500.0,304730.0772449323,13213.879884743435,122518.70569510548,40.20564914458013,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,16
+35,60703,888909a9-ad52-4363-bf5b-690d91ebc3ec,sale,departamento,VENTA DEPTO 3 AMB FLORESTA - OPORTUNIDAD REFACCION,"OPORTUNIDAD !!!
+PARA REFACCIONAR !!!
+Se trata de un departamento de 3 ambientes ubicado en Floresta, sobre Avenida Olivera.
+En primer piso por escalera, el departamento a reciclar da al jardín del fondo del edificio.
+La unidad consta de hall de entrada, cocina con conexión para lavarropas, living comedor, y pasillo distribuidor que da acceso a los 2 dormitorios y al baño.
+PLAZO PARA ESCRITURAR: APROXIMADAMENTE 6 MESES
+OPCIÓN DE POSESIÓN EN CORTO PLAZO CON BOLETO DE COMPRA VENTA",,76.0,False,Electricidad | Agua | Gas | Áreas Verdes | Dormitorio | Baño | Cocina | Placard | Disposición Contrafrente | Living/Comedor,USD,58000.0,ARS,,988.24,988.24,3,2,1,58.69,58.69,Avenida Olivera 200,Floresta,"Floresta, Capital Federal",-34.6383105,-58.4865077,negotiation,421381085-114,https://www.remax.com.ar/listings/venta-depto-3-amb-floresta-oportunidad-refaccion,departamento_estandar,3.0,False,False,False,False,True,True,False,False,False,False,Velez Sarsfield,10,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,0.0,False,58.69,988.243312318964,3,Chica,Mas_50,False,1656.5927915827176,1514.120449132358,45.0,3.0,97225.43093798967,40.34482599825928,A_refaccionar_con_descuento,1619.977324911509,1924.7748543174996,2224.8346601768208,19.0,3.0,95076.46919905646,112965.03619989404,130575.5462057776,63.92494689492493,94.76730379292076,125.1302520789269,255.58016697904245,167498.05841540496,True,106.34797359708251,638.0878415824951,58000.0,2320.0,600,1238.087841582495,29345.0,90903.0878415825,2852.294075971694,1321.087281502274,1.4532919759607537,17607.0,79165.0878415825,3388.951085996821,30410.997272314722,38.41465739692004,8803.5,70361.5878415825,3917.266386173328,56296.69197802177,80.01054794950404,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,17
+38,608953,c876b364-bb66-45be-b389-5be48350ceca,sale,departamento,Venta Departamento 2 amb Constitución,"Departamento de 2 ambientes en venta a RECICLAR – Constitución 1150 | Excelente ubicación
+
+Ubicado en un 4.º piso sobre la calle Constitución al 1150, este funcional departamento de 2 ambientes ofrece una excelente oportunidad tanto para vivienda como para inversión.
+
+La propiedad cuenta con un living-comedor, cocina independiente, baño completo y un cómodo dormitorio, con una distribución práctica que aprovecha muy bien los espacios.
+
+Su ubicación es uno de sus mayores atractivos: se encuentra en una zona con excelente conectividad, a pocos minutos de la Estación Constitución, con acceso a múltiples líneas de colectivos, trenes y la Línea C del Subte de Buenos Aires, lo que permite una rápida conexión con distintos puntos de la ciudad.
+
+Ideal para quienes buscan comodidad, buena ubicación y fácil acceso a todos los medios de transporte.
+
+¡Consultanos para coordinar una visita!
+
+IMPORTANTE: Algunas de las imágenes de esta publicación fueron generadas con inteligencia artificial y se presentan únicamente a modo ilustrativo. Su objetivo es ayudar a visualizar el potencial de los espacios y brindar una referencia de posibles ambientaciones o terminaciones. La propiedad se vende en su estado actual.
+
+",,66.0,False,Comedor | Baño | Cocina,USD,43000.0,ARS,125000.0,788.99,788.99,2,1,1,54.5,54.5,Constitución 1000,Constitución,"Constitución, Capital Federal",-34.6246993,-58.3812173,active,421061185-28,https://www.remax.com.ar/listings/venta-departamento-2-amb-constitucion-1,departamento_estandar,2.0,False,False,False,True,True,True,True,False,False,False,Constitucion,1,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,0.0,False,54.5,788.9908256880734,2,Grande,Mas_50,False,1303.2997655334116,1023.563832258985,14.0,2.0,71029.83722157092,39.46206033688979,A_refaccionar_con_descuento,1399.2537313432836,1677.966101694915,2057.4257425742576,25.0,3.0,76259.32835820895,91449.15254237287,112129.70297029705,77.34727525164871,112.6724477729602,160.76675109371402,2293.577981651376,125000.0,False,79.36507936507937,476.1904761904762,43000.0,1720.0,600,1076.1904761904761,27250.0,73046.19047619047,2287.7798507462685,925.3580312722042,1.2668121708192657,16350.0,62146.19047619047,2743.474576271186,26559.48748991122,42.73711274400113,8175.0,53971.19047619047,3363.8910891089113,54794.621404997655,101.52568605869541,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,18
+39,609954,9ae849f7-5ed6-4e98-a0eb-967b2af73843,sale,departamento,VENTA DE PISO 4 AMBIENTES - COLEGIALES,"DEPARTAMENTO 4 AMBIENTES EN VENTA COLEGIALES CAPITAL FEDERAL
+
+Departamento de 108 m² ubicado en zona estratégica de Colegiales, sobre calle Delgado. Propiedad de 4 ambientes distribuidos en un edificio de 9 pisos, con excelente disposición y orientación norte.
+
+La unidad presenta una distribución funcional con 3 dormitorios, living/comedor amplio, cocina  y baño completo. Cuenta con toilette adicional, optimizando la distribución de espacios. Superficie cubierta de 104 m² y 4 m² semicubiertos que incrementan la versatilidad del inmueble.
+
+Entre sus características destacadas se encuentra un balcón corrido con vista al frente y lateral, mas otro balcón interno techado con parrilla. La cocina y los baños, mantienen su diseño original con potencial de modernización, representando una oportunidad para inversores o familias que busquen un inmueble con potencial de actualización. El valor esta directamente relacionado con el buen estado del piso, aunque en este momento es para refaccionar estéticamente.
+
+El edificio dispone de servicios completos: electricidad, agua y gas. La ubicación en Colegiales ofrece conectividad, cercanía a comercios, transporte público y principales arterias de la ciudad.
+
+Propiedad ideal para quienes valoran espacios amplios, luminosidad y ubicación estratégica en uno de los barrios más cotizados de Capital Federal.
+
+EXCELENTE OPORTUNIDAD PARA INVERSORES QUE BUSCAN RAPIDA RENTABILIDAD A CORTO PLAZO O BIEN PARA FAMILIAS QUE DESEAN DAR EL ULTIMO TOQUE DE MODERNIZACION A SU NUEVO HOGAR",,56.0,True,Electricidad | Agua | Gas | Dormitorio | Comedor | Baño | Cocina | Living | Terraza | Lavadero | Placard | Parrilla | Orientación Norte | Disposición Frente | Balcón | Cocina/Comedor | Toilet | Otro | Living/Comedor,USD,185000.0,ARS,200000.0,1712.96,1778.85,4,3,1,108.0,104.0,Delgado 500,Colegiales,"Colegiales, Capital Federal",-34.579910843127,-58.450419902802,active,420011277-49,https://www.remax.com.ar/listings/venta-de-piso-4-ambientes-colegiales,departamento_piso,4.0,False,False,False,True,True,True,False,False,False,False,Colegiales,13,False,False,False,False,False,True,False,False,True,False,False,True,False,False,False,False,True,True,False,False,False,False,False,False,False,Necesita_obra,Necesita_obra,True,4.0,False,106.0,1745.2830188679245,4,Media,Mas_50,False,2659.558614999871,2339.255610568289,62.0,3.0,281913.2131899864,34.37696732741463,A_refaccionar_con_descuento,2411.5738081154086,2661.974372856885,3129.3916066270403,27.0,3.0,255626.8236602333,282169.2835228298,331715.5103024663,38.17666143796396,52.52393703936748,79.30568124457636,1886.7924528301887,200000.0,False,126.98412698412699,761.9047619047619,185000.0,7400.0,600,1361.904761904762,52000.0,245761.90476190476,7668.804709806998,2196.1141885215184,0.8935942251298564,31200.0,224961.90476190476,8465.078505684894,48742.300255240145,21.666913029931905,15600.0,209361.90476190476,9951.465309073988,112402.14023148754,53.68796217216117,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,19
+40,626090,11ba56b7-ce37-44cb-9a7a-c3bc3c49cc88,sale,departamento,Venta Departamento 2 AMB Almagro,"DEPARTAMENTO 2 AMBIENTES EN VENTA ALMAGRO CAPITAL FEDERAL - A REFACCIONAR -
+
+Oportunidad de inversión en Almagro, zona consolidada y de alto potencial. Este departamento de 44 m² se ubica estratégicamente sobre Treinta y Tres Orientales, en un edificio de 1970 que mantiene la estructura característica de la época.
+
+La propiedad cuenta con 32 m² cubiertos y 12 m² semicubiertos, distribuidos en dormitorio, living comedor, cocina y patio. El baño completo y los servicios básicos de electricidad, agua y gas están disponibles. El estado general requiere refacción, lo que representa una oportunidad para adecuar el espacio según necesidades personales o de inversión.
+
+La ubicación en Almagro ofrece acceso a transporte público, comercios, servicios y espacios verdes característicos del barrio. La superficie compacta lo convierte en una opción viable para inversores que buscan rentabilidad o para quienes desean un propiedad funcional en zona céntrica.
+
+Se trata de una propiedad con potencial de revalorización, ideal para quienes buscan ingresar al mercado inmobiliario porteño o ampliar su cartera de inversiones.",,56.0,False,Electricidad | Agua | Gas | Dormitorio | Cocina | Patio | Living/Comedor,USD,47000.0,ARS,125000.0,1068.18,1468.75,2,1,1,44.0,32.0,Treinta y Tres Orientales 300,Almagro,"Almagro, Capital Federal",-34.6174212,-58.424215,reserved,421011050-37,https://www.remax.com.ar/listings/venta-departamento-2-amb-almagro,departamento_estandar,2.0,False,False,False,True,True,True,False,False,False,False,Almagro,5,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,12.0,False,38.0,1236.842105263158,2,Chica,Mas_50,False,1887.234464959301,1711.203007518797,48.0,1.0,71714.90966845345,34.462721605191184,A_refaccionar_con_descuento,1801.854508196721,1986.4251812955467,2111.9876415846397,24.0,1.0,68470.47131147541,75484.15688923077,80255.5303802163,45.681853854203005,60.60458912602292,70.75644761748148,3289.4736842105262,125000.0,False,79.36507936507937,476.1904761904762,47000.0,1880.0,600,1076.1904761904761,16000.0,65956.19047619047,2054.114139344262,460.16669594067207,0.6976853766391915,9600.0,59556.19047619047,2264.524706676923,13663.441706363374,22.942101563439955,4800.0,54756.19047619047,2407.6659114064887,23091.67399261934,42.17180521837115,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,20
+41,542194,73d0d6a1-1201-47a4-b1ea-86dcfd892491,sale,departamento,"2 ambientes,  gran oportunidad!!!!!!","DEPARTAMENTO 2 AMBIENTES A REFACCIONAR EN VENTA - ALMAGRO - CAPITAL FEDERAL
+
+Departamento de 46 m² ubicado en el primer piso de un edificio tradicional con reminiscencias de arquitectura francesa, emplazado sobre la calle Billinghurst en el reconocido barrio de Almagro. Construido en 1962, el inmueble ofrece una distribución funcional ideal para inversores o primeros compradores que valoren potencial de renovación.
+
+La propiedad presenta una configuración de 2 ambientes con espacios definidos: dormitorio amplio, living/comedor integrado, cocina con sector de lavadero y baño completo. Cuenta con un placard que optimiza el aprovechamiento del espacio interior.
+
+Zona estratégica con todos los servicios urbanos disponibles: electricidad, agua, gas, internet y línea telefónica. El edificio de tres pisos mantiene un perfil familiar y tranquilo, garantizando un entorno residencial de bajo nivel de ruido.
+
+Condición general a refaccionar, lo que representa una oportunidad para personalizar el departamento según preferencias y criterio del nuevo propietario. Ubicación privilegiada en Almagro, barrio con excelente conectividad y valorización inmobiliaria constante.
+
+Características destacadas:
+- Superficie total: 48 m²
+- Ambientes: Dormitorio, living/comedor, cocina, baño
+- Placard
+- Solarium  y Parrilla en edificio
+- Año de construcción: 1962
+
+Inversión con potencial de revalorización. Ideal para quienes buscan un inmueble con posibilidades de actualización y ubicación premium.",,64.0,False,Electricidad | Agua | Gas | Internet | Teléfono | Agua Corriente | Dormitorio | Comedor | Baño | Cocina | Living | Placard | Balcón | Cocina/Comedor | Solarium | Living/Comedor,USD,62000.0,ARS,100000.0,1347.83,1347.83,2,1,1,46.0,46.0,Billinghurst 700,Almagro,"Almagro, Capital Federal",-34.6014563,-58.4154236,active,421431026-73,https://www.remax.com.ar/listings/2-ambientes-gran-oportunidad,departamento_estandar,2.0,False,False,False,True,True,True,False,False,False,False,Almagro,5,False,False,False,False,False,False,False,False,True,False,False,True,False,False,False,True,True,False,False,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,0.0,False,46.0,1347.8260869565215,2,Media,Mas_50,False,1805.6818181818185,1698.2268920073022,14.0,1.0,83061.36363636363,25.35639040140093,A_refaccionar_con_descuento,1992.857142857143,2324.187317907828,2559.91662181078,10.0,2.0,91671.42857142858,106912.61662376008,117756.16460329584,47.85714285714287,72.4397042318711,89.92929774725138,2173.913043478261,100000.0,False,63.492063492063494,380.95238095238096,62000.0,2480.0,600,980.952380952381,23000.0,88460.95238095238,2750.1428571428573,460.33333333334303,0.5203802592481054,13800.0,79260.95238095238,3207.3784987128024,24444.2857440949,30.8402624619096,6900.0,72360.95238095238,3532.684938098875,41862.527284244585,57.85237190336384,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,21
+44,644560,ef6e5d7f-0a11-4bf5-9a79-0f908d0069ea,sale,departamento,VENTA DEPTO 3 AMB CON PATIO A REFACCIONAR FLORES,"Excelente ubicación!!! Sobre la calle Caracas a metros de Avenida Gaona, a 200 mts de Avenida Boyacá.
+
+La unidad se encuentra en Planta Baja a refaccionar, con una distribución funcional y gran potencial para renovar y adaptar a gusto.  Oportunidad para desarrollar un proyecto de renovación, tanto para vivienda propia como inversión!!!
+
+La propiedad cuenta con:
+
+-living comedor con pisos de parquet
+-cocina separada y a su lado un espacio de guardado
+- dos dormitorios con placard 
+- baño completo con bañera
+-Lo mejor de la propiedad su patio donde una parte se encuentra cubierta y otra descubierta
+
+NO TE LO PODES PERDER!!! ESTAMOS AGENDANDO VISITAS!!!
+
+SI NECESITAS VENDER PARA ADQUIRIR TU NUEVA PROPIEDAD, PODEMOS REALIZAR LA OPERACION SIMULTANEAMENTE.
+
+SI TE FALTA HASTA EL 30% DEL VALOR DE LA PROPIEDAD QUE QUERES COMPRAR, PODES ACCEDER A UN PRESTAMO LENDAR EXCLUSIVO PARA CLIENTES RE/MAX!
+
+TRANSPORTE PÚBLICO
+
+• Líneas de colectivo cercanas: 84, 99, 106, 113, 124, 181
+
+",,58.0,False,Electricidad | Agua | Gas | Internet | Teléfono | Desague Cloacal | Ascensor | Dormitorio | Comedor | Baño | Cocina | Patio | Disposición Contrafrente | Living/Comedor,USD,82000.0,ARS,120000.0,1025.0,1366.67,3,2,1,80.0,60.0,Caracas 1000,Flores,"Flores, Capital Federal",-34.6177415,-58.4664575,active,421661001-158,https://www.remax.com.ar/listings/venta-depto-3-amb-con-patio-a-refaccionar-flores,departamento_estandar,3.0,False,False,False,True,True,True,False,False,False,False,Flores,7,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,False,True,True,False,False,False,False,False,Necesita_obra,Necesita_obra,False,20.0,False,70.0,1171.428571428571,3,Media,Mas_50,False,1640.625,1444.2190669371196,17.0,1.0,114843.75,28.598639455782315,A_refaccionar_con_descuento,1717.5006424709068,2046.3160834247897,2097.91157866593,16.0,2.0,120225.04497296349,143242.12583973526,146853.8105066151,46.61590850361399,74.68551931675033,79.09001281294523,1714.2857142857142,120000.0,False,76.19047619047619,457.1428571428571,82000.0,3280.0,600,1057.142857142857,30000.0,116337.14285714286,3606.7513491889044,281.1507666317193,0.24166896291836965,18000.0,104337.14285714286,4297.263775192057,34607.719207400354,33.16912679388281,9000.0,95337.14285714286,4405.6143151984525,47111.05333427379,49.41521417824211,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,22
+45,619765,6bed291a-0e2b-49dd-9b75-a08bd5a70a4f,sale,departamento,VENTA DUPLEX 4 AMBIENTES EN BELGRANO,"DEPARTAMENTO DÚPLEX EN VENTA EN BELGRANO AL FRENTE – 4 AMBIENTES + DEPENDENCIA – 3 BALCONES – SIN COCHERA
+
+Excelente departamento dúplex ubicado en una de las zonas más buscadas de Belgrano, sobre Blanco Encalada 2200, a pocos metros de Av. Cabildo. La propiedad se desarrolla en los pisos 8° y 9° de un edificio de 9 pisos y cuenta con 154 m² de superficie total, destacándose por sus amplios ambientes, excelente luminosidad, ventilación natural y tres balcones/terrazas que le aportan un diferencial único.
+
+La propiedad se encuentra para actualizar, ofreciendo una excelente oportunidad para modernizar sus espacios y personalizarlos según las necesidades y el estilo de sus nuevos propietarios.
+
+DISTRIBUCIÓN Y ESPACIOS
+
+• 117 m² cubiertos distribuidos en cuatro ambientes principales.
+• Tres dormitorios (uno en suite) + dependencia de servicio.
+• Tres baños completos + toilette.
+• Living y comedor de amplias dimensiones.
+• Cocina con comedor diario.
+• Lavadero integrado.
+• Ambientes luminosos y con excelente ventilación natural.
+• Sin edificios linderos inmediatos, favoreciendo la privacidad y las vistas.
+
+ BALCONES Y ESPACIOS EXTERIORES
+
+• Amplio balcón corrido de aproximadamente 38 m², con gran potencial para crear un espacio exterior único.
+• Segundo balcón corrido ubicado en el piso 9.
+• Tercer balcón privado en uno de los dormitorios.
+• Tres espacios exteriores que aportan luz, aire y amplitud a la propiedad.
+
+CARACTERÍSTICAS Y SERVICIOS
+
+• Edificio construido en 1980.
+• Dos ascensores.
+• Aire acondicionado frío/calor.
+• Servicios de electricidad, agua, gas e internet.
+• Propiedad con excelente potencial de actualización y puesta en valor.
+
+UBICACIÓN ESTRATÉGICA – BELGRANO
+
+Uno de los grandes diferenciales de esta propiedad es su ubicación: Blanco Encalada al 2200, a metros de Av. Cabildo, en pleno corazón de Belgrano.
+
+Una zona que combina el perfil residencial del barrio con una amplia oferta comercial, gastronómica y de servicios. En las inmediaciones se encuentran supermercados, bancos, farmacias, restaurantes, cafeterías, gimnasios, locales comerciales y todo lo necesario para resolver cómodamente la vida cotidiana.
+
+La conectividad es otro de sus grandes atributos:
+
+• Subte Línea D: estación Juramento, a pocos minutos caminando, con conexión directa hacia Palermo, Recoleta, Centro y Microcentro.
+• Metrobus de Av. Cabildo: acceso a múltiples líneas de colectivos que conectan rápidamente Belgrano con distintos puntos de CABA y Zona Norte.
+• Múltiples líneas de colectivo sobre Cabildo, Blanco Encalada y avenidas cercanas.
+• Ferrocarril Mitre – estación Belgrano R, también a pocos minutos, con conexión hacia el corredor norte y Retiro.
+• Excelente acceso vehicular hacia Av. Cabildo, Av. del Libertador, Av. Lugones y principales arterias de la ciudad.
+
+INFORMACIÓN IMPORTANTE
+
+Se deja constancia que las superficies consignadas son aproximadas y las exactas surgirán de la escritura traslativa de dominio.
+
+Las visitas son exclusivas con personal de la firma y se coordinan con anticipación. Por normas de seguridad solicitamos nombre completo, DNI, teléfono y correo electrónico de contacto.
+
+Si te interesa esta propiedad, no dudes en consultarnos. Si necesitás vender para comprar, podemos ayudarte a realizar ambas operaciones de manera simultánea.
+
+Obtené hasta un 30% de financiación. Simulá tu préstamo en Lendar. Exclusivo para clientes RE/MAX.
+",,46.0,False,Electricidad | Agua | Gas | Internet | Alarma | Aire Acondicionado | Ascensor | Dormitorio | Comedor | Baño | Cocina | Living | Terraza | Lavadero | Balcón | Toilet | Habitación de Servicio,USD,270000.0,ARS,400000.0,1749.04,2316.8,4,3,3,154.37,116.54,Blanco Encalada 2200,Belgrano,"Belgrano, Capital Federal",-34.5584312,-58.4575069,active,181558-157,https://www.remax.com.ar/listings/venta-duplex-4-ambientes-en-belgrano,departamento_duplex,4.0,False,False,False,True,True,True,False,False,False,False,Belgrano,13,False,True,False,False,False,True,False,False,False,False,False,False,False,False,False,False,True,True,False,True,False,True,False,True,False,Necesita_obra,Necesita_obra,False,37.83,False,135.455,1993.2819017385848,4,Grande,31_50,False,2700.165654334621,2564.0182768482296,13.0,1.0,365750.93870789616,26.17927353683891,A_refaccionar_con_descuento,2602.419473100601,2672.7572457719616,2846.952126335699,14.0,2.0,352510.7297288419,362038.3327260411,385633.90027280216,30.559529529200717,34.088271380015215,42.8273704714082,2953.010224797903,400000.0,False,253.96825396825398,1523.8095238095239,270000.0,10800.0,600,2123.809523809524,58270.0,341193.8095238095,10575.321891865256,741.5983131671674,0.2173539766744849,34962.0,317885.8095238095,10861.149981781233,33291.3732204503,10.472745943054369,17481.0,300404.8095238095,11569.017008184064,73660.07374080858,24.520271116022336,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,23
+46,494543,a7b52055-feaa-452d-bf39-f58f6d4811f1,sale,departamento,Semipiso luminoso sobre Av  Rivadavia con cochera,"Semipiso muy luminoso con balcòn corrido al frente, living comedor,  con salida al  balcòn,tres dormitorios muy espaciosos con placares y ventana al exterior.dos baños completos, cocina comedor , lavadero, dependencia de servicio con baño privado. El edificio esta muy bien cuidado y tiene encargado y vigilancia. La cochera es de uso exclusivo y de  fácil acceso para maniobrar.Se  encuentra en una zona rodeada de negocios, medios de transporte, a una cuadra de la Estacion del Subre A de la Estacion Perimera Junta, a  dos cuadras del Mercado El Proegreso, a tres cuadras de AV Acoyte, rodeada de colegios primarios y secundarios. Departamento a reciclar, precio muy conveniente...... te esperamos.. apto crèdito.",,54.0,False,Dormitorio | Comedor | Baño | Cocina | Living | Lavadero,USD,164000.0,ARS,470000.0,1189.1,1326.86,4,3,2,137.92,123.6,Avenida Rivadavia 5400,Caballito,"Caballito, Capital Federal",-34.6204561,-58.4410367,active,151028-262,https://www.remax.com.ar/listings/semipiso-luminoso-sobre-av-rivadavia-con-cochera,departamento_estandar,,False,False,False,True,True,True,False,False,False,False,Caballito,6,False,True,False,False,False,True,False,False,True,False,False,False,False,False,False,False,True,False,False,False,False,True,False,True,False,Necesita_obra,Necesita_obra,False,14.319999999999991,False,130.76,1254.2061792597126,4,Grande,Mas_50,False,1806.1674008810571,1654.1353383458647,17.0,1.0,236174.44933920703,30.55980422147445,A_refaccionar_con_descuento,1854.437080640761,2127.3760881151184,2578.043052927752,19.0,2.0,242486.1926645859,278175.69728193287,337104.9096008328,47.85743455157676,69.61932761093468,105.55177414684928,3594.3713673906395,470000.0,False,298.41269841269843,1790.4761904761906,164000.0,6560.0,600,2390.476190476191,61800.0,234750.47619047618,7274.585779937576,461.1306941721414,0.19643440203204557,37080.0,210030.47619047618,8345.270918457985,59799.95017299868,28.472034753073753,18540.0,191490.47619047618,10113.147288024984,135501.2861223316,70.76137091410648,Rentable en los tres escenarios,False,False,False,False,0,False,Prioridad de análisis,24
+1,507319,89b62414-47aa-4b28-8c49-8f2752a4662b,sale,departamento,VENTA DEPTO TRIPLEX APTO PROF A REFACC.  RECOLETA,"DEPARTAMENTO TRIPLEX 4 AMBIENTES EN VENTA - APTO PROFESIONAL- RECOLETA - CAPITAL FEDERAL
+
+Exclusivo departamento triplex ubicado en una de las zonas más prestigiosas de Recoleta, sobre calle Paraná entre M.T. de Alvear y Paraguay. Propiedad de 254 m² con distribución estratégica y amplios espacios que combinan funcionalidad y diseño.
+Hay fotos con IA para sugerencia en decoración y espacio.
+
+APTO PROFESIONAL
+
+El inmueble se desarrolla en tres niveles con características diferenciales. Primer nivel con living comedor amplio, cocina integrada, lavadero y dependencia de servicio. Dormitorio principal actualmente anexado al living y baño completo que puede funcionar como toilette de recepción.
+
+Segundo nivel accesible mediante escalera de madera, compuesto por tres dormitorios. Dormitorio principal en suite con acceso a balcón terraza con vista a calle Paraná. Segundo dormitorio con igual orientación. Tercer dormitorio ubicado al contrafrente. Baño completo y sauna sin uso actual.
+
+Tercer nivel con terraza de uso exclusivo equipada con parrilla y sector de lavadero. Espacio ideal para reuniones y actividades al aire libre.
+
+Características técnicas destacadas: caldera individual, persianas automatizadas en dormitorios, aire acondicionado, losa radiante y chimenea. El edificio cuenta con dos ascensores (principal y de servicio) y baulera en subsuelo. 
+
+Ubicación privilegiada a una cuadra de Avenida Santa Fe y Avenida Córdoba. Zona con excelente conectividad, rodeada de colegios, comercios y servicios. Edificio construido en 1956, actualmente a refaccionar, representa una oportunidad única de inversión en uno de los barrios más cotizados de Buenos Aires.
+
+Según escritura: Superficie total: 253,94 m2 (184 m² cubiertos, 18 m² semicubiertos, 51 m² descubiertos) + 14.,4 m2 (unidad complementaria ubicada en el sótano)
+
+Ambientes: 4
+Dormitorios: 3
+Baños: 3
+
+Ideal para quienes buscan un inmueble con potencial de renovación en una ubicación estratégica de Recoleta.",,58.0,False,Electricidad | Agua | Gas | Aire Acondicionado | Losa Radiante | Chimenea | Caldera | Dormitorio | Comedor | Baño | Cocina | Living | Terraza | Lavadero | Placard | Parrilla | Orientación Este | Disposición Frente | Balcón | Toilet | Habitación de Servicio | Baulera,USD,260000.0,ARS,1200000.0,1025.2,1409.83,4,3,3,253.61,184.42,Paraná 900,Recoleta,"Recoleta, Capital Federal",-34.5975671,-58.3883398,active,420101325-112,https://www.remax.com.ar/listings/venta-depto-triplex-apto-prof-a-refacc-recoleta-1,departamento_triplex,,False,False,False,True,True,True,False,False,False,True,Recoleta,2,False,False,False,False,True,False,True,False,True,False,False,True,False,False,False,False,True,True,False,True,True,False,False,False,False,Necesita_obra,Necesita_obra,False,69.19000000000003,False,219.015,1187.1333013720523,4,Grande,Mas_50,False,2329.993117687543,2029.2642296674555,36.0,1.0,510303.4426703372,49.04992240705626,A_refaccionar_con_descuento,2464.452876486129,2880.269745009779,3241.881962179202,14.0,1.0,539752.1467436095,630822.2782033167,710020.7779466779,107.59697951677288,142.62395315512182,173.08491459487612,5479.076775563318,1200000.0,False,761.9047619047619,4571.428571428572,260000.0,10400.0,600,5171.428571428572,92210.0,367781.4285714286,16192.564402308282,155778.15376987262,42.35617724770956,55325.99999999999,330897.4285714286,18924.6683460995,281000.1812857886,84.92063008737797,27662.999999999996,303234.4285714286,21300.623338400335,385485.7260368489,127.12465660740287,Rentable en los tres escenarios,True,False,True,False,2,True,Revisión adicional,25
+2,636825,afaa3068-0ade-490e-aad0-783305903b22,sale,departamento,COMODO DEPARTAMENTO DE 4 AMBIENTE CON DEPENDENCIA!,"DEPARTAMENTO  A REFACCIONAR, EDIFICIO EN BUEN ESTADO!!!!!!!!! DEPARTAMENTO 4 AMBIENTES, SAN CRISTÓBAL CAPITAL FEDERAL - 
+
+
+Departamento de 137 m², ubicado estratégicamente sobre Avenida Entre Ríos en el barrio de San Cristóbal. Emplazado en el segundo piso de una propiedad tradicional, este inmueble representa una oportunidad de inversión con potencial de revalorización.
+
+CARACTERÍSTICAS PRINCIPALES
+
+Distribuido en cuatro ambientes amplios con dependencia, el departamento cuenta con tres habitaciones y habitacion de servicio o funcional, y dos espacios de baño que ofrecen funcionalidad y comodidad. La superficie total construida es de 137 m², con 135 m² cubiertos y balcon frances, lo que permite múltiples configuraciones según las necesidades del comprador.
+
+ESTADO Y POTENCIAL
+
+El inmueble requiere una intervención integral de renovación. Esta condición representa una ventaja para inversores o compradores que busquen personalizar el espacio según sus preferencias, con la posibilidad de incrementar significativamente su valor de mercado mediante una reciclacion de sus ambientes.
+
+UBICACIÓN ESTRATÉGICA
+
+La propiedad se encuentra en una zona consolidada de San Cristóbal, con excelente conectividad y acceso a servicios urbanos. Su ubicación sobre Avenida Entre Ríos, a cuadras de Av. san juan y Av. Garay, cerca del Hospital Garrahan garantiza una comunicación directa con diferentes sectores de la Ciudad Autónoma de Buenos Aires.
+
+Ideal para inversión o vivienda familiar con proyecto de renovación.",,71.0,False,,USD,90000.0,ARS,257000.0,658.91,666.03,4,3,1,136.59,135.13,Avenida Entre Ríos 1400,San Cristobal,"San Cristobal, Capital Federal",-34.6254166,-58.3910076,active,422361020-26,https://www.remax.com.ar/listings/comodo-departamento-de-4-ambiente-con-dependencia,departamento_estandar,4.0,False,False,False,True,True,False,True,False,False,True,Constitucion,1,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,Necesita_obra,Necesita_obra,True,1.460000000000008,False,135.86,662.4466362431915,4,Grande,Mas_50,False,2308.9403332041843,1400.0854579119784,50.0,3.0,313692.6336691205,71.30949523828124,A_refaccionar_con_descuento,1588.6334154883905,2169.2451349585936,2684.83344513716,18.0,3.0,215831.7358282527,294713.6440354746,364761.4718563346,139.81303980916968,227.45960448386063,305.29052428481623,1891.653172383336,257000.0,False,163.17460317460316,979.047619047619,90000.0,3600.0,600,1579.047619047619,67565.0,162744.04761904763,6474.952074847582,46612.73613435749,28.641745622223247,40539.0,135718.04761904763,8841.409321064237,150154.1870953627,110.63686055729039,20269.5,115448.54761904762,10942.844155690038,238370.0800815969,206.47300030846702,Rentable en los tres escenarios,False,False,True,False,1,True,Revisión adicional,26
+3,644844,9db1aa76-9929-4a61-8a75-9015e7889272,sale,departamento,Piso de 674m2: terraza propia 3 cocheras,"Piso EN VENTA EN SAN NICOLÁS, CAPITAL FEDERAL
+
+674m2 totales
+386m2 cubiertos
+5 baños
+3 cocheras
+
+DISTRIBUCIÓN Y CARACTERÍSTICAS
+
+• tercer piso de un edificio de 10 pisos de uso mixto (vivienda y oficina) con 93 cocheras y 48 departamentos
+
+• Dos unidades funcionales que ocupan la planta completa del tercer piso
+
+• UF 94: Al frente con balcón corrido (Sur), un patio interno y patio al contrafrente (Norte). Superficie cubierta: 336 m²
+
+• UF 95: Al contrafrente (Norte). Un único ambiente con un baño. Superficie cubierta: 50 m²
+
+• Incluye 3 unidades funcionales de cocheras en el primer piso, con acceso por rampa fija vehicula
+
+Posibilidad de dividir nuevamente, uso como vivienda, oficina, consultorio. 
+
+Edificio con recepción. 
+
+UBICACIÓN ESTRATÉGICA
+• A 4 cuadras del Obelisco
+• A 5 cuadras de Tribunales y el Teatro Colón
+• A 6 cuadras del Congreso
+• A 9 cuadras de la Casa Rosada
+• Cercano a las estaciones de subte A, B, C y D
+
+ESTADO Y SERVICIOS
+• Propiedad a refaccionar, construida en 1970
+• Clasificación: Apto profesional
+• Servicios: Electricidad, agua, internet, desagüe cloacal
+
+GASTOS a Julio 2025
+
+Expensas: 1.800.000
+Agua: 175.000
+ABL: 250.00",,56.0,True,Electricidad | Agua | Internet | Desague Cloacal | Agua Corriente | Dormitorio | Baño | Cocina | Patio | Terraza | Estudio | Sala de reuniones | Orientación Sur | Orientación Norte | Disposición Contrafrente | Disposición Frente | Disposición Interno | Balcón | Toilet,USD,180000.0,ARS,1800000.0,439.56,466.32,8,5,3,409.5,386.0,Bartolome Mitre 1200,San Nicolás,"San Nicolás, Capital Federal",-34.604929283814,-58.383861895758,active,420211242-179,https://www.remax.com.ar/listings/piso-de-674m2-terraza-propia-3-cocheras,departamento_piso,,False,False,False,True,True,True,True,False,False,True,San Nicolas,1,False,False,False,False,True,True,True,False,True,False,False,False,False,False,False,False,True,True,True,False,False,True,False,True,False,Necesita_obra,Necesita_obra,False,23.5,False,397.75,452.54556882463856,5+,Grande,Mas_50,False,1843.5754189944132,1291.866028708134,21.0,3.0,733282.1229050279,75.45283126678476,A_refaccionar_con_descuento,1286.9038607115822,1443.298969072165,1614.0350877192982,21.0,4.0,511866.0105980318,574072.1649484537,641982.4561403509,184.37000588779543,218.92898052691868,256.6569200779728,4525.455688246386,1800000.0,False,1142.857142857143,6857.142857142857,180000.0,7200.0,600,7457.142857142857,193000.0,387657.14285714284,15355.980317940954,108852.88742294803,28.07968057048335,115800.0,310457.14285714284,17222.16494845361,246392.85714285716,79.36453156635378,57900.0,252557.14285714287,19259.473684210527,370165.8395989975,146.56716314231474,Rentable en los tres escenarios,True,True,False,True,3,True,Revisión adicional,27
+5,644478,54af257f-b1ea-474a-bf1a-efc3cb1605c6,sale,departamento,"Venta ,   Consultorio/Ofi/Duplex/ Recoleta","DEPARTAMENTO DÚPLEX EN VENTA EN RECOLETA, JUNÍN, CAPITAL FEDERAL
+
+Oportunidad comercial versátil en el corazón de Recoleta. Este dúplex de 136 m² ubicado en Junín, piso 1, se presenta como solución ideal para depósito, consultorio, oficina o espacio de trabajo profesional. Su distribución flexible permite adaptarse a múltiples usos comerciales según tus necesidades específicas.
+
+CARACTERÍSTICAS DEL INMUEBLE
+
+Superficie total construida de 136 m² distribuidos en 2 ambientes con 1 habitación y 1 baño completo. El espacio cuenta con patio descubierto que suma 6 m² adicionales, brindando versatilidad en la configuración del uso. Disposición contrafrente e interno que favorece la circulación y aprovechamiento del espacio.
+
+LUMINOSIDAD Y AMBIENTE
+
+Las amplias ventanas permiten entrada generosa de luz natural, creando un ambiente luminoso y acogedor que promueve productividad y bienestar. Ideal para consultorios médicos, despachos profesionales o espacios colaborativos que requieran confort ambiental.
+
+SERVICIOS E INFRAESTRUCTURA
+
+• Electricidad, agua, gas y desagüe cloacal disponibles
+• Patio interno que complementa la funcionalidad del espacio
+• Cocina y baño completo
+
+UBICACIÓN ESTRATÉGICA
+
+Situado en una de las zonas más demandadas de Buenos Aires, a pasos de las Facultades de Medicina , Odontología, Ciencias Económicas, Ciencias Sociales de la UBA. En el corazón de Recoleta, rodeado de la historia, cultura vibrante y elegancia arquitectónica que caracterizan este prestigioso barrio. Acceso inmediato a restaurantes de renombre, boutiques exclusivas, galerías de arte y parques icónicos.
+
+CONECTIVIDAD Y TRANSPORTE
+
+Múltiples líneas de colectivos y acceso a Subte D. Ubicación estratégica con proximidad a todos los servicios y comercios de la zona.
+
+ESTADO Y CONSTRUCCIÓN
+
+Edificio de 10 pisos construido en 1970. Inmueble en buen estado general, a refaccionar según necesidades de uso comercial.
+
+Contactanos para coordinar visita y conocer todas las posibilidades que ofrece este espacio.",,56.0,False,Electricidad | Agua | Gas | Desague Cloacal | Agua Corriente | Baño | Cocina | Patio | Disposición Contrafrente | Disposición Interno,USD,145000.0,ARS,515000.0,1064.61,1115.3,2,1,1,136.2,130.01,Junín 900,Barrio Norte,"Barrio Norte, Capital Federal",-34.5980054,-58.3973311,active,420491268-163,https://www.remax.com.ar/listings/venta-consultorio-ofi-duplex-recoleta,departamento_duplex,,False,False,False,True,True,True,False,False,False,True,Recoleta,2,False,True,False,False,True,False,False,False,True,False,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,Necesita_obra,Necesita_obra,True,6.189999999999998,False,133.105,1089.365538484655,2,Grande,Mas_50,False,2313.700349515088,2052.527665382928,22.0,1.0,307965.0850222058,52.91674054883696,A_refaccionar_con_descuento,2084.311311704282,2313.700349515088,2648.755211269566,12.0,1.0,277432.25714439846,307965.0850222058,352562.5623960356,91.33259113406793,112.38971380841778,143.1465947558866,3869.1258780661888,515000.0,False,326.984126984127,1961.904761904762,145000.0,5800.0,600,2561.904761904762,65004.99999999999,218366.90476190476,8322.967714331953,50742.38466816177,23.237213864201845,39003.0,192364.90476190476,9238.952550666172,106361.22770963484,55.29138895750293,19501.5,172863.40476190476,10576.876871881068,169122.28076224975,97.83579178900943,Rentable en los tres escenarios,True,False,False,False,1,True,Revisión adicional,28
+6,629512,5ae6c683-dfdf-457e-9188-d69b42434703,sale,departamento,Venta Monoamb a Reciclar en Recoleta,"MONOAMBIENTE A RECICLAR EN EXCELENTE UBICACIÓN – RECOLETA
+
+Oportunidad para inversores, desarrolladores o quienes busquen un proyecto de renovación en una de las zonas más buscadas de la ciudad.
+
+Ubicado sobre Rodríguez Peña, entre Santa Fe y Arenales, este monoambiente se encuentra en un noveno piso y cuenta con una superficie total de 22 m².
+
+La unidad posee un ambiente principal con amplio ventanal y vista lateral abierta al edificio lindero, baño compacto y espacio tipo kitchenette. El departamento requiere una refacción integral, incluyendo instalaciones, revestimientos, pintura, carpinterías y terminaciones generales.
+
+Su principal valor radica en la ubicación estratégica, a pasos de avenidas, medios de transporte, centros comerciales, universidades, oficinas y atractivos turísticos, lo que lo convierte en una excelente alternativa para alquiler temporario, estudio profesional o inversión con potencial de renta.
+
+Características principales:
+
+Monoambiente.
+22 m² totales.
+9° piso.
+Vista lateral.
+Baño.
+Espacio para kitchenette.
+Estado: a reciclar íntegramente.
+
+Ideal para quienes buscan adquirir una propiedad a valor de oportunidad y desarrollar un proyecto de puesta en valor en una ubicación de alta demanda.
+
+Consulte para coordinar una visita.",,61.0,False,Baño,USD,30000.0,ARS,120000.0,1363.64,1363.64,1,0,1,22.0,22.0,Rodríguez Peña 1100,Recoleta,"Recoleta, Capital Federal",-34.5951508,-58.3919514,reserved,421001035-159,https://www.remax.com.ar/listings/venta-monoamb-a-reciclar-en-recoleta,departamento_estandar,1.0,False,False,False,True,True,True,True,False,False,False,Recoleta,2,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,False,Necesita_obra,Necesita_obra,True,0.0,False,22.0,1363.6363636363635,1,Chica,Mas_50,False,2566.186336524259,2394.6738710922423,26.0,1.0,56456.09940353369,46.86136605795645,A_refaccionar_con_descuento,2472.5138484387157,2700.0,3024.860546867523,14.0,1.0,54395.30466565174,59400.0,66546.93203108551,81.31768221883914,98.0,121.82310677028502,5454.545454545455,120000.0,False,76.19047619047619,457.1428571428571,30000.0,1200.0,600,1057.142857142857,11000.0,43257.142857142855,1631.8591399695522,9506.302668539334,21.976261122779174,6600.0,38857.142857142855,1782.0,18760.857142857145,48.28161764705883,3300.0,35557.142857142855,1996.4079609325652,28993.381213010092,81.54024447210553,Rentable en los tres escenarios,True,False,False,False,1,True,Revisión adicional,29
+7,569285,1689f496-a49a-493b-b58e-30749281f763,sale,departamento,VENTA DEPTO 5 AMB COCHERA,"PIEDRAS 70-MICROCENTRO PORTEÑO-OPORTUNIDAD -APTO VIVIENDA y PROFESIONAL-
+Semipiso  premium de 236 m² cubiertos más dos cocheras cubiertas, ideal vivienda , estudio o Showroom.
+
+Excelente opción residencial en edificio corporativo de gran categoría sobre la calle Piedras 77, en pleno Microcentro porteño.
+
+La unidad cuenta con 235 m² totales, excelente luz natural y muy lindas vistas abiertas, desarrollándose en una planta funcional con gran potencial para reciclar y modernizar.
+
+El edificio posee seguridad presencial las 24 hs, elegante hall de acceso y 3 ascensores, ofreciendo una imagen corporativa ideal para empresas, estudios profesionales, consultoras o coworking.
+
+La propiedad dispone de:
+• Dos Cocheras cubiertas
+• Servicios centrales
+• Calefacción fan-coil perimetral por radiadores de ventana
+• Amplios espacios de trabajo
+• Muy buena luminosidad natural
+• Excelente conectividad y accesos
+
+Ubicación estratégica en el corazón del Microcentro, a metros del histórico CAFE TORTONI, Av. de Mayo y del casco histórico porteño.
+
+Excelente conectividad mediante múltiples medios de transporte:
+• Subte Línea A (Estación Piedras)
+• Cercanía a líneas C, D y E
+• Metrobus 9 de Julio y Av. de Mayo
+• Gran variedad de líneas de colectivo
+• Rápido acceso a Puerto Madero, Plaza de Mayo y principales arterias de la ciudad
+
+Una propiedad con enorme potencial para renovación integral y actualización estética, ideal para desarrollar oficinas AAA, showroom corporativo o inversión patrimonial o Vivienda en una ubicación estratégica de la ciudad.",,46.0,False,Dormitorio | Comedor | Baño | Living | Estudio | Sala de reuniones | Toilet | Otro,USD,129000.0,ARS,1000000.0,519.62,519.62,5,4,3,248.26,248.26,Piedras 0,Centro / Microcentro,"Centro / Microcentro, Capital Federal",-34.6197115,-58.3772677,active,181551-386,https://www.remax.com.ar/listings/venta-depto-5-amb-cochera,departamento_estandar,5.0,False,False,False,True,True,True,True,False,False,True,San Telmo,1,False,False,True,False,False,False,False,False,True,False,False,False,False,False,False,False,False,False,False,True,False,True,False,True,False,Necesita_obra,Necesita_obra,True,0.0,False,248.26,519.6165310561508,5+,Grande,31_50,False,1843.5754189944132,1291.866028708134,21.0,3.0,457686.0335195531,71.81473967907546,A_refaccionar_con_descuento,1286.9038607115822,1443.298969072165,1614.0350877192982,21.0,4.0,319486.7524602574,358313.40206185565,400700.350877193,147.664149193998,177.76232717973306,210.6204270365837,4028.0351244662857,1000000.0,False,634.9206349206349,3809.5238095238096,129000.0,5160.0,600,4409.523809523809,124130.0,262699.5238095238,9584.60257380772,47202.626076925895,17.96829525703717,74478.0,213047.52380952382,10749.40206185567,134516.47619047618,63.13918781367358,37239.0,175808.52380952382,12021.01052631579,212870.8165413534,121.08105564436909,Rentable en los tres escenarios,True,True,False,True,3,True,Revisión adicional,30
+8,509302,901c7cdc-a45c-4891-bff4-32d2886ce27c,sale,departamento,departamento 5 ambientes a refaccionar / Centro,"DEPARTAMENTO 5 AMBIENTES EN VENTA - MONSERRAT - 172 M² - CENTRO PORTEÑO
+
+Propiedad profesional estratégicamente ubicada en el corazón histórico de Monserrat, sobre calle Chacabuco. Inmueble de 172 m² con alto potencial de inversión y múltiples opciones de uso.
+
+CARACTERÍSTICAS PRINCIPALES
+
+• Superficie total de 172 m² cubiertos
+• Ubicado en el primer piso de edificio de 6 pisos
+• Construcción original del año 1950
+• Distribución funcional de 5 ambientes
+
+DISTRIBUCIÓN INTERIOR
+
+• 3 dormitorios amplios
+• 1 baño completo
+• 1 toilette de servicio
+• Living comedor con hall de acceso
+• Patio cubierto que optimiza la distribución de espacios interiores
+
+UBICACIÓN ESTRATÉGICA
+
+Emplazado en zona privilegiada del Centro porteño, con conexión inmediata a:
+
+• Avenida de Mayo
+• Avenida 9 de Julio
+• Medios de transporte público
+• Circuitos turísticos
+• Servicios urbanos principales
+
+POTENCIAL DE DESARROLLO
+
+Propiedad que requiere trabajos de actualización, representando una oportunidad única para:
+
+• Vivienda profesional
+• Oficina corporativa
+• Proyecto de inversión inmobiliaria
+• Personalización según necesidades específicas
+
+PERFIL DE COMPRADOR IDEAL
+
+• Profesionales independientes
+• Inversores inmobiliarios
+• Emprendedores
+• Interesados en propiedades con valor histórico y ubicación central
+
+Oportunidad de inversión en el casco histórico de Buenos Aires. Adjuntamos plano y renders para mejor comprensión del potencial del inmueble.",,76.0,False,,USD,95000.0,ARS,250000.0,551.36,551.36,5,3,1,172.3,172.3,Chacabuco 200,Monserrat,"Monserrat, Capital Federal",-34.6108907,-58.3764674,reserved,421051071-30,https://www.remax.com.ar/listings/departamento-5-ambientes-a-refaccionar-centro,departamento_estandar,5.0,False,False,False,True,True,False,True,False,False,True,Monserrat,1,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,0.0,False,172.3,551.3639001741149,5+,Media,Mas_50,False,1443.298969072165,1163.7959699408127,25.0,3.0,248680.41237113404,61.79835834507919,A_refaccionar_con_descuento,1286.9038607115822,1443.298969072165,1614.0350877192982,21.0,4.0,221733.53520060563,248680.41237113404,278098.2456140351,133.4037212637954,161.7688551275095,192.73499538319484,1450.9576320371443,250000.0,False,158.73015873015873,952.3809523809524,95000.0,3800.0,600,1552.3809523809523,86150.0,186502.38095238095,6652.006056018169,28579.148192206514,15.323744418846609,51690.0,152042.38095238095,7460.412371134021,89177.61904761908,58.65313242861485,25845.0,126197.38095238095,8342.947368421053,143557.9172932331,113.7566534343553,Rentable en los tres escenarios,True,False,False,True,2,True,Revisión adicional,31
+9,584152,5cd39fa8-4faa-4759-9679-8e4e60a7d433,sale,departamento,3 AMBIENTES DEPENDENCIA QUINCHO JARDIN BAULERA,"¡ESPECTACULAR DEPARTAMENTO EN PLANTA BAJA CON PARQUE, QUINCHO Y PARRILLA! - BELGRANO R
+
+Ubicación Premium: Moldes al 1800 (entre La Pampa y Sucre). Una ubicación estratégica y residencial inmejorable, a pocas cuadras de las avenidas Cabildo y Cramer, con acceso inmediato a subte (Línea D), tren (Estación Belgrano R) y múltiples líneas de colectivos.
+
+DETALLES DE LA PROPIEDAD:
+Departamento de 3 Ambientes con Dependencia de Servicio, Jardín, Quincho con parrilla, y baulera. Emplazado en su totalidad en Planta Baja. 
+
+202 mts2 totales.
+
+Ideal para reciclar y diseñar a tu gusto.
+
+Excelente circulación de aire y todos los ambientes perfectamente ventilados.
+
+DISTRIBUCIÓN Y COMODIDADES:
+
+Entrada a living-comedor cómodo, con posibilidad de generar en este sector un 4to dormitorio o un escritorio separado y con ventana al jardín. 
+
+Cocina separada, muy espaciosa, con gran potencial de guardado. Desde la misma se accede a la dependencia de servicio con toilette, y al patio secundario el cual cuenta con lavadero y lugar de guardado.
+
+Dos amplios dormitorios con placard. Uno con ventana al mencionado patio, el otro con ventana al jardín.
+
+1 Baño completo + 1 toilette de servicio.
+
+Gran fondo libre de 73 mts² con Quincho cubierto de 28 m² y parrilla (ideal para reuniones o transformarlo en un gran family room/estudio).
+
+Además cuenta con baulera en el edificio, aportando mayor comodidad y funcionalidad a la propiedad.
+
+ Casi 120 m² cubiertos + 85 m² descubiertos:TU OASIS EN LA CIUDAD.
+
+Apto Profesional.
+
+Un producto único en la zona por sus metros descubiertos y su ubicación en planta baja sin escaleras.
+
+ ¡Coordiná tu visita para conocer su enorme potencial!
+
+¿TENÉS QUE VENDER PARA COMPRAR? COMUNÍCATE CON NOSOTROS, PODEMOS AYUDARTE!
+
+BENEFICIO EXCLUSIVO PARA CLIENTES RE/MAX:
+Si te falta hasta un 35% del valor de esta propiedad, te ofrecemos solicitar un préstamo a través de Lendar, sistema de préstamos entre personas. Podes hacer la simulación de tu cuota a través del simulador https://www.lendar.com.ar/quiero-un-prestamo/ y MUDATE A LA VIDA QUE QUERÉS!!!
+
+*Las medidas son aproximadas, las reales surgirán de la escritura traslativa de dominio*",,46.0,True,Electricidad | Gas | Desague Cloacal | Agua Corriente | Dormitorio | Comedor | Jardín | Baño | Living | Patio | Lavadero | Quincho | Placard | Disposición Interno | Cocina/Comedor | Toilet | Habitación de Servicio | Baulera | Living/Comedor,USD,260000.0,ARS,290000.0,1277.64,2321.43,3,2,1,203.5,112.0,Moldes 1800,Belgrano,"Belgrano, Capital Federal",-34.5658412,-58.4576886,active,421031055-121,https://www.remax.com.ar/listings/3-ambientes-dependencia-quincho-jardin-baulera,departamento_estandar,3.0,False,False,False,True,True,True,False,False,False,True,Belgrano,13,False,False,False,False,False,False,True,False,True,False,False,True,False,False,False,False,False,False,True,False,True,False,False,False,False,Necesita_obra,Necesita_obra,False,91.5,False,157.75,1648.1774960380349,3,Grande,31_50,False,2471.428571428572,2312.6924392747183,21.0,1.0,389867.8571428572,33.310737154530386,A_refaccionar_con_descuento,2422.6878376166314,2657.762938230384,3017.3209415892184,19.0,2.0,382179.0063840236,419262.1035058431,475982.3785356992,46.99192553231676,61.25465519455503,83.07014559065354,1838.351822503962,290000.0,False,184.12698412698413,1104.7619047619048,260000.0,10400.0,600,1704.7619047619048,56000.0,328104.7619047619,11465.370191520708,42608.87428774097,12.986362660627563,33600.0,305704.7619047619,12577.863105175293,100979.47849590587,33.03169956095242,16800.0,288904.7619047619,14279.471356070975,172798.14527486637,59.81145625139598,Rentable en los tres escenarios,True,False,False,False,1,True,Revisión adicional,32
+10,550445,b7368663-5d61-4a83-b482-6f297748e56b,sale,departamento,Venta departamento 2 ambientes. Palermo. Apto prof,"Venta Departamento de 2 Ambientes en lo mejor de Palermo. Gran patio. Luminoso y tranquilo.
+ Apto Crédito. Apto profesional.
+– OPORTUNIDAD INMEJORABLE A METROS DE PLAZA GÜEMES -
+
+Departamento de 2 ambientes con gran potencial de renovación,  a pasos de Plaza Güemes, Colegio Guadalupe y Boulevard Charcas, rodeado de espacios verdes, cafés, comercios y variados medios de transporte.
+Zona privilegiada de alta valoración inmobiliaria. 
+Sus 36 m² cubiertos y 43 m² descubiertos ofrecen un lienzo perfecto para profesionales creativos o inversores con visión.
+Oportunidad única para quienes busquen personalizar un espacio con gran potencial de valorización. La distribución actual permite múltiples opciones de reforma y adaptación según necesidades específicas.
+
+DISTRIBUCIÓN
+Al ingresar, el departamento cuenta con un living comedor luminoso y cocina independiente con posibilidad de integración. A continuación,  se llega al hall de distribución con amplio placard y así como al  dormitorio y al baño completo. Todos los ambientes con ventilacción natural al exterior. 
+Gran patio al contrafrente  al ventilan  todos los ambientes.
+El living comedor y el dormitorio tienen pisos de parquet y persianas de madera.
+
+CARACTERÍSTICAS DEL EDIFICIO
+Encargado
+Edificio en torre, muy bien mantenido
+3 ascensores
+Este departamento se encuentra en el primer piso lo que lo hace de fácil acceso tanto por ascensor como por escalera, característica destacada y valorada especialmente por los profesionales.
+
+Una inversión inteligente que combina ubicación, potencial y todo el encanto de Palermo.
+Tu próximo proyecto de vida o inversión te espera!
+
+
+",,56.0,True,Electricidad | Agua | Gas | Internet | Desague Cloacal | Televisión por Cable | Agua Corriente | Aire Acondicionado | Dormitorio | Baño | Cocina | Patio | Placard | Orientación Este | Disposición Contrafrente | Living/Comedor,USD,99900.0,ARS,105000.0,1264.56,2775.0,2,1,1,79.0,36.0,Avenida Medrano 1700,Palermo,"Palermo, Capital Federal",-34.5898116,-58.4180425,reserved,420971263-4,https://www.remax.com.ar/listings/venta-departamento-2-ambientes-palermo-apto-prof,departamento_estandar,2.0,False,False,False,True,True,True,False,False,False,False,Palermo,14,False,True,False,False,True,False,True,False,False,False,False,False,False,False,False,False,False,False,True,True,False,False,False,False,False,Necesita_obra,Necesita_obra,False,43.0,False,57.5,1737.391304347826,2,Grande,Mas_50,False,2635.4955302323724,2445.985348577515,12.0,1.0,151540.99298836142,34.07724337158562,A_refaccionar_con_descuento,2483.49247704925,2813.008130081301,3327.499489500793,19.0,2.0,142800.81743033187,161747.9674796748,191331.2206462956,42.943761191523386,61.90987735703182,91.52274338968527,1826.0869565217392,105000.0,False,66.66666666666667,400.0,99900.0,3996.0,600,1000.0,18000.0,122896.0,4284.0245229099555,15620.792907421914,12.710578788098811,10800.0,115696.0,4852.4390243902435,41199.52845528454,35.6101580480609,5400.0,110296.0,5739.936619388868,75295.28402690674,68.26655910178677,Rentable en los tres escenarios,True,False,False,False,1,True,Revisión adicional,33
+18,605439,18af2a49-95a3-4753-aa20-7313f6709f92,sale,departamento,"Venta departamento 6 ambientes, Nuñez","DEPARTAMENTO EN VENTA 6 AMBIENTES NUÑEZ CAPITAL FEDERAL - APTO CRÉDITO
+
+Ubicado en la calle Ramallo a media cuadra de Avenida Cabildo, este departamento presenta una oportunidad excepcional para inversión o para familias que busquen amplitud y flexibilidad de uso. Situado en el quinto piso de un edificio de nueve plantas con ascensor, el inmueble cuenta con 101 m² de superficie total, distribuidos en 95 m² cubiertos y 6 m² semicubiertos.
+
+La propiedad se estructura como una unidad funcional única que actualmente se divide en dos departamentos con entrada independiente. El primer sector comprende cuatro ambientes con living comedor con salida a balcón, cocina separada, tres dormitorios, 2 de ellos con placards y baño completo. El segundo sector incluye living comedor, cocina separada y baño completo. Esta configuración permite mantener la división actual o reconvertir el espacio a un único departamento de mayor envergadura según las necesidades del propietario.
+
+El inmueble cuenta con pisos de parquet y calefacción por tiro balanceado. Construido en 1981, se encuentra en estado a refaccionar, lo que lo convierte en una alternativa interesante para proyectos de flipping inmobiliario. Las expensas son bajas, lo que representa un beneficio adicional en términos de mantenimiento.
+
+La disposición frente del departamento garantiza buena iluminación natural. El edificio dispone de ascensor y permite mascotas. La zona cuenta con todos los servicios: electricidad, agua, gas, internet, teléfono, desagüe cloacal y televisión por cable. La ubicación estratégica en Nuñez, cercana a Avenida Cabildo, ofrece acceso a comercios, transporte y servicios de la zona.",,45.0,True,Electricidad | Agua | Gas | Internet | Teléfono | Desague Cloacal | Televisión por Cable | Agua Corriente | Ascensor | Dormitorio | Comedor | Cocina | Living | Placard | Disposición Frente | Balcón | Cocina/Comedor | Permite Mascotas | ComYAmenCalefacción | Living/Comedor,USD,169000.0,ARS,,1673.27,1778.95,6,4,2,101.0,95.0,Ramallo 2300,Nuñez,"Nuñez, Capital Federal",-34.542333059631,-58.472216605878,active,420281093-189,https://www.remax.com.ar/listings/venta-departamento-6-ambientes-nunez,departamento_estandar,6.0,False,False,False,False,True,True,False,False,False,True,Nuñez,13,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,True,False,False,True,False,False,False,False,False,Necesita_obra,Necesita_obra,False,6.0,False,98.0,1724.4897959183672,5+,Chica,31_50,False,2804.6821465080493,2595.708020050125,12.0,3.0,274858.85035778885,38.51389548489722,A_refaccionar_con_descuento,2514.285714285714,2857.1428571428573,3227.8756026402366,17.0,4.0,246400.0,280000.0,316331.8090587432,45.798816568047336,65.68047337278107,87.17858524185988,,353201.34051424265,True,224.25481937412232,1345.5289162447339,169000.0,6760.0,600,1945.5289162447339,47500.0,225205.52891624474,7392.0,13802.471083755256,6.128833137524112,28500.0,206205.52891624474,8400.0,65394.471083755256,31.7132481497704,14250.0,191955.52891624474,9489.954271762295,114886.32587073615,59.85049064195701,Rentable en los tres escenarios,False,False,False,True,1,True,Revisión adicional,34
+21,361360,57c5734e-6cac-4ec1-9d56-97d913c858f5,sale,departamento,Depto 3 amb. Mas Dep. a Refaccionar Constitucion,"Tu próximo proyecto te espera en Constitución: 3 ambientes más dependencia con gran potencial para refaccionar.
+
+¿Buscas un departamento con espacios generosos y la libertad de diseñarlo a tu gusto? Este inmueble es la opción perfecta.
+
+Con sus 3 ambientes más una dependencia que puede usarse como cuarto extra, oficina o consultorio, este hogar te ofrece múltiples posibilidades.
+
+El living-comedor, con  pisos de parquet, es el lugar ideal para empezar a crear el espacio de tus sueños. Los dos dormitorios principales cuentan con amplios placares, y la cocina separada te da la libertad de rediseñar tu área de cocina.
+
+Además, tenés la comodidad de un baño completo y un toilette, ¡y un balcón para relajarte!
+
+
+
+
+",,66.0,False,Dormitorio | Baño | Cocina | Living | Lavadero | Balcón | Cocina/Comedor | Toilet | Habitación de Servicio | Living/Comedor,USD,44900.0,ARS,129000.0,660.97,787.72,3,2,1,67.93,57.0,Constitución 1200,Constitución,"Constitución, Capital Federal",-34.624520938137,-58.385124206543,reserved,420261163-36,https://www.remax.com.ar/listings/depto-3-amb-mas-dep-a-refaccionar-constitucion,departamento_estandar,3.0,False,False,False,True,True,True,True,False,False,False,Constitucion,1,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,10.930000000000009,False,62.465,718.8025294164731,3,Media,Mas_50,False,1112.3656507656065,967.1280473912052,12.0,1.0,69483.9203750736,35.38073304207623,A_refaccionar_con_descuento,1323.529411764706,1491.5693904020754,1776.1194029850749,33.0,3.0,82674.26470588235,93170.88197146564,110945.29850746268,84.12976549194288,107.50753223043571,147.09420602998372,2065.1564876330744,129000.0,False,81.9047619047619,491.4285714285714,44900.0,1796.0,600,1091.4285714285713,28500.0,76287.42857142857,2480.2279411764703,3906.6081932773086,5.120906899646668,17100.0,64887.42857142857,2795.126459143969,25488.3269408931,39.28083991313565,8550.0,56337.42857142857,3328.35895522388,51279.51098081022,91.02210072615301,Rentable en los tres escenarios,True,False,False,False,1,True,Revisión adicional,35
+24,589656,58c977f2-a3a8-4793-a1b1-5620f0f95a3e,sale,departamento,DEPARTAMENTO 3 AMBIENT VENTA VILLA CRESPO PB FRTE,"DEPARTAMENTO 3 AMBIENTES PLANTA BAJA AL FRENTE (ACTUALMENTE UNO DE LOS AMBIENTES ESTA COMO LOCAL) A REFACCIONAR APTO PROFESIONAL| UBICACIÓN ESTRATÉGICA + GRAN POTENCIAL DE REVALORIZACIÓN A UN PRECIO UNICO
+Hay propiedades que se compran por lo que son. Y otras que se compran por todo lo que pueden llegar a ser.
+
+Esta es una de ellas.
+
+Ubicada en una zona de permanente crecimiento y alta demanda, a metros de importantes avenidas como Av. Scalabrini Ortiz, Av. Ángel Gallardo, Av. Corrientes y del pulmón verde que representa Parque Centenario, con infinidad de medios de transporte y comercios de cercania.
+
+Su distribución brinda múltiples posibilidades de uso y adaptación, convirtiéndola en una opción ideal para quienes buscan instalar consultorios profesionales, estudios, oficinas comerciales, showroom, emprendimientos de servicios o incluso desarrollar una cómoda vivienda con espacio de trabajo integrado.       
+La propiedad se encuentra para remodelar, permitiendo diseñar cada ambiente según las necesidades del proyecto y agregando un importante potencial de valorización a futuro.
+
+Lo que la hace especial:
+
+ Vivienda de 3 ambientes integrada en planta baja al frente
+ Patio propio con múltiples posibilidades de uso.
+ Ambientes luminosos y ventilados.
+ Todo al frente.
+ Ideal para uso profesional, comercial o residencial.
+ Zona de gran conectividad y movimiento permanente.
+ Excelente oportunidad para reciclar y potenciar su valor.
+
+Una propiedad versátil, con ubicación estratégica y un enorme potencial para quienes saben ver más allá del presente. Al lado de cada foto original de la propiedad se muestra con ia como quedaria remodelada para entender como cambiaria su aspecto actual.
+
+Si estás buscando un espacio para desarrollar tu actividad profesional, generar renta o crear un proyecto a medida en una de las zonas más buscadas de la ciudad, esta puede ser la oportunidad que estabas esperando.",,39.0,False,Electricidad | Gas | Patio | Disposición Frente | Orientación Noroeste,USD,77000.0,ARS,155000.0,1346.86,1503.03,3,2,1,57.17,51.23,Luis Viale 100,Villa Crespo,"Villa Crespo, Capital Federal",-34.6028337,-58.4443902,negotiation,181418-120,https://www.remax.com.ar/listings/departamento-3-ambient-venta-villa-crespo-pb-frte,departamento_estandar,3.0,False,False,False,True,True,True,False,False,False,False,Villa Crespo,15,False,True,False,False,False,True,True,False,True,False,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,5.940000000000005,False,54.2,1420.6642066420663,3,Chica,31_50,False,2157.7380952380954,1909.711584352808,14.0,1.0,116949.40476190478,34.159562285278035,A_refaccionar_con_descuento,2107.960798679117,2192.2769821449806,2405.275311785532,12.0,2.0,114251.47528840815,118821.41243225796,130365.9218987758,48.37853933559501,54.31352263929605,69.30639207633222,2859.7785977859776,155000.0,False,98.41269841269842,590.4761904761905,77000.0,3080.0,600,1190.4761904761904,25615.0,106885.47619047618,3427.5442586522445,3938.4548392797296,3.684742754255192,15368.999999999998,96639.47619047618,3564.6423729677385,18617.293868814042,19.264688306173554,7684.499999999999,88954.97619047618,3910.977656963274,37499.96805133636,42.156121734032034,Rentable en los tres escenarios,True,False,False,False,1,True,Revisión adicional,36
+25,579949,15cfe63b-3a1f-4ed6-9dc0-a59ad6604aff,sale,departamento,VENTA DEPTO 5 AMB EN CABALLITO,"VENTA DEPTO 5 AMB EN CABALLITO 
+
+Ubicado en una de las zonas más buscadas de Caballito, este amplio departamento ofrece una excelente oportunidad para quienes buscan una propiedad con gran potencial de renovación y valorización.
+
+La unidad se encuentra ideal para refaccionar, conservando una sólida distribución y ambientes de generosas dimensiones que permiten adaptarla a las necesidades y gustos actuales.
+Cuenta con:
+
+3 dormitorios de muy buenas dimensiones.
+2 baños completos.
+1 toilette de recepción.
+Comedor de grandes dimensiones
+Amplio y luminoso living.
+Balcón corrido con vista abierta.
+Cocina equipada con gran capacidad de guardado.
+Lavadero con conexión de agua 
+Dependencia de servicio y espacios de almacenamiento.
+Excelente ventilación y luminosidad.
+
+Su ubicación estratégica brinda acceso inmediato a múltiples medios de transporte, centros comerciales, colegios, espacios verdes y una amplia oferta gastronómica y de servicios.
+Una propiedad con metros, ubicación y distribución difíciles de encontrar, ideal para quienes desean diseñar y renovar su próximo hogar en el corazón de Caballito.",,63.0,False,Electricidad | Agua | Gas | Ascensor | Dormitorio | Comedor | Baño | Living | Lavadero | Placard | Balcón | Cocina/Comedor | Habitación de Servicio,USD,187000.0,ARS,340000.0,1263.51,1355.07,5,3,2,148.0,138.0,Avenida Rivadavia 5300,Caballito,"Caballito, Capital Federal",-34.6206713,-58.4402186,reserved,420161535-236,https://www.remax.com.ar/listings/venta-depto-5-amb-en-caballito,departamento_estandar,5.0,False,False,False,True,True,True,False,False,False,False,Caballito,6,False,True,True,False,False,False,False,False,True,False,False,False,False,False,False,False,True,False,False,True,False,False,False,False,False,Necesita_obra,Necesita_obra,False,10.0,False,143.0,1307.6923076923076,5+,Chica,Mas_50,False,2122.477383437718,1934.4086021505375,33.0,4.0,303514.26583159366,38.38839848675916,A_refaccionar_con_descuento,1977.5871610403983,2072.6010865602566,2363.314083648237,14.0,4.0,282794.964028777,296381.9553781167,337953.9139616979,51.22725349132459,58.493024266372565,80.72401816133578,2377.622377622378,340000.0,False,215.87301587301587,1295.2380952380952,187000.0,7480.0,600,1895.2380952380952,69000.0,265375.2380952381,8483.84892086331,8935.87701267557,3.3672610439519057,41400.0,237775.2380952381,8891.4586613435,49715.25862153509,20.908509658025125,20700.0,217075.2380952381,10138.617418850936,110740.05844760884,51.014597251771065,Rentable en los tres escenarios,False,False,False,True,1,True,Revisión adicional,37
+26,654594,65a61a21-4d59-4df0-afcf-7ebf9e8b3b8f,sale,departamento,VENTA DUPLEX 3 AMB TERRAZA BELGRANO A REFACCIONAR,"Cómodo y luminoso departamento de 3 ambientes con terraza propia desarrollado en 8vo y 9no piso en el barrio de Belgrano. A REFACCIONAR. En el 8vo piso, living comedor apaisado con salida a balcón corrido, cocina completa, dependencia de servicio y toilette de recepción. En el 9no piso, dos amplios dormitorios con importante espacio de guardado, baño completo compartimentado y terraza propia. Vista totalmente abierta al pulmón de la manzana. Orientación este. APTO PROFESIONAL. APTO CREDITO.
+
+Posibilidad de adquirir cochera a dos cuadras a un valor de u$S 15.000.
+
+Inmejorable ubicación en Belgrano, zona totalmente consolidada, con excelente conectividad y servicios cercanos, a 3 cuadras de Av. Cabildo 2200 (metrobus), a 4 cuadras de la estación Juramento de la linea D de subte,  y a pocas cuadras de las Barrancas de Belgrano y la estación Belgrano C del Ferrocarril Mitre.",,51.0,True,Terraza | Orientación Este | Disposición Contrafrente | Balcón | Toilet | Habitación de Servicio,USD,200000.0,ARS,674451.0,1526.72,2061.86,3,2,2,131.0,97.0,Moldes 2200,Belgrano,"Belgrano, Capital Federal",-34.5624285,-58.4604275,active,420211006-507,https://www.remax.com.ar/listings/venta-duplex-3-amb-terraza-belgrano-a-refaccionar,departamento_duplex,3.0,False,False,False,True,True,True,False,False,False,False,Belgrano,13,False,True,False,False,False,False,True,False,True,False,False,False,False,False,False,False,True,True,False,False,False,True,True,False,False,Necesita_obra,Necesita_obra,False,34.0,False,114.0,1754.3859649122808,3,Grande,Mas_50,False,2382.752486455891,2165.6362297306678,16.0,1.0,271633.7834559716,26.37145591560135,A_refaccionar_con_descuento,2422.6878376166314,2657.762938230384,3017.3209415892184,19.0,2.0,276186.413488296,302984.97495826375,343974.5873411709,38.09320674414799,51.492487479131874,71.98729367058544,5916.236842105263,674451.0,False,428.22285714285715,2569.3371428571427,200000.0,8000.0,600,3169.3371428571427,48500.0,259669.33714285714,8285.59240464888,8231.483940789942,3.1699868884639963,29100.0,240269.33714285714,9089.549248747911,53626.08856665867,22.319156162142388,14550.0,225719.33714285714,10319.237620235126,107936.0125780786,47.818682238007014,Rentable en los tres escenarios,True,False,False,False,1,True,Revisión adicional,38
+27,603419,665dc251-e829-423a-8f7e-28ba656bc35a,sale,departamento,VENTA DEPTO 5 AMBIENTES MONTSERRAT BALCON PATIO,"EL EQUIPO RE/MAX VENDE
+
+EXCELENTE DEPARTAMENTO ANTIGUO  SOBRE AV SAN JUAN ENTRE SAN JOSE Y LUIS SAENZ PEÑA
+
+UBICADO EN PRIMER PISO ALTO AL FRENTE  MUY LUMINOSO
+
+ORIENTACION NORTE
+
+CONSTA DE   AMPLA SALA DE ESTAR
+
+LIVING CON SALIDA AL BALCON  Y ANTiGUO HOGAR 
+
+ESTUDIO /DORMITORIO CON SALIDA AL BALCON
+
+TRES DORMITORIOS CON SALIDA AL PATIO 
+
+BAÑO COMPLETO 
+
+COMEDOR DIARIO
+
+COCINA 
+
+LAVADERO 
+
+BAÑO DE SERVICIO
+
+PATIO INTERNO DE 22 m2
+
+ESTADO A REFACCIONAR
+
+PROPIEDAD CON DETALLES DE ESTILO
+
+
+SOLIICITAR VISITA
+
+LINEA SUBTE E 
+
+AUTOPISTA 25 DE MAYO 
+
+
+
+
+
+",,86.0,False,Patio | Balcón | Permite Mascotas,USD,115000.0,ARS,60500.0,663.36,861.36,5,4,1,173.36,133.51,Av. San Juan 1400,Monserrat,"Monserrat, Capital Federal",-34.622335809331,-58.386497497559,negotiation,420261161-158,https://www.remax.com.ar/listings/venta-depto-5-ambientes-montserrat-balcon-patio,departamento_semipiso,5.0,False,False,False,True,True,True,True,False,False,True,Constitucion,1,False,True,False,False,False,True,False,False,True,False,False,False,False,False,False,False,True,False,True,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,39.85000000000002,False,153.435,749.5030468928211,5+,Media,Mas_50,False,1443.298969072165,1163.7959699408127,25.0,3.0,221452.57731958764,48.07014603671168,A_refaccionar_con_descuento,1286.9038607115822,1443.298969072165,1614.0350877192982,21.0,4.0,197456.0938682816,221452.57731958764,247649.47368421053,71.7009511898101,92.56745853877186,115.34736842105264,394.30377684361457,60500.0,False,38.41269841269841,230.47619047619048,115000.0,4600.0,600,830.4761904761905,66755.0,187185.47619047618,5923.682816048448,4346.934861756978,2.3222607598752076,40053.0,160483.47619047618,6643.577319587629,54325.52380952382,33.8511634338263,20026.5,140456.97619047618,7429.484210526316,99763.01328320804,71.02745338039861,Rentable en los tres escenarios,False,False,False,True,1,True,Revisión adicional,39
+28,391982,ed32cbf3-565f-4db9-bff2-6d4d441b82b2,sale,departamento,Venta Departamento  2 ambientes en Palermo,"*CONSULTANOS POR FINANCIACIÓN de la propiedad con Créditos Hipotecarios LENDAR exclusivos para REMAX hasta el 30%
+
+Departamento en Venta 2 ambientes con balcón francés en Palermo en primer piso a reformar
+
+- Ubicación contrafrente y sus ventanas dan al pulmón de este edifcio.
+- Living comedor (4,52 x 3,66) con pisos de madera, ventanal balcón francés que da a pulmón abierto lateral del edificio con persianas, posee tender para colgar la ropa.
+- Baño completo con bañera (2 x 1,50).
+- Dormitorio (3,11 x 2,75) con pisos de madera, placard y ventanas con persiana a pulmón del edificio lateral abierto.
+- Cocina separada (2,60 x 1,61) con horno a gas 4 hornallas, espacio de guardado, termotanque eléctrico, conexión para lavarropas y ventana a pulmón del edificio lateral abierto.
+- Pasillo con Estufa Tiro balanceado (1,38 x 0,86)
+
+- El departamento se encuentra de época ideal para reformar.
+- Edificio de 9 pisos, 4 departamentos por piso.
+- Antigüedad: 53 años. 
+- 37,29 m2 totales cubiertos.
+- APTO CREDITO.
+- Apto profesional.
+- Expensas estimadas a Mayo 2026 $136.000 aprox.
+- Terraza de uso común, encargado con vivienda.
+
+- Ubicación en Palermo límite con Almagro: Sobre Pringles entre Cabrera y Av. Córdoba, a 4 cuadras Av. Scalabrini Ortiz y a 3 cuadras Av. Honduras.
+- Medios de transporte: Colectivos: 15, 19, 36, 39, 57, 90, 92, 99, 106, 109, 110, 127, 140, 141, 151, 160, 168. A 8 cuadras estación Ángel gallardo Subte línea B.
+
+Link del video: https://www.youtube.com/watch?v=-uD_LIvYNP4",,54.0,False,Electricidad | Agua | Gas | Ascensor | Dormitorio | Comedor | Baño | Cocina | Living | Placard | Disposición Contrafrente | Orientación Noreste | Otro | Permite Mascotas | ComYAmenCalefacción | Living/Comedor,USD,63000.0,ARS,136000.0,1689.46,1689.46,2,1,1,37.29,37.29,Pringles 1300,Palermo,"Palermo, Capital Federal",-34.5959632,-58.4256379,reserved,420611150-230,https://www.remax.com.ar/listings/venta-departamento-2-ambientes-en-palermo-3,departamento_estandar,2.0,False,False,False,True,True,True,False,False,False,False,Palermo,14,False,False,False,False,True,False,True,False,False,False,False,False,False,False,False,False,True,True,False,True,False,False,False,False,False,Necesita_obra,Necesita_obra,False,0.0,False,37.29,1689.46098149638,2,Chica,Mas_50,False,2561.538461538461,2266.6666666666665,41.0,1.0,95519.76923076922,34.045066788429615,A_refaccionar_con_descuento,2409.280412330103,2802.32931211499,3045.2492166152742,22.0,1.0,89842.06657578953,104498.86004876798,113557.34328758356,42.60645488220561,65.87120642661584,80.24975125013265,3647.0903727540895,136000.0,False,86.34920634920636,518.0952380952381,63000.0,2520.0,600,1118.095238095238,18645.0,85283.09523809524,2695.261997273686,1863.7093404206098,2.185320942230655,11187.0,77825.09523809524,3134.9658014630395,23538.799009209702,30.245769616080732,5593.5,72231.59523809524,3406.7202986275065,37919.02775086081,52.49645619187733,Rentable en los tres escenarios,True,False,False,False,1,True,Revisión adicional,40
+32,629453,dcaadfe9-4301-47d5-928f-4403534f9dd0,sale,departamento,"VENTA DEPTO 5 AMBIENTES , MUY AMPLIOS EN CABALLITO","OPORTUNIDAD VENTA DEPARTAMENTO DE 4 AMBIENTES , MAS PLAYROOM, CON POSIBILIDAD DE 5 AMBIENTES, AMPLIO BALCON CORRIDO  AL FRENTE EN EL CENTRO DE CABALLITO!!!
+EN BUEN ESTADO , A REFACCIONAR,  APTO CREDITO, DESOCUPADO , IDEAL PARA UNA FAMILIA NUMEROSA .
+
+El equipo REMAX, vende este amplio departamento de categoría , de 5 ambientes con balcón corrido al frente  de Av Rivadavia.
+Con orientación Sur, muy luminoso , en el 5° piso, posee ventilación cruzada .
+Cuenta con 2 aires Acondicionados en algunos ambientes y ventiladores de techo en otros.
+Tanto el living comedor como el dormitorio principal tienen salida al amplio balcón .
+Con Palier Privado y doble entrada al depto.
+Destacamos que posee 2 baños completos uno  con bañera .
+La cocina- comedor es independiente, con artefactos a gas, con variedad de muebles de guardado, con pequeño balcón, que otorga luminosidad.
+Al finalizar la cocina , tenemos una sala de planchado, con una ventana que ilumina todo el sector. 
+Los tres dormitorios tienen placard empotrado , con generosas dimensiones.
+
+El total del depto. tiene SUPERFICIE TOTAL : 147 m2, de los cuales 8m2 corresponde al balcón corrido .
+El edificio es de muy buena calidad constructiva, y esta ubicado en una inmejorable zona geográfica, del barrio de Caballito.
+La ubicación es en Av Rivadavia al 6000, entre Nicasio Oroño y Biedma.
+Por ello cuenta con gran accesibilidad a los medios de transporte publico. 
+El Subte A, Estacion Puan a metros y cercano a innumerables líneas de colectivo, que detallamos a continuación: 1,2,5,8,25,26, 36,44,49,53,55, 76, 85, 86,88,96,103,104,126,132,134,136,141,163,180.
+
+También podemos encontrar muchos colegios de prestigio en todas las cuadras de alrededor , tan importantes para las familias , que poseen niños.
+
+Cabe aclarar que las expensas de julio , poseen gastos extraordinarios, correspondientes solo a ese mes.
+
+Si tenes que vender para comprar, nosotros te ayudamos, podemos hacer la operación en simultaneo.
+Si te falta 
+hasta un 30% del valor de esta propiedad, te ofrecemos solicitar un préstamo a través de Lendar, servicio exclusivo para clientes RE/MAX. Hace la simulación de tu cuota aquí: https:/www.lendar.com.ar/quiero-un-prestamo/#simulador
+
+En cumplimiento de las normas legales aplicables, todas las operaciones inmobiliarias son objeto de intermediación y conclusión por parte del corredor responsable de la oficina RE/MAX (Marcelo Trujillo)
+CUCIBA 6470/CMCPDJLM 810). ¡ Contáctanos hoy mismo para programar una visita y descubrir todo lo que este departamento tiene para ofrecerte!
+",,56.0,True,Electricidad | Gas | Agua Corriente | Dormitorio | Comedor | Baño | Cocina | Living | Lavadero | Playroom | Placard | Orientación Sur | Disposición Frente | Balcón | Cocina/Comedor,USD,190000.0,ARS,550000.0,1288.14,1378.41,5,3,1,147.5,137.84,Avenida Rivadavia 6029 5° A 6000,Caballito,"Caballito, Capital Federal",-34.6239664,-58.4501605,active,420261265-11,https://www.remax.com.ar/listings/venta-depto-5-ambientes-muy-amplios-en-caballito,departamento_estandar,5.0,False,False,False,True,True,True,False,False,False,False,Caballito,6,False,True,False,False,False,True,False,False,True,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,False,Necesita_obra,Necesita_obra,True,9.659999999999997,False,142.67000000000002,1331.7445854068828,5+,Chica,Mas_50,False,2122.477383437718,1934.4086021505375,33.0,4.0,302813.84829505923,37.25518133673146,A_refaccionar_con_descuento,1977.5871610403983,2072.6010865602566,2363.314083648237,14.0,4.0,282142.3602656337,295697.99701955187,337174.020314094,48.49597908717562,55.63052474713256,77.46001069162844,3855.050115651503,550000.0,False,349.2063492063492,2095.2380952380954,190000.0,7600.0,600,2695.2380952380954,68920.0,269215.2380952381,8464.27080796901,4462.851362426532,1.657726135415762,41352.0,241647.2380952381,8870.939910586556,45179.81901372719,18.696600619089594,20676.0,220971.2380952381,10115.22060942282,106087.56160943309,48.00966973073192,Rentable en los tres escenarios,True,False,False,True,2,True,Revisión adicional,41
+34,630850,e43e539e-c8b1-4630-98ba-18207f1f1a0a,sale,departamento,VENTA DEPTO A RECICLAR 76 M2 BALVANERA OPORTUNIDAD,"¡Oportunidad exclusiva! VENTA DEPTO A RECICLAR 76 M2 BALVANERA 
+Ubicado en pleno barrio de Balvanera, este departamento  76 m2  se encuentra a pasos de la Av. Callao y de la Av. Corrientes.
+
+Características principales -
+
+- Piso 1° al frente, acceso desde el ascensor a un palier con ingreso a la  puerta principal. 
+- Living comedor: amplio, con luminosidad natural.
+- Cocina independiente con  posibilidad de hacer un comer diario.
+- Dos baños completos.
+- Tres habitaciones amplias. La ultima tiene baño completo y entrada independiente. 
+- APTO VIVIENDA, OFICINA Y CONSULTORIO MEDICO
+
+Medios de transporte – Subte Línea B y A. Colectivos: 5, 6, 7, 8, 12, 24, 26, 37, 50, 56, 60, 64, 86, 90, 95, 98, 105, 115, 124, 146, 150, 151, 180
+
+ ¡No dejes pasar esta oportunidad! Contactanos hoy mismo para coordinar una visita y conocer tu próximo departamento en Balvanera!!
+
+
+
+
+
+
+
+
+",,71.0,False,,USD,66000.0,ARS,185000.0,867.05,867.05,4,3,2,76.12,76.12,Sarmiento 1900,Balvanera,"Balvanera, Capital Federal",-34.6058432,-58.3939292,reserved,421451144-33,https://www.remax.com.ar/listings/venta-depto-a-reciclar-76-m2-balvanera-oportunidad,departamento_estandar,,False,False,False,True,True,False,False,False,False,False,Balvanera,3,False,False,False,False,False,True,False,False,True,False,False,False,False,False,False,False,False,False,False,True,False,False,False,False,False,Necesita_obra,Necesita_obra,False,0.0,False,76.12,867.0520231213873,4,Chica,Mas_50,False,1402.805611222445,1272.9682381482066,11.0,1.0,106781.56312625251,38.191577208918254,A_refaccionar_con_descuento,1484.5588235294117,1735.329341317365,1840.1065689451225,15.0,3.0,113004.61764705884,132093.26946107787,140068.91202810273,71.21911764705882,100.1413173652695,112.22562428500412,2430.373095112979,185000.0,False,117.46031746031746,704.7619047619047,66000.0,2640.0,600,1304.7619047619046,38060.0,108004.76190476191,3390.138529411765,1609.717212885167,1.4904131859524936,22836.0,92780.76190476191,3962.798083832336,35349.70947248362,38.10025779780681,11418.0,81362.76190476191,4202.067360843082,54504.082762497725,66.98897811052278,Rentable en los tres escenarios,True,False,False,False,1,True,Revisión adicional,42
+36,585191,bd5c4863-8d8b-470a-9f06-3e24d7777ff5,sale,departamento,DEPTO ESTILO FRANCES 4 AMB CONGRESO APTO CREDITO,"+ 3 habitaciones
++  Gran living- comedor
++ 2 baños completos
++ Cocina- comedor
++ Apto profesional
++ Apto crédito
+
+Este hermoso departamento de estilo francés, con sus aberturas y pisos originales, es funcional tanto para vivir en familia como para desarrollar una actividad comercial o profesional, ya que el reglamento de copropiedad del consorcio lo permite.
+
+Al ingresar al coqueto hall recbidor, nos encontramos de frente con un largo pasillo que conduce hacia las habitaciones y hacia ambos baños completos. Desde la entrada tambien podemos ver el living- comedor de generoso tamaño, y con ventanas que le proporcionan mucha luz y ventilación. La calefacción es por salamandra a gas, y además hay aire acondicionado split.
+
+Todo el departamento es absolutamente luminoso. La cocina comedor es amplia y funcional, y tiene salida directa tanto al living comedor como al hall recibidor. Hay conexión a gas.
+
+Los dos baños son completos, el principal con bañera y ventilación y luz natural, y el segundo con cuarto de ducha.
+
+Las 3 habitaciones cuentan con piso de pinotea original, y son de gran tamaño. Dos de ellas con vista al frente del edificio (calle Saenz Peña) y la tercera con vista al contrafrente. La principal cuenta con balcón francés. Hay aire acondicionado frio- calor en la habitación principal y en la que da al contrafrente. En la restante hay ventilador de techo.
+
+Los demás ambientes están alfombrados, cubriendo el piso original de mosaicos.
+
+El departamento se encuentra en buen estado, anque con detalles a refaccionar como empapelados, pintura, o renovar ambientes que en la actualidad se perciben antiguos.
+
+El edificio, que se encuentra muy bin conservado, cuenta con 5 pisos, con dos departamentos cada uno. El ascesor es el original de la época, en excelentes condiciones de conservación. Hay terraza de uso común.
+
+La ubicación es realmente interesante, con propuestas diversas: gastronómicas, culturales, sociales, y una cantidad de puntos de atracción que revelan una Buenos Aires auténtica y entretenida. A 100 metos de la Plaza de los Dos Congresos, a sólo siete cuadras de la avenida Corrientes con su incansable oferta de espectáculos teatrales, muy cerca del Microentro de la Ciudad, este departamento es una oportunidad para vivir la ciudad de verdad.o bien para generar ingresos utilizandolo con fines comerciales.
+
+
+- A 1 cuadra y media del Congreso de la Nacion (Av Rivadavia, Entre Rios, Callao)
+- 1 1/2 cuadra de Av. Rivadavia 
+- A menos de 100 metros de la Plaza del Congreso
+- 5 cuadras de Av. Corrientes (Cerca de todos los teatros) 
+- Cómodo acceso hacia el Microcentro y la zona de Tribunales.
+ 
+TRANSPORTES:
+1 1/2 Cuadra de Estacion Saenz Peña de Subte Linea A
+5 Cuadras de estacion Uruguay de Subte Linea B
+Lineas de Colectivos 5, 12, 37, 50, 56, 84, 86, 90, 98, 103, 168 entre otros.
+
+
+Veni a conocerlo y mudate!!!
+
+BENEFICIO PARA CLIENTES REMAX:
+Si comprás tu casa con RE/MAX y te falta hasta un 30% del valor podés acceder a un préstamo a través de LENDAR con mínimos requisitos y aprobación en sólo 7 días hábiles!
+El trámite es 100% online y sin bancos!
+Podes hacer la simulación de las cuotas y calcular vos tu préstamo. Conocé más sobre LENDAR en su página www. lendar. com. ar
+",,76.0,True,Aire Acondicionado | Ascensor | Dormitorio | Baño | Placard | Orientación Oeste | Disposición Frente | Cocina/Comedor | Living/Comedor | Apto Turístico,USD,130000.0,ARS,220000.0,970.15,970.15,4,3,2,134.0,134.0,Presidente Luis Sáenz Peña 100,Monserrat,"Monserrat, Capital Federal",-34.6107255,-58.3874616,reserved,421451032-99,https://www.remax.com.ar/listings/depto-estilo-frances-4-amb-congreso-apto-credito-1,departamento_semipiso,4.0,False,False,False,True,True,True,False,False,False,False,Monserrat,1,False,True,False,False,True,False,True,False,True,False,False,False,False,False,False,False,True,True,False,True,False,False,False,False,False,Necesita_obra,Necesita_obra,True,0.0,False,134.0,970.1492537313432,4,Grande,Mas_50,False,2308.9403332041843,1400.0854579119784,50.0,3.0,309398.0046493607,57.98292230509748,A_refaccionar_con_descuento,1588.6334154883905,2169.2451349585936,2684.83344513716,18.0,3.0,212876.8776754443,290678.8480844515,359767.6816483795,63.75144436572639,123.59911391111656,176.74437049875343,1641.7910447761194,220000.0,False,139.68253968253967,838.0952380952381,130000.0,5200.0,600,1438.095238095238,67000.0,203638.09523809524,6386.306330263329,2852.476107085735,1.4007576056683293,40200.0,176838.09523809524,8720.365442533544,105120.38740382271,59.44442415662099,20100.0,156738.09523809524,10793.030449451384,192236.5559608329,122.6482659935437,Rentable en los tres escenarios,True,False,False,False,1,True,Revisión adicional,43
+37,635041,0edf5c38-dbf0-4fc5-ac97-71cfc046bcc0,sale,departamento,Oportunidad 5 amb + dep. 3 baños a refaccionar,"Presentamos este imponente departamento de 5 ambientes y 169,25 m², ubicado en la prestigiosa Torre Saint. La propiedad se encuentra a refaccionar, lo que representa el lienzo en blanco perfecto para proyectar una renovación a medida, combinando la categoría y solidez de una construcción clásica con un diseño interior moderno y personalizado.
+Ubicación: En la exclusiva Torre Saint, un edificio de gran categoría arquitectónica.  Superficie: 169,28 m² distribuidos de manera funcional.
+Distribución: 5 ambientes y medio más dependencia, luminosos, de techos altos y con excelente ventilación natural.Estado: A refaccionar / reciclar, ideal para personalizar revestimientos, cocina y baños según tus necesidades o las de tu negocio.
+Disposición: Planta muy versátil que permite redistribuir los ambientes fácilmente.Ventajas y Potencial de la Propiedad:Doble Destino (Apto Profesional): Gracias al reglamento de copropiedad de la Torre, la unidad es apta tanto para vivienda familiar como para oficinas comerciales, consultorios o estudios profesionales.  Amplitud y Versatilidad: Sus generosos metros permiten sectorizar perfectamente un área de recepción y salas de reuniones/despachos corporativos, o bien diseñar un living-comedor de gran categoría y múltiples dormitorios para uso residencial.
+Inversión Inteligente: Adquirir una propiedad en un edificio de este renombre para reciclar te permite ingresar a un valor de metro cuadrado altamente competitivo en una estructura de calidad constructiva inigualable.
+Ideal para:
+Familias que buscan la amplitud, seguridad y el prestigio de vivir en un edificio clásico señorial.
+Estudios de arquitectura, abogados, contadores o centros médicos que requieran una dirección de prestigio institucional, espacios amplios para su equipo y confort para sus clientes. 
+Inversores enfocados en proyectos de refacción en edificios patrimoniales o de alta categoría para posterior renta o reventa con excelente rentabilidad.
+La terraza es de uso común.
+Buscá el video de la propiedad!!
+
+Nota legal: Las medidas y superficies expuestas son orientativas y aproximadas. Las medidas reales y definitivas, así como la información sobre expensas y tasas, surgirán formalmente del título de propiedad y de la documentación pertinente de la unidad.",,99.0,False,Electricidad | Gas | Agua Corriente | Dormitorio | Comedor | Baño | Cocina | Living | Estudio | Sala de reuniones | Cocina/Comedor | Toilet | Habitación de Servicio,USD,99999.0,ARS,506000.0,590.73,590.73,5,4,1,169.28,169.28,Teniente General Juan Domingo Perón 2600,Balvanera,"Balvanera, Capital Federal",-34.6078712,-58.4039025,active,291181-7,https://www.remax.com.ar/listings/oportunidad-5-amb-dep-3-banos-a-refaccionar,departamento_estandar,5.0,False,False,False,True,True,True,True,False,False,True,Balvanera,3,False,True,False,False,False,False,True,False,True,False,False,False,False,False,False,False,False,True,False,False,False,False,False,False,False,Necesita_obra,Necesita_obra,False,0.0,False,169.28,590.7313327032136,5+,Media,Mas_50,False,1333.3333333333333,1177.2138744478048,23.0,4.0,225706.66666666663,55.69515004725898,A_refaccionar_con_descuento,1179.2887317169118,1328.5387663542188,1371.0162879384468,10.0,4.0,199629.99650503884,224895.0423684421,232085.63722222028,99.63199282496709,124.89729134135554,132.0879581018013,2989.1304347826085,506000.0,False,321.26984126984127,1927.6190476190477,99999.0,3999.96,600,2527.6190476190477,84640.0,191166.57904761907,5988.899895151165,2474.517562268593,1.2944300068539687,50784.0,157310.57904761907,6746.851271053263,60837.612049769785,38.67356691335666,25392.0,131918.57904761905,6962.569116666608,93204.48905793461,70.65304199819367,Rentable en los tres escenarios,True,False,False,True,2,True,Revisión adicional,44
+42,597216,8f34fa78-f8fe-46cb-bd97-700ba7d1e980,sale,departamento,Recoleta Venta piso a reciclar 4 ambientes 252 M2,"ACLARACION LA FOTO DEL INICIO ESTA EDITADA CON MOBILIARIO POR IA 
+
+DEPARTAMENTO 4 AMBIENTES RECOLETA MONTEVIDEO 1700 CAPITAL FEDERAL - APTO CRÉDITO
+
+Elegante departamento en edificio francés de Recoleta, ubicado sobre calle Montevideo, con una superficie total de 252 m² que combina espacios amplios y funcionales en un entorno residencial premium.
+
+CARACTERÍSTICAS PRINCIPALES
+
+• Ubicación estratégica en el corazón de Recoleta
+• Edificio de estilo francés con 8 pisos
+• Superficie total construida: 252 m² (227 m² cubiertos, 25 m² descubiertos)
+• Año de construcción: 1972
+• Orientación Norte
+• Disposición frente
+• Apto crédito
+
+DISTRIBUCIÓN INTERIOR
+
+• Living comedor amplio con balcón al frente
+• Pasillo de distribución con espacio para biblioteca o escritorio
+• Toilette de cortesía
+• Dormitorio principal con ventana a pulmón abierto y placares
+• Segundo dormitorio con ventana a pulmón abierto y placard
+• Tercer dormitorio con placard
+• Dos baños completos
+• Cocina a reciclar con horno y cocina de 5 hornallas
+• Espacio comedor con placard
+• Lavadero independiente
+• Dependencias 2 de servicio con baño propio
+• Patio interno
+
+SERVICIOS E INSTALACIONES
+
+• Ascensor principal y de servicio
+• Portería fija
+
+• Permite mascotas
+• Sistema de seguridad
+
+ESTADO GENERAL
+
+Propiedad a refaccionar que ofrece un potencial único para personalizar según gustos y necesidades, manteniendo la elegancia arquitectónica original del edificio.
+
+Oportunidad de inversión en una de las zonas más prestigiosas de Buenos Aires. Ideal para quienes valoran ubicación, espacios amplios y potencial de renovación.",,54.0,True,Dormitorio | Comedor | Vestidor | Baño | Cocina | Living | Patio | Lavadero | Orientación Norte | Disposición Frente | Balcón | Cocina/Comedor | Toilet | Habitación de Servicio | Baulera | Permite Mascotas | Living/Comedor,USD,435000.0,ARS,900000.0,1726.19,1916.3,4,3,2,252.0,227.0,Montevideo 1700,Recoleta,"Recoleta, Capital Federal",-34.5897812,-58.3859426,reserved,421531007-926,https://www.remax.com.ar/listings/recoleta-venta-piso-a-reciclar-4-ambientes-252-m2,departamento_piso,4.0,False,False,False,True,True,True,False,False,False,False,Recoleta,2,False,False,False,False,False,True,False,False,True,False,False,False,False,False,False,False,True,False,True,True,True,False,False,False,False,Necesita_obra,Necesita_obra,False,25.0,False,239.5,1816.283924843424,4,Grande,Mas_50,False,2329.993117687543,2029.2642296674555,36.0,1.0,558033.3516861665,22.047669967109684,A_refaccionar_con_descuento,2464.452876486129,2880.269745009779,3241.881962179202,14.0,1.0,590236.4639184278,689824.603929842,776430.729941919,35.68654342952364,58.58036871950391,78.48982297515379,3757.828810020877,900000.0,False,571.4285714285714,3428.5714285714284,435000.0,17400.0,600,4028.5714285714284,113500.0,569928.5714285715,17707.093917552833,2600.7985723034944,0.45633763644878955,68100.0,524528.5714285715,20694.73811789526,144601.29438337532,27.56785850378918,34050.0,490478.5714285714,23292.92189825757,262659.23661509,53.55162323403177,Rentable en los tres escenarios,False,True,False,False,1,True,Revisión adicional,45
+43,528051,590bba30-fedc-4d20-b829-2c8e0dde3d3f,sale,departamento,VENTA DEPARTAMENTO PB 53M2 SALTA Y GARAY con PATIO,"VENTA departamento en PLANTA BAJA de 53m2, en SALTA y av GARAY en el barrio de CONSTITUCION
+Es un 3 ambientes luminoso ubicado en la planta baja, con ventanales y toldo rebatible . La entrada cuidada y mantenida.  Que evoca el esplendor del barrio en los años 60. 
+
+EDIFICIO SÓLIDO Y SILENCIOSO
+
+** APTO VIVIENDA, CONSULTORIO O ESCRITORIO DE PROPESIONALES**
+
+**  APTO CREDITO **
+
+DESCRIPCION del departamento:
+
+** PASILLO de ingreso de 1,44 x 1,63 
+** AMBIENTE de 5,81 x 2,57, con ventanales, toldo rebatible. Puede ser PATIO con GALERIA o transformarse en living comedor
+** DORMITORIO de 4,10 x 3,93, con pisos de pinotea, altura de techo 3,80, con puerta al baño
+** DORMITORIO de 4,10 x 4 con pisos de pinotea, con ventana alta al pulmón
+** BAÑO de 1,98 x 1.97 con ducha y bide. Falta termotanque eléctrico, está preparado para la colocación del mismo.
+** COCINA de 1,92 x 2,01 se encuentra a reciclar. El GAS NATURAL esta ya habilitado x Metrogas!!
+** BAULERA sobre el techos de la cocina y el baño
+
+ El edificio se encuentra en el centro de la Ciudad con supermercados a
+ pocos metros, acceso rápido a la autopista Av. 25 de Mayo, transporte
+ públicos, hospital cercanos, área escolar y universidades. Colectivos: 4, 9, 10,
+ 12, 17, 25, 28, 39, 45, 46, 51, 53, 57, 59, 60, 61, 62, 65, 67, 70, 79, 84, 90, 91,
+ 95, 96, 97, 98, 100, 102, 126, 129, 133, 134, 143, 148, 151, 154, 168, 195
+ Subtes: CONSTITUCION (Línea C) Trenes: Constitución (Roca), Constitución
+ (ROCA)
+
+ Si te interesa esta propiedad no dudes en consultar. #SI TIENES QUE
+ VENDER PARA COMPRAR, PODEMOS AYUDARTE Y REALIZAR LA OPERACIÓN
+ SIMULTÁNEA*
+
+ BENEFICIO PARA CLIENTES
+ Si te falta hasta un 35% del valor de esta propiedad, te ofrecemos solicitar
+ un préstamo a través de Lendar, servicio exclusivo para clientes RE/MAX.
+ Hace la simulación de tu cuota a través del simulador
+ https://www.lendar.com.ar/quiero-un-prestamo
+
+",,71.0,True,,USD,47000.0,ARS,99000.0,886.79,886.79,3,2,1,53.0,53.0,Salta 1500,Constitución,"Constitución, Capital Federal",-34.626392598675,-58.38306427002,negotiation,420561069-214,https://www.remax.com.ar/listings/venta-departamento-pb-53m2-salta-y-garay-con-patio,departamento_estandar,,False,False,False,True,True,False,False,False,False,False,Constitucion,1,False,True,False,True,False,False,False,False,True,False,False,False,False,False,False,False,False,False,True,False,True,False,False,False,False,Necesita_obra,Necesita_obra,False,0.0,False,53.0,886.7924528301887,3,Chica,Mas_50,False,1402.2138746803068,1274.6995994659546,10.0,1.0,74317.33535805627,36.75768947640958,A_refaccionar_con_descuento,1489.4524259173202,1684.2530425109892,1976.8253089835823,24.0,3.0,78940.97857361796,89265.41125308242,104771.74137612988,67.95952888003822,89.92640692145196,122.91859867261674,1867.9245283018868,99000.0,False,62.857142857142854,377.1428571428571,47000.0,1880.0,600,977.1428571428571,26500.0,76357.14285714286,2368.2293572085387,215.60635926657415,0.28236567163068643,15900.0,65757.14285714286,2677.9623375924725,20830.306058347094,31.677632502374465,7950.0,57807.142857142855,3143.1522412838963,43821.44627770313,75.8062829467248,Rentable en los tres escenarios,True,False,False,False,1,True,Revisión adicional,46

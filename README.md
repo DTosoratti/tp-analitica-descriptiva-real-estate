@@ -21,7 +21,7 @@ Licenciatura en Analítica Empresarial y Social del ITBA.
 | KPIs, hipótesis y su estado | [KPIs](#kpis), [Hipótesis](#hipótesis), [Estado de las hipótesis](#estado-de-las-hipótesis) |
 | Cómo se trató el estado de la propiedad | [Tratamiento de `Estado_Propiedad`](#tratamiento-de-la-variable-estado_propiedad) |
 | Datos, limpieza y fuentes externas | [Datos](#datos), [Fuentes externas](#fuentes-externas) |
-| Hallazgos del análisis | [Principales hallazgos](#principales-hallazgos-del-análisis-exploratorio) |
+| Hallazgos del análisis | [Principales hallazgos](#principales-hallazgos-del-análisis-exploratorio), [Modelo explicativo y benchmark ajustado](#modelo-explicativo-y-benchmark-ajustado) |
 | Qué cambió desde la PreEntrega 1 | [Cambios a partir de la devolución](#cambios-a-partir-de-la-devolución-de-la-preentrega-1) |
 | Cómo reproducir el análisis | [Reproducción](#reproducción), [Estructura del repositorio](#estructura-del-repositorio) |
 | Limitaciones y pendientes | [Limitaciones](#limitaciones), [Observaciones pendientes](#observaciones-pendientes-y-plan) |
@@ -512,6 +512,7 @@ Todas las fuentes complementarias tienen cobertura de CABA y granularidad de pun
 
 ```
 ├── README.md
+├── requirements.txt                             # dependencias (pip install -r requirements.txt)
 ├── data/
 │   ├── raw/
 │   │   ├── remax_caba_propiedades_muestra.csv   # muestra de la base raw
@@ -520,7 +521,8 @@ Todas las fuentes complementarias tienen cobertura de CABA y granularidad de pun
 │   │   ├── remax_deptos_limpio.csv              # base analítica (9.500 × 41)
 │   │   ├── registro_limpieza.csv                # registro de cada paso de limpieza
 │   │   ├── remax_deptos_features.csv            # base con variables derivadas y KPIs (9.499 × 100)
-│   │   └── registro_features.csv                # registro de pasos del notebook 03
+│   │   ├── registro_features.csv                # registro de pasos del notebook 03
+│   │   └── oportunidades_benchmark_ajustado.csv # brechas y categoría por aviso (notebook 11)
 │   ├── external/                                # fuentes externas (se descargan al ejecutar el notebook 03)
 │   │   └── barrios_caba.geojson
 │   ├── supuestos_flipping.csv                   # supuestos de costos por componente y escenario, con fuente
@@ -531,7 +533,14 @@ Todas las fuentes complementarias tienen cobertura de CABA y granularidad de pun
 │   ├── 01_extraccion_remax.ipynb
 │   ├── 02_limpieza_remax.ipynb
 │   ├── 03_features_kpis.ipynb
-│   └── 04_eda.ipynb
+│   ├── 04_eda.ipynb
+│   ├── 05_validacion_robustez.ipynb
+│   ├── 06_validacion_manual.ipynb
+│   ├── 07_modelo_economico_flipping.ipynb
+│   ├── 08_evaluacion_hipotesis.ipynb
+│   ├── 09_resultados_recomendaciones.ipynb
+│   ├── 10_modelo_explicativo.ipynb
+│   └── 11_benchmark_ajustado.ipynb
 ├── src/
 │   ├── config.py                                # parámetros, rutas y supuestos centralizados
 │   ├── datos.py                                 # descarga de la base raw y verificación SHA-256
@@ -541,7 +550,8 @@ Todas las fuentes complementarias tienen cobertura de CABA y granularidad de pun
 │   ├── patrones.py                              # expresiones regulares (limpieza, texto, estado, amenities)
 │   ├── diagnostico.py                           # validación de ambientes, faltantes y outliers
 │   ├── benchmark.py                             # bandas, benchmark jerárquico, PER y clasificación
-│   └── eda.py                                   # estadísticos robustos y tests no paramétricos
+│   ├── eda.py                                   # estadísticos robustos y tests no paramétricos
+│   └── modelos.py                               # regresión hedónica, validación fuera de muestra y benchmark ajustado
 └── reports/
     ├── informe_preentrega_1.docx                # informe ejecutivo de la Pre-Entrega 1 (editable)
     ├── informe_preentrega_1.pdf                 # informe ejecutivo de la Pre-Entrega 1
@@ -596,6 +606,24 @@ detiene.
 5. **Análisis exploratorio.** `04_eda.ipynb` parte de
    `data/processed/remax_deptos_features.csv` y responde las preguntas
    descriptivas y diagnósticas, con evidencia preliminar sobre las hipótesis.
+6. **Validación y robustez.** `05_validacion_robustez.ipynb` evalúa la
+   sensibilidad del PER a las referencias contradictorias y a las señales de
+   estado; `06_validacion_manual.ipynb` documenta la doble lectura manual del
+   clasificador de estado.
+7. **Modelo económico.** `07_modelo_economico_flipping.ipynb` estima el retorno
+   de las unidades que necesitan obra en tres escenarios y su sensibilidad; los
+   supuestos de costo se están contrastando con `data/supuestos_flipping.csv`.
+8. **Evaluación de hipótesis.** `08_evaluacion_hipotesis.ipynb` recalcula H1 y
+   H2 con tamaños de efecto e intervalos de confianza, y consolida H3.
+9. **Resultados y recomendaciones.** `09_resultados_recomendaciones.ipynb`
+   consolida el ranking de oportunidades y las recomendaciones.
+10. **Modelo explicativo.** `10_modelo_explicativo.ipynb` ajusta la regresión
+    hedónica (`src/modelos.py`) y la valida fuera de muestra.
+11. **Benchmark ajustado.** `11_benchmark_ajustado.ipynb` contrasta el
+    benchmark jerárquico con el ajustado por antigüedad y características, y
+    exporta `data/processed/oportunidades_benchmark_ajustado.csv`.
+
+Las dependencias están en `requirements.txt`.
 
 
 ## Principales hallazgos del análisis exploratorio
@@ -629,11 +657,52 @@ el fondo de inversión se desarrollan en
 
 | Hipótesis | Evidencia preliminar |
 | --- | --- |
-| **H1.** Descuento por condición | **A favor.** Descuento de 17,4 % respecto de comparables, significativo y similar entre comunas |
-| **H2.** Dispersión condicional | **Parcialmente a favor.** La dispersión difiere entre barrios y los estratos más dispersos concentran más oportunidades (3,5 % contra 11,7 %), pero también más casos con indicadores de error |
+| **H1.** Descuento por condición | **A favor.** Descuento de 17,4 % respecto de comparables, significativo y similar entre comunas; el modelo hedónico, que controla por antigüedad y características, lo confirma (−14 % frente a buen estado) |
+| **H2.** Dispersión condicional | **Parcialmente a favor.** La dispersión difiere entre barrios y los estratos más dispersos concentran más oportunidades (3,5 % contra 11,7 %), pero también más casos con indicadores de error; correlación de Spearman entre dispersión y proporción de baratas de 0,48 (IC 95 % 0,38 a 0,57) en 289 estratos |
 | **H3.** Oportunidades de flipping | **Preliminarmente a favor.** 290 unidades superan los costos de transacción; falta descontar el costo de la obra y de tenencia |
 
-La validación formal de las hipótesis corresponde a la Pre-Entrega 3.
+La evaluación formal de H1 y H2, con tamaños de efecto e intervalos de confianza, está en `notebooks/08_evaluacion_hipotesis.ipynb`. H3 se evalúa con el modelo económico del notebook 07, cuyos supuestos de costo están en revisión.
+
+
+## Modelo explicativo y benchmark ajustado
+
+El detalle está en `notebooks/10_modelo_explicativo.ipynb` y
+`notebooks/11_benchmark_ajustado.ipynb`; el código, en `src/modelos.py`.
+
+**Modelo explicativo (notebook 10).** Regresión por mínimos cuadrados del
+logaritmo del USD/m² homogeneizado (9.232 avisos, R² = 0,71) con efectos fijos
+de barrio, ambientes, superficie, antigüedad, 19 características y estado, y
+errores estándar robustos (HC3). El coeficiente de cada variable se interpreta
+como diferencia porcentual del USD/m² controlando por las demás; es una
+asociación y no una relación causal.
+
+- Con las demás variables constantes, una unidad que necesita obra se publica
+  aproximadamente 14 % por debajo de una en buen estado y 22 % por debajo de
+  una reciclada. Es un descuento menor que el de la comparación directa (25 %),
+  porque parte de esa brecha se explica por ubicación y características.
+- En un holdout repetido con cinco semillas, el modelo tiene un error
+  porcentual absoluto medio (MAPE) de 15,3 %, frente a 19,7 % del benchmark
+  jerárquico.
+
+**Benchmark ajustado (notebook 11).** Usa el modelo anterior con predicciones
+fuera de muestra (validación cruzada de cinco pliegues) como benchmark que
+considera antigüedad y características del edificio.
+
+- El MAPE baja de 19,6 % a 15,3 % (mediana del error de 14,8 % a 11,6 %), y la
+  mejora se observa tanto en avisos en buen estado como en reciclados.
+- De las 822 propiedades que el benchmark jerárquico marca como baratas (sin
+  contar las que necesitan obra), 326 (40 %) lo siguen siendo con el ajuste.
+  Las otras tienen menos amenities, en particular cochera. Las 326 confirmadas
+  por ambos métodos son las candidatas de mayor confianza.
+- El PER del modelo económico es consistente con el que surge del modelo
+  (razón mediana 1,04; correlación de Spearman 0,97), por lo que el supuesto de
+  reventa no está sesgado al alza.
+- Un híbrido que corrige la regresión con la mediana local de los residuos no
+  mejoró la precisión y se descartó.
+
+Ambos modelos usan precios de publicación y no observan el estado del edificio,
+el piso ni las terminaciones; sirven para priorizar y contrastar, no como
+tasación individual.
 
 
 ## Cambios a partir de la devolución de la PreEntrega 1
@@ -661,6 +730,7 @@ La validación formal de las hipótesis corresponde a la Pre-Entrega 3.
   señales contradictorias, donde `Reciclada_refaccionada` tuvo baja precisión (3 de 10), y sobre una muestra aleatoria de 50 avisos `Reciclada_refaccionada`, donde la precisión fue de 94 % (47 de 50). Ambas revisiones se hicieron sobre el texto del aviso, no sobre el estado físico real, y sin segunda lectura independiente. Las otras categorías (`Buen_estado` y `Sin_clasificar`) no se validaron en una muestra aleatoria.
 - **Potencial bruto.** El PER estima el valor post-obra, no el margen de flipping: faltan el costo de obra, la tenencia y el tipo de cambio.
 - **Umbral de gap.** El 25 % surge de un análisis de sensibilidad (aproximadamente el percentil 90 del gap) y no de una validación externa; como evidencia indirecta, las propiedades clasificadas como baratas tienen más operaciones en curso.
+- **Modelos de precio.** La regresión y el benchmark ajustado controlan solo las características publicadas; no observan el estado del edificio, el piso ni las terminaciones, y su error mediano ronda 12 %. Se usan para priorizar y contrastar, no para tasar.
 
 
 ## Observaciones pendientes y plan
@@ -668,9 +738,9 @@ La validación formal de las hipótesis corresponde a la Pre-Entrega 3.
 | Pendiente | Plan |
 | --- | --- |
 | Validación del clasificador de estado | Se revisaron los 78 avisos con señales contradictorias y 50 avisos `Reciclada_refaccionada` de la muestra aleatoria (resultados en "Qué se midió sobre la calidad de la señal"). Falta revisar las otras tres categorías de la muestra estratificada (`reports/validacion_estado_muestra.csv`) y obtener una segunda lectura independiente de una parte de los avisos. Opcionalmente, evaluar si excluir de los comparables del PER los avisos con `Flag_Senal_Contradictoria` |
-| Categoría del edificio en los comparables | Construir un índice de amenities mediante reducción de dimensionalidad e incorporarlo al benchmark, para reducir su error |
+| Categoría del edificio en los comparables | Resuelto con el benchmark ajustado por antigüedad y características (notebook 11, MAPE de 19,6 % a 15,3 %). Queda por evaluar un índice resumen de amenities |
 | Costo de refacción y margen de flipping | Cotizaciones por nivel de obra (liviana, media, integral), actualizadas con el ICC y convertidas a USD, para pasar del potencial bruto al margen y evaluar H3 |
 | Tipo de cambio y brecha de cierre | Definir la fuente del tipo de cambio (también para convertir las expensas) y confirmar la disponibilidad de estadísticas de escrituras |
 | Detección contextual de outliers | La detección global marca como atípicos a los segmentos de menor precio (por ejemplo, la comuna 8); evaluar una detección por segmento |
 | Permanencia en el mercado | Nuevas capturas del extractor (con una columna de fecha de extracción) para medir la primera y la última aparición de cada aviso |
-| Validación formal de hipótesis y micromercados | Tests formales de H1 a H3, fuentes externas complementarias y clustering de micromercados (Pre-Entrega 3) |
+| Validación formal de hipótesis y micromercados | H1 y H2 evaluadas (notebook 08); falta cerrar H3 con el modelo económico. Quedan las fuentes externas complementarias y el análisis de micromercados |

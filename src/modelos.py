@@ -135,3 +135,64 @@ def diferencia_obra_vs_reciclada(modelo):
     t = modelo.t_test(contraste)
     ef, (lo, hi) = float(t.effect[0]), t.conf_int()[0]
     return (np.exp(ef) - 1) * 100, (np.exp(lo) - 1) * 100, (np.exp(hi) - 1) * 100
+
+
+# BENCHMARK AJUSTADO POR CARACTERÍSTICAS (predicción fuera de muestra)
+
+def prediccion_cruzada(d, k=5, semilla=7):
+    """
+    Predicción fuera de muestra (validación cruzada de `k` pliegues) del USD/m²
+    esperado de cada aviso con la regresión hedónica.
+
+    Cada aviso se predice con un modelo que no lo vio al ajustarse, de modo que
+    las brechas calculadas no están infladas por sobreajuste.
+
+    Agrega a una copia de `d`:
+    - Pred_USD_m2_Propio: USD/m² esperado dado el estado actual del aviso.
+    - Pred_USD_m2_Reciclado: USD/m² esperado si el aviso estuviera reciclado
+      (`Estado` = Reciclada_refaccionada, `Reciclado_Parcial` = 0).
+    Los avisos de barrios ausentes en el conjunto de ajuste quedan en NaN.
+    """
+    d = d.copy()
+    pliegue = np.random.RandomState(semilla).permutation(len(d)) % k
+    d["Pred_USD_m2_Propio"] = np.nan
+    d["Pred_USD_m2_Reciclado"] = np.nan
+    for i in range(k):
+        entrenamiento, prueba = d[pliegue != i], d[pliegue == i]
+        prueba = prueba[prueba["Barrio_Oficial"].isin(entrenamiento["Barrio_Oficial"].unique())]
+        modelo = smf.ols(FORMULA, data=entrenamiento).fit()
+        correccion = np.exp(modelo.scale / 2)   # de la media del log a la media del nivel
+        d.loc[prueba.index, "Pred_USD_m2_Propio"] = np.exp(modelo.predict(prueba)) * correccion
+        reciclada = prueba.copy()
+        reciclada["Estado"] = pd.Categorical(["Reciclada_refaccionada"] * len(reciclada),
+                                             categories=prueba["Estado"].cat.categories)
+        reciclada["Reciclado_Parcial"] = 0
+        d.loc[prueba.index, "Pred_USD_m2_Reciclado"] = np.exp(modelo.predict(reciclada)) * correccion
+    return d
+
+
+def comparar_precision(d, columnas_pred):
+    """MAPE y MdAPE (%) de cada predicción de `columnas_pred` ({nombre: columna}) frente al USD/m² observado."""
+    filas = {}
+    for nombre, col in columnas_pred.items():
+        mape, mdape = _mape(d[col], d["USD_m2_Homogeneizado"])
+        filas[nombre] = {"N": int(d[col].notna().sum()), "MAPE (%)": mape, "MdAPE (%)": mdape}
+    return pd.DataFrame(filas).T
+
+
+def clasificar_barata_doble(d, umbral_gap=25):
+    """
+    Cruza la brecha del benchmark jerárquico con la brecha hedónica (ambas en %
+    por debajo de lo esperado) para los avisos que no necesitan obra.
+
+    Categorías: Confirmada_por_ambos, Solo_benchmark (el descuento se explica por
+    antigüedad y características), Solo_hedonico, No_barata.
+    """
+    d = d.copy()
+    d["Gap_Benchmark_pct"] = (d["Benchmark_USD_m2"] - d["USD_m2_Homogeneizado"]) / d["Benchmark_USD_m2"] * 100
+    d["Gap_Hedonico_pct"] = (d["Pred_USD_m2_Propio"] - d["USD_m2_Homogeneizado"]) / d["Pred_USD_m2_Propio"] * 100
+    a, b = d["Gap_Benchmark_pct"] >= umbral_gap, d["Gap_Hedonico_pct"] >= umbral_gap
+    d["Categoria_Doble"] = np.select(
+        [a & b, a & ~b, ~a & b], ["Confirmada_por_ambos", "Solo_benchmark", "Solo_hedonico"], "No_barata")
+    d.loc[d["Estado_Propiedad"].eq("Necesita_obra") | d["Pred_USD_m2_Propio"].isna(), "Categoria_Doble"] = pd.NA
+    return d

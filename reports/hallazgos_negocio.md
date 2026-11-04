@@ -10,7 +10,7 @@
 
 ## Resumen
 
-El análisis confirma que existen oportunidades, pero también muestra que **buscarlas con un criterio simple de "precio bajo" llevaría al fondo a decisiones equivocadas**. Las oportunidades reales se concentran en zonas distintas de las que sugiere el precio por m², se agotan rápido y conviven con una proporción relevante de avisos con errores. Los cinco hallazgos siguientes cambian la forma en que el fondo debería buscar, priorizar y validar sus inversiones.
+El análisis confirma que existen oportunidades, pero también muestra que **buscarlas con un criterio simple de "precio bajo" llevaría al fondo a decisiones equivocadas**. Las oportunidades potenciales se concentran en zonas distintas de las que sugiere el precio por m², los avisos con descuento muestran más operaciones en curso y conviven con una proporción relevante de avisos con errores. Los cinco hallazgos siguientes cambian la forma en que el fondo debería buscar, priorizar y validar sus inversiones.
 
 ---
 
@@ -24,13 +24,13 @@ El análisis confirma que existen oportunidades, pero también muestra que **bus
 
 ---
 
-## 2. Las oportunidades se agotan rápido
+## 2. Los avisos con descuento muestran más operaciones en curso
 
-**Evidencia.** Una cuarta parte de la oferta (24,6%) está reservada o en negociación. Esos avisos se publican, en la mediana, **8,4 puntos más baratos** respecto de sus comparables que los activos (Mann-Whitney, p < 0,001). Entre las propiedades clasificadas como baratas, el 34% ya tiene una operación en curso, y entre las que necesitan obra con descuento, el 40%, contra el 23% de las propiedades a precio de mercado.
+**Evidencia.** Una cuarta parte de la oferta (24,6%) está reservada o en negociación. Esos avisos se publican, en la mediana, **8,4 puntos más baratos** respecto de sus comparables que los activos (Mann-Whitney, p < 0,001). Entre las propiedades clasificadas como baratas, el 34% tiene una operación en curso, y entre las que necesitan obra con descuento, el 40%, contra el 23% de las propiedades a precio de mercado.
 
-**Implicancia.** El mercado detecta las mismas oportunidades que el modelo, y las toma. Una propiedad barata que hoy está disponible puede no estarlo en pocas semanas.
+**Implicancia.** Los avisos con descuento relativo atraen más demanda que los de precio de mercado. Sin embargo, el análisis se basa en una única captura: no permite medir la velocidad con la que estos avisos salen del mercado ni confirmar que los reservados o en negociación terminen en una venta.
 
-**Cambio de rumbo.** El ranking de oportunidades no puede ser un informe estático: tiene que **actualizarse con frecuencia** (con nuevas corridas del extractor) y el fondo necesita un **proceso de decisión rápido** (visita y oferta en pocos días) para competir con otros compradores.
+**Cambio de rumbo.** Si el fondo quiere aprovechar estas propiedades, conviene acortar el ciclo de decisión y actualizar el ranking con nuevas corridas del extractor. Esas corridas sucesivas permitirían además medir la permanencia de cada aviso y probar si las oportunidades realmente se agotan rápido, algo que hoy no se puede afirmar.
 
 ---
 
@@ -40,7 +40,7 @@ El análisis confirma que existen oportunidades, pero también muestra que **bus
 
 **Implicancia.** Una parte de los precios "excepcionalmente bajos" son errores de publicación, no descuentos.
 
-**Cambio de rumbo.** El fondo debe **separar las oportunidades confirmadas (716) de las que requieren verificación (120)**, y revisar cada aviso dudoso antes de destinar tiempo a visitas. En las zonas de menor precio, la verificación es obligatoria.
+**Cambio de rumbo.** El fondo debe **separar las propiedades con potencial bruto sin alertas de error (716) de las que requieren verificación (120)**, y revisar cada aviso dudoso antes de destinar tiempo a visitas. Que una propiedad no tenga alertas no la convierte en una oportunidad confirmada: todavía falta verificar su estado físico y el costo de la obra. En las zonas de menor precio, la verificación es obligatoria.
 
 ---
 
@@ -67,7 +67,7 @@ El análisis confirma que existen oportunidades, pero también muestra que **bus
 | # | Recomendación | Basada en |
 | --- | --- | --- |
 | 1 | Priorizar el flipping en el centro y el corredor norte | Hallazgo 1 |
-| 2 | Actualizar el ranking con frecuencia y acortar el ciclo de decisión | Hallazgo 2 |
+| 2 | Actualizar el ranking con capturas sucesivas, para medir la permanencia de los avisos y acortar el ciclo de decisión | Hallazgo 2 |
 | 3 | Revisar cada aviso dudoso antes de visitar; verificación obligatoria en el sur | Hallazgo 3 |
 | 4 | Comparar cada oportunidad con edificios de la misma categoría | Hallazgo 4 |
 | 5 | Trabajar con el umbral de 25% y el ranking ordenado por descuento | Hallazgo 5 |

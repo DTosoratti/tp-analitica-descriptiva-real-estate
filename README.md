@@ -21,7 +21,9 @@ Licenciatura en Analítica Empresarial y Social del ITBA.
 | KPIs, hipótesis y su estado | [KPIs](#kpis), [Hipótesis](#hipótesis), [Estado de las hipótesis](#estado-de-las-hipótesis) |
 | Cómo se trató el estado de la propiedad | [Tratamiento de `Estado_Propiedad`](#tratamiento-de-la-variable-estado_propiedad) |
 | Datos, limpieza y fuentes externas | [Datos](#datos), [Fuentes externas](#fuentes-externas) |
-| Hallazgos del análisis | [Principales hallazgos](#principales-hallazgos-del-análisis-exploratorio), [Modelo explicativo y benchmark ajustado](#modelo-explicativo-y-benchmark-ajustado) |
+| Hallazgos del análisis | [Principales hallazgos](#principales-hallazgos-del-análisis-exploratorio), [Modelo explicativo y benchmark ajustado](#modelo-explicativo-y-benchmark-ajustado), [Modelo económico de flipping](#modelo-económico-de-flipping) |
+| Recomendaciones y dashboard | [Recomendaciones](#recomendaciones-para-el-fondo), [Dashboard](#dashboard) |
+| Qué cambió en la PreEntrega 3 | [Cambios en la PreEntrega 3](#cambios-en-la-preentrega-3) |
 | Qué cambió desde la PreEntrega 1 | [Cambios a partir de la devolución](#cambios-a-partir-de-la-devolución-de-la-preentrega-1) |
 | Cómo reproducir el análisis | [Reproducción](#reproducción), [Estructura del repositorio](#estructura-del-repositorio) |
 | Limitaciones y pendientes | [Limitaciones](#limitaciones), [Observaciones pendientes](#observaciones-pendientes-y-plan) |
@@ -52,8 +54,9 @@ El equipo de inversión lo usa para dos decisiones concretas:
 2. **Decidir si conviene comprar y refaccionar una unidad puntual**, a partir
    del margen potencial de flipping.
 
-El resultado se consume mediante un ranking exportable y, en la entrega final,
-un tablero interactivo en Power BI o Tableau.
+El resultado se consume mediante dos rankings exportables
+(`data/processed/ranking_visitas.csv` y `data/processed/flipping_ranking_priorizado.csv`)
+y un tablero interactivo (ver [Dashboard](#dashboard)).
 
 
 ## Contexto de negocio
@@ -182,6 +185,12 @@ Los umbrales son hiperparámetros: se eligen mediante un análisis de
 sensibilidad que balancea la cantidad de oportunidades detectadas contra la
 confiabilidad del margen.
 
+La regla está implementada en `src/flipping.py` (`aplicar_regla`) con los
+umbrales de `src/config.py` (`MARGEN_MINIMO_PCT` = 15 %, `PRESUPUESTO_MAX_USD`
+= USD 300.000, `DESCUENTO_NEGOCIABLE_PCT` = 10 %, `MIN_COMPARABLES` = 10). Además
+de "comprar" o "descartar", calcula el **precio máximo de oferta** de cada unidad:
+el precio que deja el margen mínimo en el escenario base.
+
 
 ## KPIs
 
@@ -199,7 +208,7 @@ confiabilidad del margen.
 | Inversión total (USD) | Precio de compra + Costos de compra + Costo de obra + Costo de tenencia | Capital total comprometido |
 | Margen potencial de flipping (%) | (PER × (1 − Costos de venta) − Inversión total) / Inversión total | Ganancia potencial relativa, antes de impuestos no modelados |
 
-**Estado de cada KPI en esta entrega.** Los KPIs que dependen solo de los avisos están calculados y materializados en `data/processed/remax_deptos_features.csv`. Los que requieren cotizaciones de obra, tipo de cambio y plazos quedan definidos, con sus parámetros iniciales, para la Pre-Entrega 3.
+**Estado de cada KPI en esta entrega.** Todos los KPIs están calculados. Los que dependen solo de los avisos están en `data/processed/remax_deptos_features.csv`; los del modelo económico, en `data/processed/flipping_modelo_economico.csv`.
 
 | KPI | Estado | Dónde |
 | --- | --- | --- |
@@ -207,7 +216,7 @@ confiabilidad del margen.
 | Gap de estado | Calculado | Notebook 04 (por comuna y global) |
 | PER en tres escenarios | Calculado | Notebook 03 (`PER_Conservador`, `PER_Base`, `PER_Optimista`) |
 | Potencial bruto (PER frente al precio publicado) | Calculado, como paso previo al margen | Notebook 03 (`Potencial_Bruto_*_pct`) |
-| Costo de obra, costo de tenencia, inversión total y margen potencial de flipping | **Pendiente**: faltan cotizaciones por nivel de obra, tipo de cambio y plazos validados | Pre-Entrega 3 (ver pendientes) |
+| Costo de obra, costo de tenencia, inversión total, margen potencial de flipping y precio máximo de oferta | Calculado, con los supuestos con fuente de `data/supuestos_flipping.csv` | Notebook 07 (`Costo_Obra_*_USD`, `Costo_Tenencia_*_USD`, `Inversion_Total_*_USD`, `ROI_*_pct`, `Precio_Max_Oferta_*_USD`) |
 
 ### Costo de la operación de flipping
 
@@ -229,7 +238,7 @@ El costo no es un único valor por m²: se descompone en cinco dimensiones.
 
 El nivel de obra se asigna según la evidencia del aviso ("a reciclar" → integral; "a actualizar" → media). Sin evidencia, se usa el nivel integral como caso conservador. Para obras de nivel liviano, el valor post-obra se toma del escenario conservador del PER.
 
-**Parámetros iniciales (supuestos a validar con un escribano o corredor):**
+**Parámetros iniciales.** Los valores definitivos, por escenario y con su fuente, están en `data/supuestos_flipping.csv` (por ejemplo, obra media de 400 a 650 USD/m² e integral de 1.000 a 1.300 USD/m²):
 
 | Parámetro | Valor inicial |
 | --- | --- |
@@ -309,6 +318,19 @@ base en el 97,3 % y el 97,7 % de los avisos, y las propiedades baratas
 (incluidas las que requieren verificación) son 853, 836 y 851 con los
 coeficientes 0,3, 0,5 y 0,7.
 
+**Cifras de propiedades baratas en este documento.** Corresponden a
+definiciones distintas:
+
+| Cifra | Qué cuenta | Dónde |
+| --- | --- | --- |
+| 716 | `Barata` (sin indicadores de error), base completa, coeficiente 0,5 | Notebook 03 |
+| 836 | `Barata` + `Barata_requiere_verificacion` (716 + 120) | Notebook 03 |
+| 853 y 851 | Igual que 836, con coeficientes de superficie descubierta de 0,3 y 0,7 | Notebook 03, sección 7.4 |
+| 663 | `Barata` usando solo comparables con estado informado | Notebook 03, sección 8.3 |
+| 822 | Baratas del benchmark jerárquico dentro de los 9.194 avisos con benchmark ajustado (sin las que necesitan obra) | Notebook 11 |
+| 326 | De esas 822, las que también son baratas con el benchmark ajustado | Notebook 11 |
+| 249 | De esas 326, las que no tienen indicadores de error: **candidatas de mayor confianza** | Notebook 09 |
+
 
 ## Tratamiento de la variable `Estado_Propiedad`
 
@@ -357,7 +379,8 @@ aplican el mismo criterio:
 
 Este criterio es un protocolo de revisión y no cambia la clasificación automática,
 que da prioridad a las señales de obra. Las diferencias entre ambos son lo que la
-validación mide. Se revisaron los 78 avisos con
+validación mide. Además de la doble lectura independiente de la notebook 06
+(ver abajo), se revisaron los 78 avisos con
 `Flag_Senal_Contradictoria` (`reports/validacion_estado_contradictorios.csv`,
 repartidos entre los cuatro integrantes) y 50 avisos `Reciclada_refaccionada`
 de la muestra estratificada de 200 (`reports/validacion_reciclada_muestra.csv`). Los errores de precisión (clasificó mal) se reportan
@@ -374,6 +397,7 @@ indican que el clasificador subestima la cantidad de unidades que necesitan obra
 | Cruce con señales no textuales (sección 6.5) | Antigüedad, amenities y expensas por m² según el estado | Los `Necesita_obra` son los más antiguos (mediana de 56 años contra 47 y 36) y tienen las expensas por m² más bajas, y el 31 % tiene perfil de edificio viejo sin amenities (22 % y 14 % en los otros grupos). Kruskal-Wallis (sección 6.6) rechaza que los tres grupos tengan la misma distribución en antigüedad, amenities y expensas por m² (esta última con diferencia chica), y Mann-Whitney confirma que los `Necesita_obra` son más antiguos que los `Buen_o_reciclada` (56 contra 47 años). Es un respaldo indirecto y no reemplaza la validación manual |
 | Sensibilidad a la definición de "reciclada" (sección 8.3) | PER con una definición estricta, la base y dos más laxas; clasificación con comparables solo de avisos con estado informado | El potencial bruto mediano se mantiene entre 21 % y 31 % y el 66–74 % de las propiedades con PER supera el 12 %. Usar solo comparables con estado informado reduce las `Barata` de 716 a 663 y deja sin benchmark a 174 avisos (antes 49) |
 | Revisión manual de los avisos con señales contradictorias (sección 10.3) | Los cuatro integrantes revisaron los 78 avisos con `Flag_Senal_Contradictoria` según el criterio de revisión manual | Coincidencia global de 79,5 % (62 de 78). De los 68 clasificados como `Necesita_obra`, 59 se confirmaron (86,8 %); los otros 9 eran buen estado o reciclado (4) o no permitían decidir (5). De los 10 clasificados como `Reciclada_refaccionada`, solo 3 se confirmaron (30 %): 7 eran en realidad unidades a renovar, con frases como "gran potencial de reciclado", "ideal para modernizar" o "invita a una renovación integral", que la expresión regular de reciclada interpreta como reciclado ya hecho. Son los casos más dudosos (0,8 % de la base) y no hubo una segunda lectura independiente, por lo que los porcentajes son indicativos |
+| Doble lectura independiente de una muestra estratificada de 50 avisos (notebook 06, `data/validation/`) | Dos evaluadores clasificaron por separado, sin ver la clasificación automática, 50 avisos de las cuatro categorías; los 17 desacuerdos se adjudicaron con justificación | Acuerdo entre evaluadores de 66 % (Cohen's kappa = 0,54, concordancia moderada). Contra la referencia manual, el clasificador tiene un accuracy de 78 % (kappa = 0,70); precisión de 82 % en `Necesita_obra` y 75 % en `Reciclada_refaccionada`, con recall de 100 % en ambas. La mayor dificultad está en distinguir `Sin_clasificar` de `Buen_estado`. La adjudicación la hizo uno de los dos evaluadores, lo que es una limitación |
 | Revisión manual de una muestra aleatoria de `Reciclada_refaccionada` (sección 10.4, `reports/validacion_reciclada_muestra.csv`) | Los cuatro integrantes revisaron, solo a partir del título y la descripción, 50 avisos `Reciclada_refaccionada` tomados al azar de la muestra estratificada, con el mismo criterio de revisión manual | 47 de 50 se confirmaron como `Buen_o_reciclada` (94 %; intervalo de Wilson al 95 %: 84 %–98 %). Los otros 3 necesitaban obra y ninguno quedó como `Sin_clasificar`. Supera el 80 % fijado como criterio, por lo que no se modificó el patrón de reciclada. Es una revisión sobre el texto del aviso, no sobre el estado físico real, y sin segunda lectura independiente |
 
 Implicancias: los comparables en buen estado o reciclados provienen sobre todo
@@ -493,7 +517,7 @@ para explicar diferencias de precio dentro de un mismo estrato.
 | --- | --- | --- | --- | --- | --- |
 | [BA Data — Barrios](https://data.buenosaires.gob.ar/dataset/barrios) — **integrada** | CABA; versión actualizada el 29/07/2026 (licencia CC-BY-2.5-AR) | Polígonos de barrio. Unión espacial punto en polígono con la latitud y longitud de cada aviso | `Barrio_Oficial`, `Comuna` | Estratos del benchmark y del PER (niveles 1 a 4) | 4 avisos con coordenadas fuera de CABA: uno excluido (propiedad en provincia) y tres asignados por su etiqueta y marcados con `Flag_Coordenadas_Invalidas`. La etiqueta de la fuente coincide con el barrio oficial en el 83,8 % de los avisos |
 | [INDEC — Índice del Costo de la Construcción](https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-5-33) | Gran Buenos Aires; serie mensual | Serie temporal; se une por fecha (cotización y fecha de análisis) | Factor de actualización del costo de obra | Costo de refacción | Es un índice, no un costo por m²; está en pesos |
-| Tipo de cambio histórico (BCRA; MEP como alternativa) | Argentina; serie diaria | Serie temporal; se une por fecha de referencia | Costos de obra y expensas en USD | Inversión total y margen | El margen cambia según el tipo de cambio elegido; se informa la sensibilidad |
+| Tipo de cambio — **integrado**: dólar MEP, venta (DolarHub), 02/11/2026, en `src/config.py` | Argentina; serie diaria | Valor de referencia a la fecha de análisis | Expensas en USD | Costo de tenencia, inversión total y margen | Sensibilidad de ±20 % en la notebook 07: casi no cambia el resultado, porque solo afecta a las expensas |
 | Estadísticas de escrituras o precios de cierre (por ejemplo, Colegio de Escribanos de CABA) | CABA; mensual | Agregado por zona o ciudad (desagregación a confirmar) | Brecha estimada entre precio publicado y de cierre | Ajuste del gap y del valor post-obra | Disponibilidad y nivel de desagregación por confirmar |
 
 ### Complementarias (Pre-Entrega 3)
@@ -522,9 +546,13 @@ Todas las fuentes complementarias tienen cobertura de CABA y granularidad de pun
 │   │   ├── registro_limpieza.csv                # registro de cada paso de limpieza
 │   │   ├── remax_deptos_features.csv            # base con variables derivadas y KPIs (9.499 × 100)
 │   │   ├── registro_features.csv                # registro de pasos del notebook 03
-│   │   └── oportunidades_benchmark_ajustado.csv # brechas y categoría por aviso (notebook 11)
+│   │   ├── oportunidades_benchmark_ajustado.csv # brechas y categoría por aviso (notebook 11)
+│   │   ├── flipping_modelo_economico.csv        # costos, ROI y decisión de las 428 unidades a reciclar (notebook 07)
+│   │   ├── flipping_ranking_priorizado.csv      # las 428 ordenadas por descuento requerido, con precio máximo de oferta (notebook 07)
+│   │   └── ranking_visitas.csv                  # 249 candidatas de mayor confianza (notebook 09)
 │   ├── external/                                # fuentes externas (se descargan al ejecutar el notebook 03)
 │   │   └── barrios_caba.geojson
+│   ├── validation/                              # muestra y planillas de la doble lectura manual (notebook 06)
 │   ├── supuestos_flipping.csv                   # supuestos de costos por componente y escenario, con fuente
 │   ├── excepciones_manuales.csv                 # correcciones puntuales documentadas
 │   ├── diccionario_variables.csv                # descripciones de las variables (insumo del diccionario)
@@ -551,7 +579,9 @@ Todas las fuentes complementarias tienen cobertura de CABA y granularidad de pun
 │   ├── diagnostico.py                           # validación de ambientes, faltantes y outliers
 │   ├── benchmark.py                             # bandas, benchmark jerárquico, PER y clasificación
 │   ├── eda.py                                   # estadísticos robustos y tests no paramétricos
-│   └── modelos.py                               # regresión hedónica, validación fuera de muestra y benchmark ajustado
+│   ├── modelos.py                               # regresión hedónica, validación fuera de muestra y benchmark ajustado
+│   └── flipping.py                              # modelo económico: costos, ROI, precio máximo de oferta y regla de decisión
+├── tests/                                       # tests (python -m pytest tests/)
 └── reports/
     ├── informe_preentrega_1.docx                # informe ejecutivo de la Pre-Entrega 1 (editable)
     ├── informe_preentrega_1.pdf                 # informe ejecutivo de la Pre-Entrega 1
@@ -610,20 +640,24 @@ detiene.
    sensibilidad del PER a las referencias contradictorias y a las señales de
    estado; `06_validacion_manual.ipynb` documenta la doble lectura manual del
    clasificador de estado.
-7. **Modelo económico.** `07_modelo_economico_flipping.ipynb` estima el retorno
-   de las unidades que necesitan obra en tres escenarios y su sensibilidad; los
-   supuestos de costo se están contrastando con `data/supuestos_flipping.csv`.
-8. **Evaluación de hipótesis.** `08_evaluacion_hipotesis.ipynb` recalcula H1 y
-   H2 con tamaños de efecto e intervalos de confianza, y consolida H3.
-9. **Resultados y recomendaciones.** `09_resultados_recomendaciones.ipynb`
-   consolida el ranking de oportunidades y las recomendaciones.
+7. **Modelo económico.** `07_modelo_economico_flipping.ipynb` aplica
+   `src/flipping.py` con los supuestos de `data/supuestos_flipping.csv`: costos,
+   ROI en tres escenarios, precio máximo de oferta, regla de decisión y
+   sensibilidad. Exporta `flipping_modelo_economico.csv` y
+   `flipping_ranking_priorizado.csv`.
+8. **Evaluación de hipótesis.** `08_evaluacion_hipotesis.ipynb` recalcula H1, H2
+   y H3 con tamaños de efecto, intervalos de confianza y pruebas de robustez.
+9. **Resultados y recomendaciones.** `09_resultados_recomendaciones.ipynb` arma
+   el ranking de visitas (`ranking_visitas.csv`, usa la salida de la notebook 11)
+   y las recomendaciones. Conviene correrla después de la 11.
 10. **Modelo explicativo.** `10_modelo_explicativo.ipynb` ajusta la regresión
     hedónica (`src/modelos.py`) y la valida fuera de muestra.
 11. **Benchmark ajustado.** `11_benchmark_ajustado.ipynb` contrasta el
     benchmark jerárquico con el ajustado por antigüedad y características, y
     exporta `data/processed/oportunidades_benchmark_ajustado.csv`.
 
-Las dependencias están en `requirements.txt`.
+Las dependencias están en `requirements.txt`. Los tests se ejecutan con
+`python -m pytest tests/` desde la raíz.
 
 
 ## Principales hallazgos del análisis exploratorio
@@ -650,18 +684,22 @@ el fondo de inversión se desarrollan en
   propiedades clasificadas como baratas tienen más operaciones en curso (34 %
   contra 23 %). Las que requieren verificación se comportan como las de precio
   de mercado, lo que sugiere que una parte son errores de carga.
-- **Hay candidatas a flipping.** 290 unidades que necesitan obra tienen un
-  potencial bruto superior a los costos de transacción en el escenario base.
+- **El flipping no cierra a precio publicado.** 290 unidades que necesitan obra
+  tienen un potencial bruto superior a los costos de transacción, pero al
+  descontar la obra, la tenencia y el costo de oportunidad, ninguna es rentable
+  en el escenario conservador (ver [Modelo económico de flipping](#modelo-económico-de-flipping)).
 
 ### Estado de las hipótesis
 
 | Hipótesis | Evidencia preliminar |
 | --- | --- |
-| **H1.** Descuento por condición | **A favor.** Descuento de 17,4 % respecto de comparables, significativo y similar entre comunas; el modelo hedónico, que controla por antigüedad y características, lo confirma (−14 % frente a buen estado) |
-| **H2.** Dispersión condicional | **Parcialmente a favor.** La dispersión difiere entre barrios y los estratos más dispersos concentran más oportunidades (3,5 % contra 11,7 %), pero también más casos con indicadores de error; correlación de Spearman entre dispersión y proporción de baratas de 0,48 (IC 95 % 0,38 a 0,57) en 289 estratos |
-| **H3.** Oportunidades de flipping | **Preliminarmente a favor.** 290 unidades superan los costos de transacción; falta descontar el costo de la obra y de tenencia |
+| Hipótesis | Resultado (notebook 08) |
+| --- | --- |
+| **H1.** Descuento por condición | **Se sostiene.** Las unidades que necesitan obra se publican 17,5 puntos por debajo de sus comparables (IC 95 % bootstrap: −19,9 a −15,3; Mann-Whitney, p < 0,001; probabilidad de superioridad 0,75). Se mantiene sin señales contradictorias (−16,4) y en los estratos más finos (−17,3). No difiere entre comunas (Kruskal-Wallis, p = 0,26; épsilon² = 0,006). El modelo hedónico lo confirma (−14 % frente a buen estado) |
+| **H2.** Dispersión condicional | **Se sostiene parcialmente.** En 289 estratos, la dispersión se asocia con la proporción de baratas sin indicadores de error (Spearman 0,43; IC 95 %: 0,33 a 0,53), también al controlar por el tamaño del estrato (0,45). Pero los estratos más dispersos también concentran más casos que requieren verificación (0,2 % en el quintil menos disperso contra 1,5 % en el más disperso): la dispersión sirve para priorizar la revisión, no como prueba de oportunidad |
+| **H3.** Oportunidades de flipping | **No se sostiene (reformulada).** Con los supuestos con fuente, 0 de 428 unidades son rentables en el escenario conservador (IC 95 % Wilson: 0 a 0,9 %) y 2 en el base. El descuento de entrada cubre la transacción y la tenencia, pero no la obra |
 
-La evaluación formal de H1 y H2, con tamaños de efecto e intervalos de confianza, está en `notebooks/08_evaluacion_hipotesis.ipynb`. H3 se evalúa con el modelo económico del notebook 07, cuyos supuestos de costo están en revisión.
+Los tests se recalculan en `notebooks/08_evaluacion_hipotesis.ipynb` desde `data/processed/`, con tamaños de efecto, intervalos bootstrap y pruebas de robustez.
 
 
 ## Modelo explicativo y benchmark ajustado
@@ -705,6 +743,76 @@ el piso ni las terminaciones; sirven para priorizar y contrastar, no como
 tasación individual.
 
 
+## Modelo económico de flipping
+
+El detalle está en `notebooks/07_modelo_economico_flipping.ipynb`; la lógica, en
+`src/flipping.py`; los supuestos, con su fuente, en `data/supuestos_flipping.csv`.
+
+- **Nivel de obra por aviso.** Integral si el aviso dice "a reciclar" o "a
+  refaccionar", o si no hay evidencia (caso conservador): 311 unidades. Media si
+  solo hay señales débiles ("a actualizar"): 117 unidades. En los 12 barrios del
+  cuartil superior de USD/m² se aplica un factor de terminación premium.
+- **Resultado.** El ROI mediano es de −53 % (conservador), −39 % (base) y −19 %
+  (optimista). Ninguna unidad es rentable en el escenario conservador, 2 lo son
+  en el base y 62 en el optimista.
+- **¿Cuánta obra paga el mercado?** El PER es, en la mediana, 1,23 veces el
+  precio publicado. Con ese descuento, la obra máxima pagable con ROI 0 es de
+  unos 24 USD/m² en la mediana: 132 unidades pagarían una obra liviana
+  (220 USD/m²), 36 una media (500) y 1 una integral (1.150).
+- **Sensibilidad.** El supuesto que más pesa es el nivel de obra: si todas
+  fueran livianas, 137 serían rentables en el escenario base. Un descuento de
+  negociación del 10 % lleva las rentables en el base de 2 a 6. El tipo de
+  cambio (±20 %) casi no influye, porque solo afecta a las expensas.
+
+La versión anterior de esta notebook usaba supuestos ilustrativos (obra de 150 a
+500 USD/m², gastos de compra de 4 % y de venta de 3 %, sin contingencia ni costo
+de oportunidad), que no coincidían con los supuestos con fuente del proyecto.
+Con ellos resultaban 46 operaciones rentables en los tres escenarios.
+
+
+## Recomendaciones para el fondo
+
+El detalle está en `notebooks/09_resultados_recomendaciones.ipynb`.
+
+1. **Qué visitar.** Priorizar las 249 candidatas de mayor confianza
+   (`data/processed/ranking_visitas.csv`): son baratas con dos métodos
+   independientes y no tienen indicadores de error. El 41 % ya está reservado o
+   en negociación, contra el 23 % de las no baratas (chi-cuadrado, p < 0,001):
+   el mercado también las detecta, así que conviene actuar rápido. El orden
+   exacto depende del método (20 del top 50 coinciden), por lo que el ranking se
+   usa por tramos y no por puesto.
+2. **Flipping.** No adoptarlo como estrategia general a precio publicado. Usar el
+   precio máximo de oferta de cada unidad (`flipping_ranking_priorizado.csv`)
+   como techo de negociación. Solo 7 unidades alcanzarían el margen mínimo con un
+   descuento de hasta 30 %.
+3. **Antes de ofertar,** verificar el aviso y cotizar la obra con una visita
+   técnica: el alcance de la obra es el supuesto que más mueve el resultado.
+
+
+## Dashboard
+
+<!-- Completar con el link o el archivo del dashboard y las instrucciones para abrirlo. -->
+El tablero interactivo para el fondo se encuentra en: **[completar]**.
+
+Fuentes de datos del tablero: `data/processed/ranking_visitas.csv`,
+`data/processed/flipping_ranking_priorizado.csv` y
+`data/processed/remax_deptos_features.csv`. Las capturas de las vistas
+principales están en `reports/dashboard/`.
+
+
+## Cambios en la PreEntrega 3
+
+| Observación | Cambio realizado |
+| --- | --- |
+| El modelo económico no usaba los supuestos con fuente del proyecto | La notebook 07 lee `data/supuestos_flipping.csv` y `src/config.py`, asigna el nivel de obra por aviso e incluye contingencia, costo de oportunidad y factor premium. La lógica se trasladó a `src/flipping.py`. H3 pasó de "a favor" a "no se sostiene" |
+| La evaluación de hipótesis copiaba resultados a mano | La notebook 08 recalcula H1, H2 y H3 con tamaños de efecto, intervalos bootstrap o de Wilson y pruebas de robustez |
+| Recomendaciones de compra basadas en supuestos ilustrativos | La notebook 09 recomienda a partir del ranking de baratas confirmado por dos métodos y del precio máximo de oferta |
+| Notebooks sin outputs, ejecutadas fuera de orden o con nombres de copia | Se ejecutaron de punta a punta las notebooks 04, 05, 07, 08 y 09, y se quitaron los sufijos "(1)", "(2)" y "(4)" de los nombres |
+| Dependencias de Colab y variables no definidas | Se quitó `google.colab` de la notebook 06; la 05 importaba `PATRONES` de una sesión anterior; la 04 corre sin geopandas |
+| Umbrales repetidos en las notebooks | La 05 toma `UMBRAL_GAP` de `src/config.py`; el modelo económico, todos sus parámetros |
+| Tests | Se agregaron `tests/` (modelo de flipping, supuestos, consistencia de los datos procesados y clasificador de estado) |
+
+
 ## Cambios a partir de la devolución de la PreEntrega 1
 
 | Observación | Cambio realizado |
@@ -726,9 +834,9 @@ tasación individual.
 - **Una sola fuente.** Los avisos provienen de RE/MAX; no representan a todo el mercado, y un mismo inmueble puede estar publicado por otras inmobiliarias.
 - **Precio de publicación.** Se analizan precios pedidos, no de cierre. La brecha entre ambos no está medida (ver pendientes).
 - **Una única captura.** La base es una foto a la fecha de corte; no se observa la permanencia ni la evolución del precio de cada aviso.
-- **Estado inferido del texto.** El 63,5 % de los avisos no informa el estado y la precisión del clasificador solo se validó manualmente sobre los 78 avisos con
-  señales contradictorias, donde `Reciclada_refaccionada` tuvo baja precisión (3 de 10), y sobre una muestra aleatoria de 50 avisos `Reciclada_refaccionada`, donde la precisión fue de 94 % (47 de 50). Ambas revisiones se hicieron sobre el texto del aviso, no sobre el estado físico real, y sin segunda lectura independiente. Las otras categorías (`Buen_estado` y `Sin_clasificar`) no se validaron en una muestra aleatoria.
-- **Potencial bruto.** El PER estima el valor post-obra, no el margen de flipping: faltan el costo de obra, la tenencia y el tipo de cambio.
+- **Estado inferido del texto.** El 63,5 % de los avisos no informa el estado. El clasificador se validó con una doble lectura independiente de 50 avisos estratificados (accuracy de 78 %, kappa de 0,70; acuerdo entre evaluadores con kappa de 0,54), con la revisión de los 78 avisos con señales contradictorias (`Reciclada_refaccionada` con baja precisión, 3 de 10) y con una muestra aleatoria de 50 `Reciclada_refaccionada` (94 % de precisión). Todas las revisiones se hicieron sobre el texto del aviso, no sobre el estado físico real.
+- **Costos de obra.** Los costos por m² son supuestos con fuente secundaria (prensa y cámaras del sector), no cotizaciones propias. El nivel de obra se infiere del texto del aviso, y es el supuesto que más mueve el resultado del flipping.
+- **Valor post-obra.** El PER se estima con comparables en buen estado o reciclados. Una unidad recién reciclada de forma integral puede valer más que una en buen estado; el escenario optimista (P75) aproxima ese caso. No se modelan impuestos (cedular) ni financiamiento.
 - **Umbral de gap.** El 25 % surge de un análisis de sensibilidad (aproximadamente el percentil 90 del gap) y no de una validación externa; como evidencia indirecta, las propiedades clasificadas como baratas tienen más operaciones en curso.
 - **Modelos de precio.** La regresión y el benchmark ajustado controlan solo las características publicadas; no observan el estado del edificio, el piso ni las terminaciones, y su error mediano ronda 12 %. Se usan para priorizar y contrastar, no para tasar.
 
@@ -737,10 +845,11 @@ tasación individual.
 
 | Pendiente | Plan |
 | --- | --- |
-| Validación del clasificador de estado | Se revisaron los 78 avisos con señales contradictorias y 50 avisos `Reciclada_refaccionada` de la muestra aleatoria (resultados en "Qué se midió sobre la calidad de la señal"). Falta revisar las otras tres categorías de la muestra estratificada (`reports/validacion_estado_muestra.csv`) y obtener una segunda lectura independiente de una parte de los avisos. Opcionalmente, evaluar si excluir de los comparables del PER los avisos con `Flag_Senal_Contradictoria` |
+| Validación del clasificador de estado | Resuelto en gran parte (notebook 06: doble lectura independiente de 50 avisos de las cuatro categorías). Queda que un tercer integrante adjudique los 17 desacuerdos, porque hoy los adjudicó uno de los dos evaluadores |
 | Categoría del edificio en los comparables | Resuelto con el benchmark ajustado por antigüedad y características (notebook 11, MAPE de 19,6 % a 15,3 %). Queda por evaluar un índice resumen de amenities |
-| Costo de refacción y margen de flipping | Cotizaciones por nivel de obra (liviana, media, integral), actualizadas con el ICC y convertidas a USD, para pasar del potencial bruto al margen y evaluar H3 |
-| Tipo de cambio y brecha de cierre | Definir la fuente del tipo de cambio (también para convertir las expensas) y confirmar la disponibilidad de estadísticas de escrituras |
+| Costo de refacción y margen de flipping | Modelo calculado con supuestos con fuente (notebook 07). Falta reemplazarlos por cotizaciones propias por nivel de obra, actualizadas con el ICC |
+| Tipo de cambio y brecha de cierre | Tipo de cambio definido (MEP, DolarHub, 02/11/2026, en `src/config.py`). Falta confirmar la disponibilidad de estadísticas de escrituras |
 | Detección contextual de outliers | La detección global marca como atípicos a los segmentos de menor precio (por ejemplo, la comuna 8); evaluar una detección por segmento |
+| Hash de la base raw | Completar `RAW_SHA256` en `src/config.py` con `calcular_sha256(RAW_PATH)` sobre la base descargada de Drive |
 | Permanencia en el mercado | Nuevas capturas del extractor (con una columna de fecha de extracción) para medir la primera y la última aparición de cada aviso |
-| Validación formal de hipótesis y micromercados | H1 y H2 evaluadas (notebook 08); falta cerrar H3 con el modelo económico. Quedan las fuentes externas complementarias y el análisis de micromercados |
+| Validación formal de hipótesis y micromercados | H1, H2 y H3 evaluadas (notebook 08). Quedan las fuentes externas complementarias y el análisis de micromercados |

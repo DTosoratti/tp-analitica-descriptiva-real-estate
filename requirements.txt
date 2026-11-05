@@ -25,3 +25,6 @@ geopandas>=0.14
 
 # Ejecución de notebooks fuera de Colab
 jupyter
+
+# Tests (python -m pytest tests/)
+pytest>=7.0

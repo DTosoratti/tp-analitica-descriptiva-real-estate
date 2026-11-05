@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Real Estate Analytics CABA</title>
+<style>
+:root{
+  color-scheme: light;
+  --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#6b6963;
+  --grid:#e1e0d9; --axis:#c3c2b7; --ring:rgba(11,11,11,.10);
+  --s1:#2a78d6; --s2:#eb6834; --other:#b9b8b0; --bar:#2a78d6;
+}
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme: dark;
+    --page:#0d0d0d; --surface:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --muted:#a3a198;
+    --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,.10);
+    --s1:#3987e5; --s2:#d95926; --other:#4a4a46; --bar:#3987e5;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --page:#0d0d0d; --surface:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --muted:#a3a198;
+  --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,.10);
+  --s1:#3987e5; --s2:#d95926; --other:#4a4a46; --bar:#3987e5;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:22px;margin:0 0 4px}
+.sub{color:var(--ink2);margin:0 0 16px;max-width:760px}
+.filtros{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin-bottom:16px}
+.filtros label{display:flex;flex-direction:column;font-size:12px;color:var(--ink2);gap:4px}
+select,button{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--axis);border-radius:8px;padding:7px 10px}
+button{cursor:pointer}
+select:focus-visible,button:focus-visible,a:focus-visible,.barra:focus-visible{outline:2px solid var(--s1);outline-offset:2px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px}
+.tile,.card{background:var(--surface);border:1px solid var(--ring);border-radius:12px;padding:14px 16px}
+.tile .v{font-size:28px;font-weight:650;line-height:1.1}
+.tile .l{color:var(--ink2);font-size:13px;margin-top:4px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+.card h2{font-size:15px;margin:0 0 2px}
+.card p.n{color:var(--ink2);font-size:13px;margin:0 0 10px}
+.leyenda{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--ink2);margin-bottom:8px}
+.leyenda i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+canvas{width:100%;display:block;border-radius:8px}
+.barras{display:flex;flex-direction:column;gap:6px}
+.barra{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;font-size:13px;cursor:pointer;border-radius:6px}
+.barra .nom{color:var(--ink2);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.barra .pista{position:relative;height:18px}
+.barra .rel{position:absolute;left:0;top:0;height:18px;background:var(--bar);border-radius:0 4px 4px 0;min-width:2px}
+.barra .val{position:absolute;top:0;line-height:18px;font-size:12px;color:var(--ink);padding-left:6px;font-variant-numeric:tabular-nums}
+.barra:hover .rel{filter:brightness(1.15)}
+.vacio{color:var(--muted);font-size:13px;padding:8px 0}
+svg text{fill:var(--ink2);font-size:12px}
+.tabla-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+th,td{text-align:right;padding:7px 8px;border-bottom:1px solid var(--grid);white-space:nowrap}
+th:first-child,td:first-child,th.t,td.t{text-align:left}
+th{color:var(--ink2);font-weight:600;font-size:12px}
+a{color:var(--s1)}
+.pie{color:var(--muted);font-size:12.5px;margin-top:16px;max-width:900px}
+#tip{position:fixed;pointer-events:none;background:var(--surface);color:var(--ink);border:1px solid var(--axis);border-radius:8px;padding:8px 10px;font-size:12.5px;display:none;z-index:5;box-shadow:0 4px 14px rgba(0,0,0,.18);max-width:260px}
+#tip b{font-size:14px}
+#tip .s{color:var(--ink2)}
+.tema{margin-left:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Oportunidades inmobiliarias en CABA</h1>
+  <p class="sub">Departamentos en venta publicados en RE/MAX (precios de publicación en USD). Una propiedad es <b>barata</b> si está al menos 25 % por debajo del precio de sus comparables y en el cuartil inferior de su grupo. <b>Confirmada por ambos</b> significa que lo está tanto respecto del benchmark de comparables como del benchmark ajustado por antigüedad y características. Las <b>candidatas de mayor confianza</b> son las confirmadas que además no tienen indicadores de posible error de carga.</p>
+
+  <div class="filtros" role="group" aria-label="Filtros">
+    <label>Barrio<select id="f-barrio"></select></label>
+    <label>Ambientes<select id="f-amb"></select></label>
+    <label>Estado<select id="f-est"></select></label>
+    <label>Oportunidad<select id="f-cat"></select></label>
+    <button id="reset" type="button">Limpiar filtros</button>
+    <button id="tema" class="tema" type="button" aria-label="Cambiar tema claro u oscuro">Tema</button>
+  </div>
+
+  <div class="tiles" id="tiles"></div>
+
+  <div class="grid">
+    <section class="card" aria-labelledby="t-mapa">
+      <h2 id="t-mapa">Ubicación de los avisos</h2>
+      <p class="n">Cada punto es un aviso. Pasá el cursor para ver el detalle.</p>
+      <div class="leyenda" id="ley-mapa"></div>
+      <canvas id="mapa" role="img" aria-label="Mapa de dispersión de los avisos según oportunidad. El detalle está en la tabla inferior."></canvas>
+    </section>
+    <section class="card" aria-labelledby="t-barrios">
+      <h2 id="t-barrios">Oportunidades confirmadas por barrio</h2>
+      <p class="n">Cantidad de avisos confirmados por ambos métodos. Clic en una barra para filtrar el barrio.</p>
+      <div class="barras" id="barras"></div>
+    </section>
+  </div>
+
+  <div class="grid">
+    <section class="card" aria-labelledby="t-estado">
+      <h2 id="t-estado">Precio relativo al benchmark según estado</h2>
+      <p class="n">Barra: del percentil 25 al 75. Marca vertical: mediana. 0 % = precio de sus comparables.</p>
+      <svg id="estado" width="100%" role="img" aria-label="Rango intercuartil del precio relativo al benchmark por estado de la propiedad"></svg>
+    </section>
+    <section class="card" aria-labelledby="t-dist">
+      <h2 id="t-dist">Cómo se distribuyen los avisos</h2>
+      <p class="n">Avisos sin necesidad de obra, según el resultado del cruce entre ambos benchmarks.</p>
+      <div class="barras" id="dist"></div>
+    </section>
+  </div>
+
+  <section class="card" aria-labelledby="t-tabla">
+    <h2 id="t-tabla">Avisos con mayor descuento respecto del benchmark ajustado</h2>
+    <p class="n" id="tabla-n"></p>
+    <div class="tabla-wrap"><table id="tabla"><thead></thead><tbody></tbody></table></div>
+    <p style="margin:10px 0 0"><button id="mas" type="button">Mostrar más</button></p>
+  </section>
+
+  <section class="card" aria-labelledby="t-flip" style="margin-top:12px">
+    <h2 id="t-flip">Flipping: hasta cuánto ofertar por una unidad a reciclar</h2>
+    <p class="n" id="flip-n"></p>
+    <div class="tiles" id="flip-tiles" style="margin-top:8px"></div>
+    <div class="tabla-wrap"><table id="flip-tabla"><thead></thead><tbody></tbody></table></div>
+    <p style="margin:10px 0 0"><button id="flip-mas" type="button">Mostrar más</button></p>
+  </section>
+
+  <p class="pie" id="pie"></p>
+</div>
+<div id="tip" role="status"></div>
+
+<script>
+const DATOS = /*DATOS*/null;
+const FLIP = /*FLIP*/null;
+const META = /*META*/null;
+if (!DATOS) {
+  document.body.replaceChildren();
+  const m = document.createElement("p");
+  m.style.cssText = "font:16px system-ui;padding:24px;max-width:640px";
+  m.textContent = "Este archivo es la plantilla del dashboard y no contiene datos. Para generarlo, ejecutá `python -m src.dashboard` desde la raíz del repositorio y abrí dashboard/index.html.";
+  document.body.appendChild(m);
+  throw new Error("plantilla sin datos");
+}
+
+const COLS = DATOS.cols, N = DATOS.n;
+const R = []; // filas como objetos
+for (let i = 0; i < N; i++) { const o = {}; for (const c of COLS) o[c] = DATOS.data[c][i]; R.push(o); }
+
+const CAT_TXT = {Confirmada_por_ambos:"Confirmada por ambos", Solo_benchmark:"Solo según benchmark",
+                 Solo_hedonico:"Solo según ajustado", No_barata:"No barata", Necesita_obra:"Necesita obra (se evalúa con el PER)"};
+const fmtN = n => n==null ? "–" : Math.round(n).toLocaleString("es-AR");
+const fmtP = n => n==null ? "–" : (n>0?"+":"")+n.toFixed(1).replace(".",",")+" %";
+const mediana = a => { if(!a.length) return null; const s=[...a].sort((x,y)=>x-y), m=s.length>>1; return s.length%2?s[m]:(s[m-1]+s[m])/2; };
+const cuantil = (s,q)=>{ if(!s.length) return null; const p=(s.length-1)*q, i=Math.floor(p); return s[i]+(s[Math.min(i+1,s.length-1)]-s[i])*(p-i); };
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const el = (t,c,x)=>{const e=document.createElement(t); if(c) e.className=c; if(x!=null) e.textContent=x; return e;};
+
+// Filtros
+const F = {barrio:"", amb:"", est:"", cat:""};
+function llenar(id, valores, todos){ const s=document.getElementById(id); s.replaceChildren();
+  const o=el("option",null,todos); o.value=""; s.appendChild(o);
+  for(const [v,t] of valores){ const e=el("option",null,t); e.value=v; s.appendChild(e);} }
+const barrios=[...new Set(R.map(r=>r.barrio))].sort((a,b)=>a.localeCompare(b,"es"));
+llenar("f-barrio", barrios.map(b=>[b,b]), "Todos");
+llenar("f-amb", ["1","2","3","4","5+"].map(a=>[a,a]), "Todos");
+llenar("f-est", ["Buen_estado","Reciclada_refaccionada","Necesita_obra","Sin_clasificar"].map(e=>[e,e.replaceAll("_"," ")]), "Todos");
+llenar("f-cat", Object.entries(CAT_TXT), "Todas");
+for(const [id,k] of [["f-barrio","barrio"],["f-amb","amb"],["f-est","est"],["f-cat","cat"]])
+  document.getElementById(id).addEventListener("change",e=>{F[k]=e.target.value; render();});
+document.getElementById("reset").addEventListener("click",()=>{ for(const k in F) F[k]=""; 
+  for(const id of ["f-barrio","f-amb","f-est","f-cat"]) document.getElementById(id).value=""; render();});
+
+const pasa = (r, ignorar) => (ignorar==="barrio"||!F.barrio||r.barrio===F.barrio) && (!F.amb||r.amb===F.amb)
+  && (!F.est||r.est===F.est) && (!F.cat||r.cat===F.cat);
+let filas = [], mostrar = 15;
+
+function render(){
+  filas = R.filter(r=>pasa(r)); mostrar = 15; flipMostrar = 10;
+  tiles(); mapa(); barras(); estado(); dist(); tabla(); flipping();
+}
+
+function tiles(){
+  const t=document.getElementById("tiles"); t.replaceChildren();
+  const sinObra=filas.filter(r=>r.cat!=="Necesita_obra");
+  const baratas=sinObra.filter(r=>r.cat==="Confirmada_por_ambos"||r.cat==="Solo_benchmark").length;
+  const conf=filas.filter(r=>r.cat==="Confirmada_por_ambos").length;
+  const confianza=filas.filter(r=>r.conf).length;
+  const med=mediana(filas.map(r=>r.usdm2));
+  const items=[[fmtN(filas.length),"avisos"],[med==null?"–":"USD "+fmtN(med),"mediana USD/m²"],
+    [fmtN(baratas),"baratas según el benchmark de comparables"],[fmtN(conf),"confirmadas por ambos métodos"],
+    [fmtN(confianza),"candidatas de mayor confianza (sin indicadores de error)"]];
+  for(const [v,l] of items){ const d=el("div","tile"); d.appendChild(el("div","v",v)); d.appendChild(el("div","l",l)); t.appendChild(d); }
+}
+
+// Mapa (canvas)
+const cv=document.getElementById("mapa"), ctx=cv.getContext("2d");
+let pts=[], geom=null;
+function colorCat(c){ return c==="Confirmada_por_ambos"?css("--s1"):c==="Solo_benchmark"?css("--s2"):css("--other"); }
+function mapa(){
+  const leyenda=document.getElementById("ley-mapa"); leyenda.replaceChildren();
+  for(const [c,t] of [["Confirmada_por_ambos","Confirmada por ambos"],["Solo_benchmark","Solo según benchmark"],["otros","Resto"]]){
+    const s=el("span"); const i=el("i"); i.style.background=colorCat(c); s.appendChild(i); s.appendChild(document.createTextNode(t)); leyenda.appendChild(s); }
+  const conGeo=filas.filter(r=>r.lat!=null);
+  const dpr=window.devicePixelRatio||1, w=cv.clientWidth, h=Math.round(w*0.95);
+  cv.width=w*dpr; cv.height=h*dpr; cv.style.height=h+"px"; ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,w,h);
+  const all=R.filter(r=>r.lat!=null);
+  const kx=Math.cos(34.6*Math.PI/180);
+  const lons=all.map(r=>r.lon*kx), lats=all.map(r=>r.lat);
+  const x0=Math.min(...lons), x1=Math.max(...lons), y0=Math.min(...lats), y1=Math.max(...lats);
+  const pad=14, esc=Math.min((w-2*pad)/(x1-x0),(h-2*pad)/(y1-y0));
+  const ox=(w-(x1-x0)*esc)/2, oy=(h-(y1-y0)*esc)/2;
+  const px=r=>ox+(r.lon*kx-x0)*esc, py=r=>h-oy-(r.lat-y0)*esc;
+  // contexto: todos los avisos en gris muy tenue
+  ctx.fillStyle=css("--grid");
+  for(const r of all){ ctx.beginPath(); ctx.arc(px(r),py(r),1.6,0,6.283); ctx.fill(); }
+  pts=[];
+  const orden={Confirmada_por_ambos:2,Solo_benchmark:1};
+  const dibujar=[...conGeo].sort((a,b)=>(orden[a.cat]||0)-(orden[b.cat]||0));
+  for(const r of dibujar){
+    const x=px(r), y=py(r), res=(orden[r.cat]||0)>0;
+    ctx.beginPath(); ctx.arc(x,y,res?3.6:2.1,0,6.283);
+    ctx.fillStyle=colorCat(r.cat); ctx.globalAlpha=res?1:0.75; ctx.fill(); ctx.globalAlpha=1;
+    if(res){ ctx.lineWidth=1.5; ctx.strokeStyle=css("--surface"); ctx.stroke(); }
+    pts.push({x,y,r});
+  }
+}
+cv.addEventListener("pointermove",e=>{
+  const b=cv.getBoundingClientRect(), x=e.clientX-b.left, y=e.clientY-b.top;
+  let mejor=null, d2=14*14;
+  for(const p of pts){ const dx=p.x-x, dy=p.y-y, d=dx*dx+dy*dy; if(d<d2){d2=d; mejor=p;} }
+  if(mejor) tip(e, detalle(mejor.r)); else ocultar();
+});
+cv.addEventListener("pointerleave",ocultar);
+function detalle(r){ const f=document.createDocumentFragment();
+  const t=el("div"); t.appendChild(el("b",null,"USD "+fmtN(r.precio))); f.appendChild(t);
+  const l=[`${r.barrio} · ${r.amb} amb. · ${fmtN(r.sup)} m²`, `USD/m²: ${fmtN(r.usdm2)} (benchmark ${fmtN(r.bm)})`,
+    `Brecha vs benchmark: ${fmtP(r.gbm)}`, `Brecha vs ajustado: ${fmtP(r.ghed)}`, (CAT_TXT[r.cat]||"Sin clasificar")+(r.verif?" · requiere verificación":"")];
+  for(const x of l) f.appendChild(el("div","s",x)); return f; }
+const tipEl=document.getElementById("tip");
+function tip(e,contenido){ tipEl.replaceChildren(contenido); tipEl.style.display="block";
+  const w=tipEl.offsetWidth, h=tipEl.offsetHeight;
+  let x=e.clientX+14, y=e.clientY+14; if(x+w>innerWidth-8) x=e.clientX-w-14; if(y+h>innerHeight-8) y=e.clientY-h-14;
+  tipEl.style.left=x+"px"; tipEl.style.top=y+"px"; }
+function ocultar(){ tipEl.style.display="none"; }
+
+// Barras por barrio
+function barras(){
+  const cont=document.getElementById("barras"); cont.replaceChildren();
+  const cuenta={};
+  for(const r of R) if(r.cat==="Confirmada_por_ambos" && pasa(r,"barrio")) cuenta[r.barrio]=(cuenta[r.barrio]||0)+1;
+  const top=Object.entries(cuenta).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],"es")).slice(0,12);
+  if(!top.length){ cont.appendChild(el("div","vacio","No hay avisos confirmados con estos filtros.")); return; }
+  const max=top[0][1];
+  for(const [b,n] of top){
+    const fila=el("div","barra"); fila.tabIndex=0; fila.setAttribute("role","button");
+    fila.setAttribute("aria-label",`${b}: ${n} avisos confirmados. Filtrar por este barrio.`);
+    fila.appendChild(el("span","nom",b));
+    const pista=el("div","pista"), rel=el("div","rel"); rel.style.width=(n/max*78)+"%";
+    if(F.barrio && b!==F.barrio) rel.style.opacity=".4";
+    const val=el("span","val",String(n)); val.style.left=(n/max*78)+"%";
+    pista.appendChild(rel); pista.appendChild(val); fila.appendChild(pista);
+    const activar=()=>{ F.barrio=b; document.getElementById("f-barrio").value=b; render(); };
+    fila.addEventListener("click",activar);
+    fila.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){e.preventDefault();activar();}});
+    cont.appendChild(fila);
+  }
+}
+
+// Distribución por categoría (sin obra)
+function dist(){
+  const cont=document.getElementById("dist"); cont.replaceChildren();
+  const orden=["Confirmada_por_ambos","Solo_benchmark","Solo_hedonico","No_barata"], c={};
+  for(const r of filas) if(orden.includes(r.cat)) c[r.cat]=(c[r.cat]||0)+1;
+  const total=orden.reduce((s,k)=>s+(c[k]||0),0);
+  if(!total){ cont.appendChild(el("div","vacio","No hay avisos con estos filtros.")); return; }
+  const max=Math.max(...orden.map(k=>c[k]||0)), ancho=cont.clientWidth<420?48:70;
+  for(const k of orden){ const n=c[k]||0;
+    const fila=el("div","barra"); fila.style.cursor="default";
+    fila.appendChild(el("span","nom",CAT_TXT[k]));
+    const pista=el("div","pista"), rel=el("div","rel"); rel.style.width=(n/max*ancho)+"%";
+    if(k==="Confirmada_por_ambos") rel.style.background=css("--s1"); else if(k==="Solo_benchmark") rel.style.background=css("--s2"); else rel.style.background=css("--other");
+    const val=el("span","val",`${fmtN(n)} (${(n/total*100).toFixed(1).replace(".",",")} %)`); val.style.left=(n/max*ancho)+"%";
+    pista.appendChild(rel); pista.appendChild(val); fila.appendChild(pista); cont.appendChild(fila); }
+}
+
+// Rango intercuartil por estado
+function estado(){
+  const svg=document.getElementById("estado"); svg.replaceChildren();
+  const NS="http://www.w3.org/2000/svg", w=svg.clientWidth||460, filaH=34, top=8, izq=(w<420?112:140), der=16, h=top+4*filaH+26;
+  svg.setAttribute("height",h); svg.setAttribute("viewBox",`0 0 ${w} ${h}`);
+  const lo=-70, hi=50, X=v=>izq+(Math.max(lo,Math.min(hi,v))-lo)/(hi-lo)*(w-izq-der);
+  const mk=(t,a,tx)=>{const e=document.createElementNS(NS,t); for(const k in a) e.setAttribute(k,a[k]); if(tx!=null) e.textContent=tx; return e;};
+  const marcas = w<420 ? [-40,0,40] : [-60,-40,-20,0,20,40];
+  for(const v of marcas){
+    svg.appendChild(mk("line",{x1:X(v),x2:X(v),y1:top,y2:h-22,stroke:v===0?css("--axis"):css("--grid"),"stroke-width":v===0?1.5:1}));
+    svg.appendChild(mk("text",{x:X(v),y:h-6,"text-anchor":"middle"},v+" %")); }
+  const estados=["Necesita_obra","Reciclada_refaccionada","Buen_estado","Sin_clasificar"];
+  estados.forEach((es,i)=>{
+    const vals=filas.filter(r=>r.est===es&&r.gbm!=null).map(r=>-r.gbm).sort((a,b)=>a-b);
+    const y=top+i*filaH+filaH/2;
+    svg.appendChild(mk("text",{x:izq-8,y:y+4,"text-anchor":"end"},(w<420&&es==="Reciclada_refaccionada")?"Reciclada":es.replaceAll("_"," ")));
+    if(vals.length<5) { svg.appendChild(mk("text",{x:izq+8,y:y+4},"pocos avisos")); return; }
+    const q1=cuantil(vals,.25), q2=cuantil(vals,.5), q3=cuantil(vals,.75);
+    const g=mk("g",{tabindex:0});
+    g.appendChild(mk("rect",{x:X(q1),y:y-8,width:Math.max(2,X(q3)-X(q1)),height:16,rx:4,fill:css("--bar")}));
+    g.appendChild(mk("line",{x1:X(q2),x2:X(q2),y1:y-11,y2:y+11,stroke:css("--ink"),"stroke-width":2.5}));
+    g.appendChild(mk("rect",{x:izq,y:y-14,width:w-izq-der,height:28,fill:"transparent"}));
+    const info=()=>{ const f=document.createDocumentFragment(); f.appendChild(el("b",null,es.replaceAll("_"," ")));
+      for(const x of [`Mediana: ${fmtP(q2)}`,`P25 a P75: ${fmtP(q1)} a ${fmtP(q3)}`,`${fmtN(vals.length)} avisos`]) f.appendChild(el("div","s",x)); return f; };
+    g.addEventListener("pointermove",e=>tip(e,info())); g.addEventListener("pointerleave",ocultar);
+    g.addEventListener("focus",()=>{const b=g.getBoundingClientRect(); tip({clientX:b.left,clientY:b.top},info());}); g.addEventListener("blur",ocultar);
+    svg.appendChild(g);
+  });
+}
+
+// Tabla
+function tabla(){
+  const cand=filas.filter(r=>r.ghed!=null).sort((a,b)=>b.ghed-a.ghed);
+  const th=document.querySelector("#tabla thead"), tb=document.querySelector("#tabla tbody");
+  th.replaceChildren(); tb.replaceChildren();
+  const cab=["Barrio","Amb.","m²","Precio (USD)","USD/m²","Benchmark","Brecha bench.","Brecha ajust.","Oportunidad","Revisión","Aviso"];
+  const tr=el("tr"); cab.forEach((c,i)=>{ const x=el("th",(i===0||(i>=8&&i<10))?"t":null,c); x.scope="col"; tr.appendChild(x);}); th.appendChild(tr);
+  document.getElementById("tabla-n").textContent=`Ordenados por la brecha frente al benchmark ajustado (mayor a menor). Se muestran ${Math.min(mostrar,cand.length)} de ${fmtN(cand.length)} avisos.`;
+  for(const r of cand.slice(0,mostrar)){
+    const f=el("tr"); const celdas=[r.barrio,r.amb,fmtN(r.sup),fmtN(r.precio),fmtN(r.usdm2),fmtN(r.bm),fmtP(r.gbm),fmtP(r.ghed),CAT_TXT[r.cat]||"Sin clasificar",r.verif?"Requiere verificación":"–"];
+    celdas.forEach((c,i)=>f.appendChild(el("td",(i===0||i>=8)?"t":null,c)));
+    const td=el("td"); const url=r.link==null?null:(r.link.startsWith("https://")?r.link:META.base+r.link);
+    if(typeof url==="string" && url.startsWith("https://")){ const a=el("a",null,"Ver"); a.href=url; a.target="_blank"; a.rel="noopener noreferrer"; td.appendChild(a);} else td.textContent="–";
+    f.appendChild(td); tb.appendChild(f);
+  }
+  document.getElementById("mas").style.display = cand.length>mostrar ? "" : "none";
+}
+document.getElementById("mas").addEventListener("click",()=>{ mostrar+=15; tabla(); });
+
+// Flipping (unidades que necesitan obra; responde a los filtros de barrio y ambientes)
+const FR=[]; for(let i=0;i<FLIP.n;i++){ const o={}; for(const c of FLIP.cols) o[c]=FLIP.data[c][i]; FR.push(o); }
+let flipMostrar=10;
+function urlDe(l){ const u=l==null?null:(l.startsWith("https://")?l:META.base+l); return typeof u==="string"&&u.startsWith("https://")?u:null; }
+function flipping(){
+  const fs=FR.filter(r=>(!F.barrio||r.barrio===F.barrio)&&(!F.amb||r.amb===F.amb)).sort((a,b)=>a.desc-b.desc);
+  const fuera=F.est&&F.est!=="Necesita_obra" || F.cat&&F.cat!=="Necesita_obra";
+  document.getElementById("flip-n").textContent=
+    `Para cada unidad, el precio máximo de oferta es el precio de compra que deja un ROI de ${META.margen} % en el escenario base, `+
+    `después de obra, contingencia, transacción, tenencia y costo de oportunidad. El descuento requerido compara ese precio con el publicado `+
+    `(un descuento negociable habitual ronda el ${META.desc_neg} %). Ordenadas de la más cercana a cerrar a la más lejana.`+
+    (fuera?" Esta sección solo usa los filtros de barrio y ambientes.":"");
+  const t=document.getElementById("flip-tiles"); t.replaceChildren();
+  const med=mediana(fs.map(r=>r.desc).filter(v=>v!=null));
+  const items=[[fmtN(fs.length),"unidades a reciclar evaluadas"],
+    [fmtN(fs.filter(r=>r.roic>0).length),"rentables en el escenario conservador"],
+    [fmtN(fs.filter(r=>r.roib>0).length),"rentables en el escenario base"],
+    [fmtN(fs.filter(r=>r.desc<=META.desc_neg).length),`cierran con un descuento ≤ ${META.desc_neg} %`],
+    [med==null?"–":fmtN(med)+" %","descuento requerido mediano"]];
+  for(const [v,l] of items){ const d=el("div","tile"); d.appendChild(el("div","v",v)); d.appendChild(el("div","l",l)); t.appendChild(d); }
+  const th=document.querySelector("#flip-tabla thead"), tb=document.querySelector("#flip-tabla tbody"); th.replaceChildren(); tb.replaceChildren();
+  const cab=["Barrio","Amb.","m² cub.","Obra","Precio publicado","Precio máx. oferta","Descuento requerido","ROI base","ROI optimista","Decisión","Aviso"];
+  const tr=el("tr"); cab.forEach((c,i)=>{ const x=el("th",(i===0||i===3||i===9)?"t":null,c); x.scope="col"; tr.appendChild(x);}); th.appendChild(tr);
+  if(!fs.length){ const f=el("tr"), td=el("td","t","No hay unidades a reciclar con estos filtros."); td.colSpan=cab.length; f.appendChild(td); tb.appendChild(f); }
+  for(const r of fs.slice(0,flipMostrar)){
+    const f=el("tr");
+    const celdas=[r.barrio,r.amb,fmtN(r.sup),r.nivel,"USD "+fmtN(r.precio),r.pmax>0?"USD "+fmtN(r.pmax):"No cierra",
+      r.desc==null?"–":r.desc.toFixed(1).replace(".",",")+" %",fmtP(r.roib),fmtP(r.roio),r.dec+(r.alertas>0?` (${r.alertas} alerta${r.alertas>1?"s":""})`:"")];
+    celdas.forEach((c,i)=>f.appendChild(el("td",(i===0||i===3||i===9)?"t":null,c)));
+    const td=el("td"), u=urlDe(r.link); if(u){ const a=el("a",null,"Ver"); a.href=u; a.target="_blank"; a.rel="noopener noreferrer"; td.appendChild(a);} else td.textContent="–";
+    f.appendChild(td); tb.appendChild(f);
+  }
+  document.getElementById("flip-mas").style.display=fs.length>flipMostrar?"":"none";
+}
+document.getElementById("flip-mas").addEventListener("click",()=>{ flipMostrar+=10; flipping(); });
+
+// Tema
+const tb=document.getElementById("tema");
+tb.addEventListener("click",()=>{ const r=document.documentElement, oscuro=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
+  r.dataset.theme=oscuro?"light":"dark"; render(); });
+addEventListener("resize",()=>{ clearTimeout(window.__t); window.__t=setTimeout(render,150); });
+
+document.getElementById("pie").textContent=META.pie;
+render();
+</script>
+</body>
+</html>

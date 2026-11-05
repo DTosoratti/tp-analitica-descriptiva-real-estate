@@ -30,11 +30,11 @@ SUPUESTOS_FLIPPING = DATA_DIR / "supuestos_flipping.csv"
 
 RAW_DRIVE_ID = "1EapNHaHFCOYzIgedcWNqcLYoFHDkF3QE"
 
-# Huella SHA-256 de la extracción de referencia (corte 26/09/2026).
-# Se completa una sola vez corriendo `src.datos.calcular_sha256(RAW_PATH)`
-# sobre la base descargada. Mientras sea None, la verificación solo informa
-# el hash calculado y no bloquea la ejecución.
-RAW_SHA256 = None
+# Huella SHA-256 de la extracción de referencia (corte 26/09/2026; 17.023
+# avisos, 29 variables). Se calculó con `src.datos.calcular_sha256(RAW_PATH)`
+# sobre la copia de Google Drive. Si la base descargada no coincide, la
+# ejecución se detiene (src.datos.verificar_raw).
+RAW_SHA256 = "1ee9714d103a974aeac1ecb0c605f7d5d9ff8732f6103c658d30475beecb489a"
 
 
 # BENCHMARK Y CLASIFICACIÓN DE OPORTUNIDADES

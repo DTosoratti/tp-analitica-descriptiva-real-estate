@@ -384,7 +384,7 @@ no coincide con la extracción de referencia, la ejecución se detiene.
 | 05 Validación y robustez | Sensibilidad del PER a referencias contradictorias y a señales de estado |
 | 06 Validación manual | Doble lectura independiente del clasificador de estado |
 | 07 Modelo económico | Costos, ROI en tres escenarios, precio máximo de oferta, regla de decisión y sensibilidad (`src/flipping.py`) |
-| 08 Evaluación de hipótesis | Recalcula H1, H2 y H3 con tamaños de efecto, intervalos y robustez |
+| 08 Evaluación de hipótesis | Evalúa H1, H2 y H3 con pruebas estadísticas y análisis de robustez. Incluye un análisis exploratorio de micromercados por barrio |
 | 09 Resultados y recomendaciones | Ranking de visitas y recomendaciones (conviene correrla después de la 11) |
 | 10 Modelo explicativo | Regresión hedónica validada fuera de muestra (`src/modelos.py`) |
 | 11 Benchmark ajustado | Contrasta el benchmark jerárquico con el ajustado por antigüedad y características |
@@ -416,6 +416,13 @@ el fondo, en [`reports/hallazgos_negocio.md`](reports/hallazgos_negocio.md).
   transacción, pero al descontar la obra, la tenencia y el costo de
   oportunidad, ninguna es rentable en el escenario conservador (ver
   [Modelo económico de flipping](#modelo-económico-de-flipping)).
+- **Micromercados y dispersión.** En 43 barrios (9.433 avisos),
+  se encontró una asociación positiva moderada entre la dispersión
+  relativa de precios y la proporción de propiedades clasificadas
+  como baratas (Spearman ρ = 0,48; p = 0,0011).
+  Es una señal exploratoria para priorizar barrios, no una
+  confirmación de rentabilidad.
+
 ### Estado de las hipótesis
  
 | Hipótesis | Resultado (notebook 08) |
@@ -580,4 +587,4 @@ verifica. Capturas en `reports/dashboard/`.
 | Detección contextual de outliers | La detección global marca como atípicos a los segmentos de menor precio (por ejemplo, la comuna 8); evaluar una detección por segmento |
 | Estado físico real | El estado se infiere del texto del aviso. Se podría complementar con una clasificación de las fotos del aviso (por ejemplo, un modelo de imágenes que detecte cocina, baño y pisos a renovar) y así reducir el 63,5 % de avisos sin clasificar y la incertidumbre del PER |
 | Permanencia en el mercado | Nuevas capturas del extractor (con una columna de fecha de extracción) para medir la primera y la última aparición de cada aviso |
-| Validación formal de hipótesis y micromercados | H1, H2 y H3 evaluadas (notebook 08). Quedan las fuentes externas complementarias y el análisis de micromercados |
+| Validación formal de hipótesis y micromercados | H1, H2 y H3 evaluadas. Se incorporó un análisis territorial exploratorio de 43 barrios (notebook 08). Queda profundizar con variables externas y controlar diferencias de composición entre barrios |

@@ -22,6 +22,8 @@ El análisis confirma que existen oportunidades, pero también muestra que **bus
 
 **Cambio de rumbo.** Lo intuitivo sería buscar oportunidades en las zonas más baratas. La evidencia sugiere lo contrario: si el costo de obra es similar entre zonas, el fondo debería **priorizar el centro y el corredor norte**, donde además se concentran las unidades a refaccionar con descuento (comuna 1: 72 unidades; comunas 13 y 14: 36 cada una). Esta prioridad queda sujeta a confirmar los costos de obra por zona.
 
+**Actualización (PreEntrega 3, notebook 07).** El modelo económico completo, con obra, tenencia, transacción y costo de oportunidad, muestra que el flipping **no es rentable a precio publicado en ninguna zona**: ninguna unidad lo es en el escenario conservador y solo 2 de 428 en el base. El hallazgo se mantiene solo en términos relativos: aun aplicando un costo de obra 20 % mayor en los barrios caros, allí la proporción de unidades rentables en el escenario optimista es mayor (19 % contra 12 %), y las 7 unidades más cercanas a cerrar con un descuento de hasta 30 % están todas en Palermo, Recoleta y Belgrano. Si el fondo hace flipping, conviene hacerlo en esas zonas y solo comprando por debajo del precio máximo de oferta.
+
 ---
 
 ## 2. Los avisos con descuento muestran más operaciones en curso
@@ -66,7 +68,8 @@ El análisis confirma que existen oportunidades, pero también muestra que **bus
 
 | # | Recomendación | Basada en |
 | --- | --- | --- |
-| 1 | Priorizar el flipping en el centro y el corredor norte | Hallazgo 1 |
+| 1 | No hacer flipping a precio publicado; si se hace, ofertar por debajo del precio máximo de oferta y priorizar el corredor norte | Hallazgo 1 y notebook 07 |
+| 1b | Visitar primero las 249 baratas confirmadas por dos métodos (`data/processed/ranking_visitas.csv`) | Notebooks 09 y 11 |
 | 2 | Actualizar el ranking con capturas sucesivas, para medir la permanencia de los avisos y acortar el ciclo de decisión | Hallazgo 2 |
 | 3 | Revisar cada aviso dudoso antes de visitar; verificación obligatoria en el sur | Hallazgo 3 |
 | 4 | Comparar cada oportunidad con edificios de la misma categoría | Hallazgo 4 |
@@ -76,5 +79,5 @@ El análisis confirma que existen oportunidades, pero también muestra que **bus
 
 - Los precios son de publicación, no de cierre: el descuento es relativo a la oferta.
 - El estado de la propiedad se infiere del texto de los avisos; su validación manual cubrió los 78 casos más dudosos, donde la categoría de reciclada resultó poco confiable (3 de 10 confirmadas), y una muestra aleatoria de 50 avisos de esa categoría, donde 47 (94 %) se confirmaron; ambas revisiones se hicieron sobre el texto del aviso, no sobre el estado físico real. El error de la categoría de reciclada parece concentrarse en los avisos con señales contradictorias. Además, el estado se informa de forma desigual (casi no lo declaran los edificios de hasta 10 años ni los avisos más caros), por lo que el precio esperado de reciclado es más confiable para unidades antiguas que para unidades nuevas o de precio alto. Las conclusiones no cambian con definiciones más estrictas o más laxas de "reciclada" (potencial bruto mediano entre 21 % y 31 %). En consecuencia, en las zonas de mayor precio, que son las que el hallazgo 1 sugiere priorizar, el valor post-obra estimado debe tomarse con más cautela.
-- El margen de flipping todavía no descuenta el costo de la obra, que se definirá con cotizaciones por nivel de obra.
+- El margen de flipping usa costos de obra con fuente secundaria (prensa y cámaras del sector), no cotizaciones propias; el nivel de obra se infiere del texto del aviso.
 - La base corresponde a una sola red inmobiliaria y a una única captura.

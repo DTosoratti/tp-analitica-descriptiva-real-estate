@@ -68,3 +68,21 @@ ESCENARIOS = list(ESCENARIOS_PER)
 # PreEntrega 2 como primera vara del potencial bruto. El desglose por
 # componente y escenario está en data/supuestos_flipping.csv.
 COSTOS_TRANSACCION_PCT = 12
+
+
+# MODELO ECONÓMICO DE FLIPPING (notebook 07, src/flipping.py)
+
+# Tipo de cambio para convertir expensas (ARS) a USD.
+TIPO_CAMBIO_ARS_USD = 1575.00
+TIPO_CAMBIO_FECHA = "2026-11-02"
+TIPO_CAMBIO_FUENTE = "Dólar MEP, venta (DolarHub, histórico)"
+
+# Regla de decisión (README, "Regla de decisión"). Son hiperparámetros:
+# la notebook 07 informa la sensibilidad de los resultados a cada uno.
+MARGEN_MINIMO_PCT = 15          # ROI mínimo exigido en el escenario base
+PRESUPUESTO_MAX_USD = 300_000   # inversión total máxima por operación (escenario base)
+DESCUENTO_NEGOCIABLE_PCT = 10   # descuento sobre el precio publicado que se considera alcanzable
+
+# Barrios cuyo USD/m² mediano está en el cuartil superior: se les aplica
+# factor_terminacion_premium (data/supuestos_flipping.csv) al costo de obra.
+CUANTIL_BARRIO_PREMIUM = 0.75

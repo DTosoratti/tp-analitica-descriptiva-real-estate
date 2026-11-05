@@ -783,7 +783,9 @@ El detalle está en `notebooks/09_resultados_recomendaciones.ipynb`.
    (`data/processed/ranking_visitas.csv`): son baratas con dos métodos
    independientes y no tienen indicadores de error. El 41 % ya está reservado o
    en negociación, contra el 23 % de las no baratas (chi-cuadrado, p < 0,001):
-   el mercado también las detecta, así que conviene actuar rápido. El orden
+   atraen más demanda, lo que respalda que la señal no es solo error de carga.
+   Con una sola captura no se puede medir la velocidad con que salen del
+   mercado; las capturas sucesivas lo permitirían. El orden
    exacto depende del método (20 del top 50 coinciden), por lo que el ranking se
    usa por tramos y no por puesto.
 2. **Flipping.** No adoptarlo como estrategia general a precio publicado. Usar el
@@ -882,5 +884,6 @@ verifica.
 | Costo de refacción y margen de flipping | Modelo calculado con supuestos con fuente (notebook 07). Falta reemplazarlos por cotizaciones propias por nivel de obra, actualizadas con el ICC |
 | Tipo de cambio y brecha de cierre | Tipo de cambio definido (MEP, DolarHub, 02/11/2026, en `src/config.py`). Falta confirmar la disponibilidad de estadísticas de escrituras |
 | Detección contextual de outliers | La detección global marca como atípicos a los segmentos de menor precio (por ejemplo, la comuna 8); evaluar una detección por segmento |
+| Estado físico real | El estado se infiere del texto del aviso. Se podría complementar con una clasificación de las fotos del aviso (por ejemplo, un modelo de imágenes que detecte cocina, baño y pisos a renovar) y así reducir el 63,5 % de avisos sin clasificar y la incertidumbre del PER |
 | Permanencia en el mercado | Nuevas capturas del extractor (con una columna de fecha de extracción) para medir la primera y la última aparición de cada aviso |
 | Validación formal de hipótesis y micromercados | H1, H2 y H3 evaluadas (notebook 08). Quedan las fuentes externas complementarias y el análisis de micromercados |

@@ -580,7 +580,11 @@ Todas las fuentes complementarias tienen cobertura de CABA y granularidad de pun
 │   ├── benchmark.py                             # bandas, benchmark jerárquico, PER y clasificación
 │   ├── eda.py                                   # estadísticos robustos y tests no paramétricos
 │   ├── modelos.py                               # regresión hedónica, validación fuera de muestra y benchmark ajustado
-│   └── flipping.py                              # modelo económico: costos, ROI, precio máximo de oferta y regla de decisión
+│   ├── flipping.py                              # modelo económico: costos, ROI, precio máximo de oferta y regla de decisión
+│   ├── dashboard.py                             # genera dashboard/index.html (python -m src.dashboard)
+│   └── dashboard_plantilla.html                 # plantilla del dashboard (sin datos)
+├── dashboard/
+│   └── index.html                               # dashboard interactivo (se abre en el navegador)
 ├── tests/                                       # tests (python -m pytest tests/)
 └── reports/
     ├── informe_preentrega_1.docx                # informe ejecutivo de la Pre-Entrega 1 (editable)
@@ -589,7 +593,8 @@ Todas las fuentes complementarias tienen cobertura de CABA y granularidad de pun
     ├── validacion_benchmark.csv                 # métricas de la validación del benchmark y del PER
     ├── validacion_estado_muestra.csv            # muestra estratificada para la validación manual del estado
     ├── validacion_estado_contradictorios.csv    # avisos con señales contradictorias, con la revisión manual
-    └── validacion_reciclada_muestra.csv         # 50 avisos Reciclada_refaccionada al azar, con la revisión manual
+    ├── validacion_reciclada_muestra.csv         # 50 avisos Reciclada_refaccionada al azar, con la revisión manual
+    └── dashboard/                               # capturas de las vistas principales del dashboard
 ```
 
 La base raw completa (36 MB) no se versiona por su tamaño. En `data/raw/` se
@@ -791,13 +796,39 @@ El detalle está en `notebooks/09_resultados_recomendaciones.ipynb`.
 
 ## Dashboard
 
-<!-- Completar con el link o el archivo del dashboard y las instrucciones para abrirlo. -->
-El tablero interactivo para el fondo se encuentra en: **[completar]**.
+El tablero es un único archivo HTML autocontenido: **`dashboard/index.html`**.
+Se abre con doble clic en cualquier navegador, sin instalar nada ni conectarse
+a internet.
 
-Fuentes de datos del tablero: `data/processed/ranking_visitas.csv`,
-`data/processed/flipping_ranking_priorizado.csv` y
-`data/processed/remax_deptos_features.csv`. Las capturas de las vistas
-principales están en `reports/dashboard/`.
+**Cómo regenerarlo** (después de volver a correr las notebooks 07 y 11), desde la raíz:
+
+```
+python -m src.dashboard
+```
+
+El script `src/dashboard.py` une los datos y los inserta en la plantilla
+`src/dashboard_plantilla.html`.
+
+**Qué responde.**
+
+| Decisión del fondo | Vista |
+| --- | --- |
+| Qué propiedades visitar | Indicadores (baratas, confirmadas por ambos métodos y candidatas de mayor confianza), mapa, oportunidades por barrio y tabla ordenada por brecha, con link al aviso y marca de "requiere verificación" |
+| Si conviene refaccionar una unidad | Sección de flipping: unidades rentables por escenario y, para cada unidad a reciclar, precio máximo de oferta, descuento requerido, ROI y decisión |
+| Contexto | Precio relativo al benchmark según estado y distribución de los avisos según el cruce de métodos |
+
+Los filtros de barrio, ambientes, estado y oportunidad actualizan todas las
+vistas. La sección de flipping usa solo los de barrio y ambientes.
+
+**Fuentes:** `data/processed/remax_deptos_features.csv` (notebook 03),
+`oportunidades_benchmark_ajustado.csv` (notebook 11) y
+`flipping_modelo_economico.csv` (notebook 07). Las cifras coinciden con las de
+las notebooks 07 y 09 (por ejemplo, 249 candidatas de mayor confianza y 0
+unidades rentables en el escenario conservador); `tests/test_dashboard.py` lo
+verifica.
+
+**Capturas:** `reports/dashboard/01_vista_general.png`,
+`02_ranking.png` y `03_flipping.png`.
 
 
 ## Cambios en la PreEntrega 3
@@ -810,7 +841,8 @@ principales están en `reports/dashboard/`.
 | Notebooks sin outputs, ejecutadas fuera de orden o con nombres de copia | Se ejecutaron de punta a punta las notebooks 04, 05, 07, 08 y 09, y se quitaron los sufijos "(1)", "(2)" y "(4)" de los nombres |
 | Dependencias de Colab y variables no definidas | Se quitó `google.colab` de la notebook 06; la 05 importaba `PATRONES` de una sesión anterior; la 04 corre sin geopandas |
 | Umbrales repetidos en las notebooks | La 05 toma `UMBRAL_GAP` de `src/config.py`; el modelo económico, todos sus parámetros |
-| Tests | Se agregaron `tests/` (modelo de flipping, supuestos, consistencia de los datos procesados y clasificador de estado) |
+| Tests | Se agregaron `tests/` (modelo de flipping, supuestos, consistencia de los datos procesados, clasificador de estado y dashboard) |
+| Dashboard | Tablero HTML interactivo (`dashboard/index.html`, generado por `src/dashboard.py`) que incorpora los resultados de flipping y las candidatas de mayor confianza |
 
 
 ## Cambios a partir de la devolución de la PreEntrega 1

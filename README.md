@@ -882,6 +882,5 @@ verifica.
 | Costo de refacción y margen de flipping | Modelo calculado con supuestos con fuente (notebook 07). Falta reemplazarlos por cotizaciones propias por nivel de obra, actualizadas con el ICC |
 | Tipo de cambio y brecha de cierre | Tipo de cambio definido (MEP, DolarHub, 02/11/2026, en `src/config.py`). Falta confirmar la disponibilidad de estadísticas de escrituras |
 | Detección contextual de outliers | La detección global marca como atípicos a los segmentos de menor precio (por ejemplo, la comuna 8); evaluar una detección por segmento |
-| Hash de la base raw | Completar `RAW_SHA256` en `src/config.py` con `calcular_sha256(RAW_PATH)` sobre la base descargada de Drive |
 | Permanencia en el mercado | Nuevas capturas del extractor (con una columna de fecha de extracción) para medir la primera y la última aparición de cada aviso |
 | Validación formal de hipótesis y micromercados | H1, H2 y H3 evaluadas (notebook 08). Quedan las fuentes externas complementarias y el análisis de micromercados |

@@ -18,11 +18,19 @@ Fórmulas por escenario e (conservador, base, optimista):
     venta_neta  = PER_e × (1 − costos_venta)
     ROI         = (venta_neta − inversion) / inversion
 
-El precio máximo de oferta despeja el precio de compra que deja un ROI igual
-al margen mínimo:
+Para cada escenario, el precio máximo de oferta despeja el precio de compra
+que deja un ROI igual al margen mínimo:
 
-    P_max = (venta_neta / ((1 + k) (1 + margen)) − obra − tenencia) / (1 + costos_compra),
+    P_max_e(m) = (venta_neta / ((1 + k) (1 + m)) − obra − tenencia) / (1 + costos_compra),
     con k = tasa_anual × meses / 12.
+
+El precio máximo de oferta que usa la regla de decisión (`Precio_Max_Oferta_USD`)
+es el menor de tres techos, de modo que al precio ofertado se cumplen todas las
+condiciones económicas de la regla del README:
+
+    1. ROI base ≥ margen mínimo          → P_max_Base(margen)
+    2. ROI conservador ≥ 0               → P_max_Conservador(0)
+    3. gap de subvaluación ≥ UMBRAL_GAP  → Precio_Esperado × (1 − UMBRAL_GAP / 100)
 """
 
 import re
@@ -38,6 +46,7 @@ from src.config import (
     PRESUPUESTO_MAX_USD,
     SUPUESTOS_FLIPPING,
     TIPO_CAMBIO_ARS_USD,
+    UMBRAL_GAP,
 )
 from src.patrones import PATRONES
 
@@ -129,12 +138,62 @@ def calcular_escenarios(df, supuestos, premium, descuento_compra=0.0,
         out[f"ROI_{esc}_pct"] = ganancia / inversion * 100
 
         k = s["tasa_oportunidad"] * meses / 12
-        pmax = (venta_neta / ((1 + k) * (1 + MARGEN_MINIMO_PCT / 100))
-                - obra - tenencia) / (1 + s["costos_compra"])
-        out[f"Precio_Max_Oferta_{esc}_USD"] = pmax
-        out[f"Descuento_Requerido_{esc}_pct"] = (1 - pmax / out["Precio_Valor"]) * 100
+
+        def pmax(margen_pct):
+            return (venta_neta / ((1 + k) * (1 + margen_pct / 100))
+                    - obra - tenencia) / (1 + s["costos_compra"])
+
+        out[f"Precio_Max_Oferta_{esc}_USD"] = pmax(MARGEN_MINIMO_PCT)
+        out[f"Descuento_Requerido_{esc}_pct"] = (
+            1 - out[f"Precio_Max_Oferta_{esc}_USD"] / out["Precio_Valor"]) * 100
+        if esc == "Conservador":
+            out["Precio_Max_ROI_Conservador_0_USD"] = pmax(0)
 
     return out
+
+
+TECHOS_OFERTA = {
+    "ROI base ≥ margen": "Precio_Max_Oferta_Base_USD",
+    "ROI conservador ≥ 0": "Precio_Max_ROI_Conservador_0_USD",
+    "Gap ≥ umbral": "Precio_Max_Gap_USD",
+}
+
+
+def precio_max_oferta(df, umbral_gap=UMBRAL_GAP):
+    """
+    Precio máximo de oferta que cumple a la vez las tres condiciones económicas
+    de la regla (ver docstring del módulo) y qué condición lo determina.
+
+    Devuelve un DataFrame con `Precio_Max_Gap_USD`, `Precio_Max_Oferta_USD`,
+    `Descuento_Requerido_pct` (sobre el precio publicado) y `Restriccion_Activa`.
+    """
+    out = pd.DataFrame(index=df.index)
+    out["Precio_Max_Gap_USD"] = df["Precio_Esperado"] * (1 - umbral_gap / 100)
+    techos = pd.concat([df.get(c, out.get(c)) for c in TECHOS_OFERTA.values()], axis=1)
+    techos.columns = list(TECHOS_OFERTA)
+    out["Precio_Max_Oferta_USD"] = techos.min(axis=1)
+    out["Restriccion_Activa"] = techos.idxmin(axis=1)
+    out["Descuento_Requerido_pct"] = (1 - out["Precio_Max_Oferta_USD"] / df["Precio_Valor"]) * 100
+    return out
+
+
+def verificar_oferta(df, supuestos, premium, umbral_gap=UMBRAL_GAP):
+    """
+    Recalcula el modelo completo al precio máximo de oferta de cada unidad y
+    devuelve ROI conservador, ROI base, gap e inversión base a ese precio.
+    Sirve para comprobar que la regla de oferta hace lo que declara.
+    """
+    desc = (df["Descuento_Requerido_pct"] / 100).to_numpy()
+    filas = []
+    for i, d in zip(df.index, desc):
+        r = calcular_escenarios(df.loc[[i]], supuestos, premium, descuento_compra=d).iloc[0]
+        filas.append({
+            "ROI_Conservador_Oferta_pct": r["ROI_Conservador_pct"],
+            "ROI_Base_Oferta_pct": r["ROI_Base_pct"],
+            "Gap_Oferta_pct": (1 - r["Precio_Compra_USD"] / df.at[i, "Precio_Esperado"]) * 100,
+            "Inversion_Base_Oferta_USD": r["Inversion_Total_Base_USD"],
+        })
+    return pd.DataFrame(filas, index=df.index)
 
 
 def clasificar_robustez(df):
@@ -169,22 +228,28 @@ def alertas(df):
 def aplicar_regla(df, margen=MARGEN_MINIMO_PCT, presupuesto=PRESUPUESTO_MAX_USD,
                   descuento_max=DESCUENTO_NEGOCIABLE_PCT, min_comp=MIN_COMPARABLES):
     """
-    Regla de decisión del README, con una categoría intermedia para el caso
-    en que la operación solo cierra si se negocia el precio:
+    Regla de decisión del README. Las condiciones económicas (ROI base ≥ margen,
+    ROI conservador ≥ 0 y gap ≥ umbral) se evalúan al precio máximo de oferta
+    (`precio_max_oferta`), que las cumple todas por construcción:
 
-    - "Comprar al precio publicado": ROI base ≥ margen, ROI conservador ≥ 0,
-      inversión base ≤ presupuesto, comparables ≥ mínimo y sin alertas.
-    - "Ofertar con descuento": cumple soporte, presupuesto y alertas, y el
-      descuento necesario para alcanzar el margen en el escenario base es
-      ≤ descuento_max.
-    - "Revisar manualmente": cerraría con descuento, pero tiene alertas.
+    - "Comprar al precio publicado": el precio publicado ya cumple las tres
+      condiciones (descuento requerido ≤ 0), comparables ≥ mínimo, inversión
+      base ≤ presupuesto y sin alertas.
+    - "Ofertar con descuento": igual, pero hace falta un descuento positivo
+      y ≤ descuento_max para cumplirlas.
+    - "Revisar manualmente": cerraría al precio publicado o con descuento,
+      pero tiene alertas.
     - "Descartar": el resto.
+
+    Requiere las columnas de `precio_max_oferta` y `verificar_oferta`
+    (`Descuento_Requerido_pct`, `Inversion_Base_Oferta_USD`).
     """
     soporte = df["PER_N_Comparables"] >= min_comp
-    presup = df["Inversion_Total_Base_USD"] <= presupuesto
+    presup = df["Inversion_Base_Oferta_USD"] <= presupuesto
     sin_alertas = df["Cantidad_Alertas"] == 0
-    cumple_precio = (df["ROI_Base_pct"] >= margen) & (df["ROI_Conservador_pct"] >= 0)
-    cumple_desc = df["Descuento_Requerido_Base_pct"] <= descuento_max
+    desc = df["Descuento_Requerido_pct"]
+    cumple_precio = desc <= 0
+    cumple_desc = (desc > 0) & (desc <= descuento_max)
     base = soporte & presup
     return pd.Series(np.select(
         [base & sin_alertas & cumple_precio,

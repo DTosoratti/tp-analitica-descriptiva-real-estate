@@ -5,6 +5,7 @@ Modelo explicativo del precio por m² (regresión hedónica) y su validación.
 - ajustar_hedonico: regresión de log(USD/m² homogeneizado) con errores robustos.
 - tabla_efectos: efecto porcentual de cada variable, con intervalo de confianza.
 - validar_fuera_de_muestra: holdout repetido contra el benchmark jerárquico.
+- vif_por_termino / diagnostico_residuos: colinealidad y supuestos del modelo.
 
 El coeficiente de una variable indica la diferencia porcentual del USD/m²
 asociada a esa característica, controlando por las demás. Es una asociación,
@@ -14,6 +15,7 @@ no una relación causal.
 import numpy as np
 import pandas as pd
 import statsmodels.formula.api as smf
+from scipy import stats
 
 CARACTERISTICAS = [
     "Pileta", "SUM", "Gimnasio", "Seguridad", "Laundry", "Parrilla", "Solarium",
@@ -137,6 +139,102 @@ def diferencia_obra_vs_reciclada(modelo):
     return (np.exp(ef) - 1) * 100, (np.exp(lo) - 1) * 100, (np.exp(hi) - 1) * 100
 
 
+# DIAGNÓSTICO DEL MODELO: COLINEALIDAD Y RESIDUOS
+# Las funciones reciben la matriz de diseño y los residuos del modelo ajustado
+# (modelo.model.exog, modelo.model.exog_names, modelo.resid, modelo.fittedvalues)
+# y solo usan numpy y scipy.
+
+
+def _termino(nombre):
+    """Término de la fórmula al que pertenece una columna de la matriz de diseño."""
+    return nombre.split("[")[0] if nombre.startswith("C(") else nombre
+
+
+def vif_por_termino(exog, nombres):
+    """
+    Factor de inflación de la varianza por término.
+
+    Para variables de una sola columna es el VIF clásico, 1 / (1 − R²_j). Para
+    las categóricas con varias columnas (barrio, ambientes, antigüedad, estado),
+    el VIF de cada dummy no es interpretable, así que se usa el VIF generalizado
+    (GVIF) de Fox y Monette (1992):
+
+        GVIF = det(R_11) · det(R_22) / det(R)
+
+    con R la matriz de correlación de las columnas sin intercepto, R_11 la del
+    término y R_22 la del resto. Para comparar términos con distintos grados de
+    libertad (gl) se informa GVIF^(1 / (2 gl)), que para gl = 1 es la raíz del
+    VIF clásico (regla habitual: preocupa por encima de √5 ≈ 2,2 o √10 ≈ 3,2).
+    """
+    X = pd.DataFrame(np.asarray(exog, dtype=float), columns=list(nombres))
+    X = X.drop(columns=[c for c in X.columns if c == "Intercept"])
+    X = X.loc[:, X.std() > 0]
+    R = np.corrcoef(X.to_numpy(), rowvar=False)
+    _, logdet_total = np.linalg.slogdet(R)
+    terminos = pd.Series([_termino(c) for c in X.columns], index=X.columns)
+    filas = []
+    for term, cols in terminos.groupby(terminos, sort=False):
+        idx = np.flatnonzero(terminos.index.isin(cols.index))
+        resto = np.setdiff1d(np.arange(len(X.columns)), idx)
+        _, ld1 = np.linalg.slogdet(R[np.ix_(idx, idx)])
+        _, ld2 = np.linalg.slogdet(R[np.ix_(resto, resto)])
+        gvif = float(np.exp(ld1 + ld2 - logdet_total))
+        gl = len(idx)
+        filas.append({"Término": _etiqueta(term) if gl == 1 else term, "gl": gl,
+                      "GVIF": gvif, "GVIF^(1/(2gl))": gvif ** (1 / (2 * gl))})
+    return pd.DataFrame(filas).set_index("Término").sort_values("GVIF^(1/(2gl))", ascending=False)
+
+
+def diagnostico_residuos(resid, ajustados, exog):
+    """
+    Pruebas sobre los residuos del modelo:
+
+    - normalidad: asimetría, curtosis y Jarque-Bera;
+    - heterocedasticidad: Breusch-Pagan (regresión de los residuos al cuadrado
+      sobre los regresores; LM = n · R²) y la correlación de Spearman entre
+      |residuo| y el valor ajustado;
+    - observaciones influyentes: residuos estudentizados internos con |r| > 3 y
+      distancia de Cook > 4 / n, a partir de la diagonal de la matriz sombrero.
+
+    Devuelve (resumen, detalle por aviso).
+    """
+    e = np.asarray(resid, dtype=float)
+    yhat = np.asarray(ajustados, dtype=float)
+    X = np.asarray(exog, dtype=float)
+    n, k = X.shape
+
+    jb = stats.jarque_bera(e)
+    e2 = e ** 2
+    coef, *_ = np.linalg.lstsq(X, e2, rcond=None)
+    r2_aux = 1 - ((e2 - X @ coef) ** 2).sum() / ((e2 - e2.mean()) ** 2).sum()
+    rango = np.linalg.matrix_rank(X)
+    lm_bp = n * r2_aux
+    p_bp = stats.chi2.sf(lm_bp, rango - 1)
+    rho_het, p_het = stats.spearmanr(np.abs(e), yhat)
+
+    Q, _ = np.linalg.qr(X)
+    h = (Q ** 2).sum(axis=1)
+    s2 = (e2.sum()) / (n - rango)
+    r_est = e / np.sqrt(s2 * (1 - h))
+    cook = r_est ** 2 * h / (rango * (1 - h))
+
+    resumen = pd.Series({
+        "N": n,
+        "Asimetría": stats.skew(e),
+        "Curtosis (exceso)": stats.kurtosis(e),
+        "Jarque-Bera": jb.statistic, "Jarque-Bera p-valor": jb.pvalue,
+        "Breusch-Pagan LM": lm_bp, "Breusch-Pagan p-valor": p_bp,
+        "Spearman |residuo| vs. ajustado": rho_het,
+        "% residuos estudentizados |r| > 3": np.mean(np.abs(r_est) > 3) * 100,
+        "% con distancia de Cook > 4/n": np.mean(cook > 4 / n) * 100,
+        "Distancia de Cook máxima": cook.max(),
+    })
+    detalle = pd.DataFrame({"Residuo": e, "Ajustado": yhat, "Leverage": h,
+                            "Residuo_Estudentizado": r_est, "Cook": cook},
+                           index=getattr(resid, "index", None))
+    return resumen, detalle
+
+
 # BENCHMARK AJUSTADO POR CARACTERÍSTICAS (predicción fuera de muestra)
 
 def prediccion_cruzada(d, k=5, semilla=7):
@@ -187,11 +285,18 @@ def clasificar_barata_doble(d, umbral_gap=25):
 
     Categorías: Confirmada_por_ambos, Solo_benchmark (el descuento se explica por
     antigüedad y características), Solo_hedonico, No_barata.
+
+    Del lado del benchmark jerárquico se aplica la definición completa de
+    "barata" del proyecto (`src/benchmark.py`): brecha ≥ umbral **y** USD/m² en
+    el cuartil inferior de los comparables (≤ `P25_USD_m2_Comparable`). Del lado
+    del benchmark ajustado no hay grupo de comparables, así que se usa solo la
+    brecha ≥ umbral.
     """
     d = d.copy()
     d["Gap_Benchmark_pct"] = (d["Benchmark_USD_m2"] - d["USD_m2_Homogeneizado"]) / d["Benchmark_USD_m2"] * 100
     d["Gap_Hedonico_pct"] = (d["Pred_USD_m2_Propio"] - d["USD_m2_Homogeneizado"]) / d["Pred_USD_m2_Propio"] * 100
-    a, b = d["Gap_Benchmark_pct"] >= umbral_gap, d["Gap_Hedonico_pct"] >= umbral_gap
+    a = (d["Gap_Benchmark_pct"] >= umbral_gap) & (d["USD_m2_Homogeneizado"] <= d["P25_USD_m2_Comparable"])
+    b = d["Gap_Hedonico_pct"] >= umbral_gap
     d["Categoria_Doble"] = np.select(
         [a & b, a & ~b, ~a & b], ["Confirmada_por_ambos", "Solo_benchmark", "Solo_hedonico"], "No_barata")
     d.loc[d["Estado_Propiedad"].eq("Necesita_obra") | d["Pred_USD_m2_Propio"].isna(), "Categoria_Doble"] = pd.NA

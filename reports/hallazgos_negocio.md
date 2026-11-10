@@ -1,66 +1,64 @@
 # Hallazgos que cambian el rumbo del negocio
 
-**Pre-Entrega 2 — Real Estate Analytics (ITBA, Analítica Descriptiva)**
+**Real Estate Analytics (ITBA, Analítica Descriptiva)**
 
 **Cliente:** Fondo de Inversión Inmobiliario que busca propiedades subvaluadas en CABA y oportunidades de refacción y reventa (flipping).
 
-**Base:** 9.499 departamentos usados en venta publicados en RE/MAX (corte aproximado: 26/09/2026). El detalle técnico está en `notebooks/03_features_kpis.ipynb` y `notebooks/04_eda.ipynb`.
+**Base:** 9.499 departamentos usados en venta publicados en RE/MAX (corte aproximado: 26/09/2026). El detalle técnico está en las notebooks 03 a 11; las cifras de este documento salen de ellas.
 
 ---
 
 ## Resumen
 
-El análisis confirma que existen oportunidades, pero también muestra que **buscarlas con un criterio simple de "precio bajo" llevaría al fondo a decisiones equivocadas**. Las oportunidades potenciales se concentran en zonas distintas de las que sugiere el precio por m², los avisos con descuento muestran más operaciones en curso y conviven con una proporción relevante de avisos con errores. Los cinco hallazgos siguientes cambian la forma en que el fondo debería buscar, priorizar y validar sus inversiones.
+El fondo buscaba dos cosas: propiedades publicadas por debajo de su valor y unidades a reciclar en las que el descuento pague la obra. Con los datos de RE/MAX, **ninguna de las dos aparece como una estrategia general**: el mercado ya descuenta el estado de las unidades, pero no lo suficiente para pagar una obra, y buena parte de lo que parece "muy barato" es un producto distinto. Lo que sí deja el análisis es una lista corta y revisada de candidatas, un techo de oferta para cada unidad a reciclar y una explicación de por qué el resultado es este.
 
 ---
 
-## 1. El flipping rinde más en las zonas caras, no en las baratas
+## 1. El mercado ya descuenta el estado, pero no paga la obra
 
-**Evidencia.** Las unidades que necesitan obra se publican, en la mediana, un **17,4% por debajo** del precio de propiedades comparables de su misma zona. Ese descuento es **similar en toda la ciudad**: el gap de estado por comuna se ubica mayormente entre 18% y 25%, y no hay diferencias estadísticamente significativas entre comunas (Kruskal-Wallis, p = 0,26). En cambio, el nivel de precio sobre el que se aplica ese descuento varía mucho: la mediana del USD/m² va de USD 1.391 en Constitución a USD 2.852 en Palermo.
+**Evidencia.** Las unidades que necesitan obra se publican, en la mediana, **17,4 % por debajo de su benchmark**; las que están en buen estado o recicladas, en el benchmark. La diferencia entre ambos grupos es de **17,5 puntos** (IC 95 %: 15,3 a 19,9), similar en todas las comunas (Kruskal-Wallis, p = 0,26) y estable al controlar por ubicación, antigüedad y amenities (≈ 14 % en el modelo hedónico). Pero, una vez descontados obra, contingencia, transacción, tenencia y costo de oportunidad, **ninguna de las 428 unidades es rentable en el escenario conservador y solo 2 en el base**. En la mediana, el descuento alcanza para pagar unos 24 USD/m² de obra, cuando una obra media cuesta unos 500 y una integral unos 1.150. La mitad de las unidades (212) no cierra a ningún precio de compra.
 
-**Implicancia.** Si el descuento porcentual es parecido en todas las zonas, la ganancia en dólares que genera la obra es proporcional al precio del barrio. Un mismo descuento del 20% representa unos USD 570 por m² en Palermo y unos USD 280 por m² en Constitución. Si el costo de la obra por m² es similar en ambas zonas (supuesto a confirmar con las cotizaciones), **el margen del flipping es mucho mayor en los barrios de mayor valor**.
-
-**Cambio de rumbo.** Lo intuitivo sería buscar oportunidades en las zonas más baratas. La evidencia sugiere lo contrario: si el costo de obra es similar entre zonas, el fondo debería **priorizar el centro y el corredor norte**, donde además se concentran las unidades a refaccionar con descuento (comuna 1: 72 unidades; comunas 13 y 14: 36 cada una). Esta prioridad queda sujeta a confirmar los costos de obra por zona.
-
-**Actualización (PreEntrega 3, notebook 07).** El modelo económico completo, con obra, tenencia, transacción y costo de oportunidad, muestra que el flipping **no es rentable a precio publicado en ninguna zona**: ninguna unidad lo es en el escenario conservador y solo 2 de 428 en el base. El hallazgo se mantiene solo en términos relativos: aun aplicando un costo de obra 20 % mayor en los barrios caros, allí la proporción de unidades rentables en el escenario optimista es mayor (19 % contra 12 %), y las 7 unidades más cercanas a cerrar con un descuento de hasta 30 % están todas en Palermo, Recoleta y Belgrano. Si el fondo hace flipping, conviene hacerlo en esas zonas y solo comprando por debajo del precio máximo de oferta.
+**Cambio de rumbo.** No comprar unidades a reciclar al precio publicado para hacer flipping. Usar el **precio máximo de oferta** de cada unidad como techo: el mayor precio al que se cumplen a la vez un ROI base de 15 %, un ROI no negativo en el escenario conservador y una brecha de al menos 25 %. Con esa regla, ninguna unidad cierra con un descuento de hasta 10 % y solo una con hasta 30 %. Antes de cualquier oferta, **visitar y cotizar la obra**: el nivel de obra es el supuesto que más mueve el resultado (si todas fueran livianas, 137 serían rentables en el escenario base); el tipo de cambio casi no influye.
 
 ---
 
-## 2. Los avisos con descuento muestran más operaciones en curso
+## 2. Lo que parece "muy barato" suele ser otro producto
 
-**Evidencia.** Una cuarta parte de la oferta (24,6%) está reservada o en negociación. Esos avisos se publican, en la mediana, **8,4 puntos más baratos** respecto de sus comparables que los activos (Mann-Whitney, p < 0,001). Entre las propiedades clasificadas como baratas, el 34% tiene una operación en curso, y entre las que necesitan obra con descuento, el 40%, contra el 23% de las propiedades a precio de mercado.
+**Evidencia.** Al leer título y descripción de los primeros puestos del ranking de visitas aparecieron un precio que es solo un anticipo del 50 %, dos ventas de nuda propiedad, una unidad escriturada como cochera, oficinas, un PH y tres avisos con las coordenadas en otro barrio (por lo que su benchmark se calculó contra el barrio equivocado). Se excluyeron 12 de las 249 candidatas; otras 29 tienen una razón identificable para el descuento (inquilino, uso profesional, sucesión, posible duplicado) y quedan marcadas para verificar. Además, 120 de las 836 baratas de la base tienen indicadores de posible error de carga y no atraen más demanda que una propiedad a precio de mercado.
 
-**Implicancia.** Los avisos con descuento relativo atraen más demanda que los de precio de mercado. Sin embargo, el análisis se basa en una única captura: no permite medir la velocidad con la que estos avisos salen del mercado ni confirmar que los reservados o en negociación terminen en una venta.
-
-**Cambio de rumbo.** Si el fondo quiere aprovechar estas propiedades, conviene acortar el ciclo de decisión y actualizar el ranking con nuevas corridas del extractor. Esas corridas sucesivas permitirían además medir la permanencia de cada aviso y probar si las oportunidades realmente se agotan rápido, algo que hoy no se puede afirmar.
+**Cambio de rumbo.** Ningún ranking automático se presenta sin revisar los primeros puestos. La revisión quedó incorporada al pipeline (`src/revision_avisos.py` y `data/validation/revision_lista_visitas.csv`) y el fondo recibe **237 candidatas revisadas**.
 
 ---
 
-## 3. No toda "ganga" es real: hay que verificar antes de ofertar
+## 3. Por qué casi nada cierra: la fuente
 
-**Evidencia.** De las 836 propiedades que cumplen el criterio de barata, **120 tienen indicadores de posible error de carga** (precio atípicamente bajo, combinación inusual de superficie y ambientes, coordenadas inválidas o ficha sin descripción). Esas propiedades no atraen más demanda que una propiedad a precio de mercado: el 23% está reservada o en negociación, igual que las propiedades a precio de mercado. Si fueran oportunidades reales, deberían atraer más compradores. El problema se agrava en el sur: en la comuna 8, **18 de las 20 propiedades baratas** requieren verificación.
+**Evidencia.** En RE/MAX cada aviso lo publica un agente que tasa la propiedad antes de publicarla y cuya comisión depende de vender. Es poco probable que publique con errores de valuación groseros. Los resultados son coherentes con eso: la cola de la brecha está poblada por diferencias de producto (hallazgo 2) y el descuento por estado está bien calibrado, pero no sobra para la obra (hallazgo 1).
 
-**Implicancia.** Una parte de los precios "excepcionalmente bajos" son errores de publicación, no descuentos.
-
-**Cambio de rumbo.** El fondo debe **separar las propiedades con potencial bruto sin alertas de error (716) de las que requieren verificación (120)**, y revisar cada aviso dudoso antes de destinar tiempo a visitas. Que una propiedad no tenga alertas no la convierte en una oportunidad confirmada: todavía falta verificar su estado físico y el costo de la obra. En las zonas de menor precio, la verificación es obligatoria.
+**Cambio de rumbo.** En avisos tasados por un agente, "buscar precios mal puestos" rinde poco; la oportunidad está en descuentos con una causa que el fondo puede aceptar o resolver (inquilino, sucesión, obra liviana). La premisa original es más plausible en portales donde publican particulares (por ejemplo, avisos de dueño directo en Zonaprop o MercadoLibre). Antes de descartarla, conviene correr el mismo pipeline sobre esa fuente y comparar la proporción de baratas.
 
 ---
 
 ## 4. Comparar sin tener en cuenta la categoría del edificio genera falsas oportunidades
 
-**Evidencia.** Las amenities del edificio son lo que más diferencia el precio entre propiedades de una misma zona y tamaño. Respecto de sus comparables, los departamentos en edificios con gimnasio se publican **27 puntos más caros**; con pileta o SUM, unos 18 puntos más; con seguridad, 15 puntos más. Las amenities aparecen juntas y en edificios más nuevos (por ejemplo, la pileta se asocia negativamente con la antigüedad, ρ = −0,43).
+**Evidencia.** A igualdad de barrio, tamaño y antigüedad, la cochera incluida se asocia con un USD/m² 14 % mayor y el gimnasio con uno 10 % mayor. De las 801 propiedades baratas según el benchmark de comparables, solo **325 (41 %) siguen siéndolo** con un benchmark ajustado por antigüedad y características, que además tiene menor error fuera de muestra (MAPE de 15,3 % contra 19,6 %). Las demás tienen, sobre todo, menos amenities y menos cochera.
 
-**Implicancia.** El benchmark actual compara por barrio, ambientes, superficie y antigüedad, pero no por categoría del edificio. Un departamento sin amenities, rodeado de comparables con amenities, aparece como "barato" aunque su precio sea el correcto para su producto.
-
-**Cambio de rumbo.** Antes de ofertar, cada oportunidad debe compararse con **edificios de su misma categoría**. En la siguiente etapa se incorporará un índice de categoría del edificio al cálculo del benchmark, lo que reducirá las falsas oportunidades y el error de estimación (hoy, el error típico es del 15%).
+**Cambio de rumbo.** Priorizar las baratas según ambos benchmarks. Como los dos se estiman sobre los mismos avisos, su coincidencia es consistencia interna y no una confirmación independiente: sigue haciendo falta la visita.
 
 ---
 
-## 5. Un criterio exigente da una lista accionable
+## 5. La dispersión de precios no señala oportunidades
 
-**Evidencia.** Con un umbral de descuento del 15%, el 18,6% de la oferta resultaba "barata": casi uno de cada cinco departamentos. Ese nivel de descuento está dentro de la variación normal del mercado (el 25% de las propiedades ya tiene un gap de al menos 13,8%) y del error de estimación del benchmark. Con un umbral del **25%**, que supera ese error, la lista se reduce a **836 propiedades (8,8%)**.
+**Evidencia.** Los estratos con precios más dispersos tienen más baratas, pero eso ocurre por construcción: si "barata" es estar 25 % por debajo de la mediana, en un estrato más disperso más avisos caen lejos de ella. Frente a un nulo que preserva la dispersión de cada estrato, la proporción de avisos en la cola es la esperada (9,6 % observada contra 9,6 % esperada) y el exceso no crece con la dispersión.
 
-**Cambio de rumbo.** El fondo no necesita revisar miles de avisos: con el umbral recalibrado y el ranking ordenado por descuento, puede **concentrar su esfuerzo en las primeras posiciones** y ampliar la búsqueda solo si lo necesita. El umbral es un parámetro que puede ajustarse según la capacidad de análisis del equipo.
+**Cambio de rumbo.** No usar la dispersión de un barrio o estrato como criterio para buscar oportunidades. Sirve para describir dónde está la cola y como alerta de que el benchmark de ese estrato es menos confiable.
+
+---
+
+## 6. Las candidatas atraen demanda: hay que moverse rápido
+
+**Evidencia.** El 41 % de las candidatas de mayor confianza ya está reservado o en negociación, contra el 23 % de las no baratas (chi-cuadrado, p < 0,001).
+
+**Cambio de rumbo.** Acortar el ciclo de decisión y actualizar el ranking con capturas sucesivas del extractor. Con una sola captura no se puede medir la velocidad con que salen del mercado.
 
 ---
 
@@ -68,16 +66,17 @@ El análisis confirma que existen oportunidades, pero también muestra que **bus
 
 | # | Recomendación | Basada en |
 | --- | --- | --- |
-| 1 | No hacer flipping a precio publicado; si se hace, ofertar por debajo del precio máximo de oferta y priorizar el corredor norte | Hallazgo 1 y notebook 07 |
-| 1b | Visitar primero las 249 baratas confirmadas por dos métodos (`data/processed/ranking_visitas.csv`) | Notebooks 09 y 11 |
-| 2 | Actualizar el ranking con capturas sucesivas, para medir la permanencia de los avisos y acortar el ciclo de decisión | Hallazgo 2 |
-| 3 | Revisar cada aviso dudoso antes de visitar; verificación obligatoria en el sur | Hallazgo 3 |
-| 4 | Comparar cada oportunidad con edificios de la misma categoría | Hallazgo 4 |
-| 5 | Trabajar con el umbral de 25% y el ranking ordenado por descuento | Hallazgo 5 |
+| 1 | Visitar las 237 candidatas revisadas (`data/processed/ranking_visitas.csv`), por tramos y no por puesto; confirmar primero las 29 marcadas para verificar | Hallazgos 2, 4 y 6; notebook 09 |
+| 2 | No hacer flipping a precio publicado; ofertar como máximo el precio máximo de oferta de cada unidad | Hallazgo 1; notebook 07 |
+| 3 | Antes de ofertar, visita técnica y cotización de obra propia | Hallazgo 1 |
+| 4 | Revisar título, descripción y ubicación de cada aviso antes de visitarlo | Hallazgo 2 |
+| 5 | Probar el pipeline sobre avisos de particulares antes de abandonar la búsqueda de precios mal puestos | Hallazgo 3 |
+| 6 | Actualizar el ranking con capturas sucesivas | Hallazgo 6 |
 
 ## Limitaciones
 
-- Los precios son de publicación, no de cierre: el descuento es relativo a la oferta.
-- El estado de la propiedad se infiere del texto de los avisos; su validación manual cubrió los 78 casos más dudosos, donde la categoría de reciclada resultó poco confiable (3 de 10 confirmadas), y una muestra aleatoria de 50 avisos de esa categoría, donde 47 (94 %) se confirmaron; ambas revisiones se hicieron sobre el texto del aviso, no sobre el estado físico real. El error de la categoría de reciclada parece concentrarse en los avisos con señales contradictorias. Además, el estado se informa de forma desigual (casi no lo declaran los edificios de hasta 10 años ni los avisos más caros), por lo que el precio esperado de reciclado es más confiable para unidades antiguas que para unidades nuevas o de precio alto. Las conclusiones no cambian con definiciones más estrictas o más laxas de "reciclada" (potencial bruto mediano entre 21 % y 31 %). En consecuencia, en las zonas de mayor precio, que son las que el hallazgo 1 sugiere priorizar, el valor post-obra estimado debe tomarse con más cautela.
-- El margen de flipping usa costos de obra con fuente secundaria (prensa y cámaras del sector), no cotizaciones propias; el nivel de obra se infiere del texto del aviso.
-- La base corresponde a una sola red inmobiliaria y a una única captura.
+- Los precios son de publicación, no de cierre: el descuento es relativo a la oferta, y la brecha entre publicación y cierre no está medida.
+- Una sola red inmobiliaria y una sola captura: no representa a todo el mercado ni permite medir permanencia.
+- El estado se infiere del texto de los avisos. Se validó con doble lectura (accuracy de 78 %, kappa de 0,70) y con muestras dirigidas, siempre sobre el texto y no sobre el estado físico real.
+- Los costos de obra son supuestos con fuente secundaria, no cotizaciones propias, y el nivel de obra se infiere del texto.
+- La revisión de la lista de visitas es manual en los primeros 42 puestos y automática en el resto.

@@ -26,13 +26,18 @@ DESTINO = RAIZ / "dashboard" / "index.html"
 PREFIJO_LINK = "https://www.remax.com.ar/listings/"
 
 
-def preparar_datos(features=BASE_FEATURES, oportunidades=PROCESSED_DIR / "oportunidades_benchmark_ajustado.csv"):
+ESTADOS_PUBLICACION = {"active": "Activo", "reserved": "Reservado", "negotiation": "En negociación"}
+
+
+def preparar_datos(features=BASE_FEATURES, oportunidades=PROCESSED_DIR / "oportunidades_benchmark_ajustado.csv",
+                   ranking=PROCESSED_DIR / "ranking_visitas.csv"):
     """Une las bases y devuelve el DataFrame con las columnas que usa el dashboard."""
     feat = pd.read_csv(features)
     opor = pd.read_csv(oportunidades)
     d = opor.merge(
         feat[["ID", "Link", "Latitud", "Longitud", "Precio_Valor", "Superficie_Homogeneizada_m2",
-              "Ambientes_Grupo", "Flag_Coordenadas_Invalidas", "Clasificacion_Oportunidad"]],
+              "Ambientes_Grupo", "Flag_Coordenadas_Invalidas", "Clasificacion_Oportunidad",
+              "Estado_Publicacion"]],
         on="ID", how="left", validate="one_to_one")
     sin_geo = d["Flag_Coordenadas_Invalidas"].fillna(False).astype(bool) | d[["Latitud", "Longitud"]].isna().any(axis=1)
     d.loc[sin_geo, ["Latitud", "Longitud"]] = np.nan
@@ -41,8 +46,22 @@ def preparar_datos(features=BASE_FEATURES, oportunidades=PROCESSED_DIR / "oportu
     d.loc[d["Estado_Propiedad"].eq("Necesita_obra"), "Cat"] = "Necesita_obra"
     # Baratas con indicadores de posible error de carga (no son candidatas de mayor confianza)
     d["Verif"] = d["Clasificacion_Oportunidad"].eq("Barata_requiere_verificacion")
-    # Candidatas de mayor confianza: mismo criterio que la notebook 09 (ranking_visitas.csv)
-    d["Confianza"] = d["Categoria_Doble"].eq("Confirmada_por_ambos") & d["Clasificacion_Oportunidad"].eq("Barata")
+    # Candidatas de mayor confianza: las del ranking de visitas revisado (notebook 09)
+    visitas = pd.read_csv(ranking)
+    d["Confianza"] = d["ID"].isin(visitas["ID"])
+    automaticas = d["Categoria_Doble"].eq("Confirmada_por_ambos") & d["Clasificacion_Oportunidad"].eq("Barata")
+    motivo = d["ID"].map(visitas.set_index("ID")["Motivo_Revision"])
+    verificar = d["ID"].map(visitas.set_index("ID")["Revision"]).eq("Verificar")
+    d["Revision"] = np.select(
+        [d["Verif"], verificar, d["Confianza"], automaticas & ~d["Confianza"]],
+        ["Requiere verificación (posible error de carga)",
+         "Verificar",
+         "Revisada",
+         "Excluida (no comparable)"],
+        default="–")
+    d["Motivo_Revision"] = np.where(d["Verif"], "Indicadores de posible error de carga",
+                                    motivo.fillna("").astype(str))
+    d["Publicacion"] = d["Estado_Publicacion"].map(ESTADOS_PUBLICACION).fillna("Sin dato")
     return d
 
 
@@ -76,6 +95,9 @@ def construir_json(d):
         "link": _lista(link),
         "verif": _lista(d["Verif"]),
         "conf": _lista(d["Confianza"]),
+        "rev": _lista(d["Revision"]),
+        "revm": _lista(d["Motivo_Revision"]),
+        "pub": _lista(d["Publicacion"]),
     }
     return {"n": len(d), "cols": list(columnas), "data": columnas}
 
@@ -91,13 +113,14 @@ def construir_json_flipping(f):
         "sup": _lista(f["Superficie_Cubierta_m2"], 1),
         "nivel": _lista(f["Nivel_Obra"]),
         "precio": _lista(f["Precio_Valor"], 0),
-        "pmax": _lista(f["Precio_Max_Oferta_Base_USD"], 0),
-        "desc": _lista(f["Descuento_Requerido_Base_pct"], 1),
+        "pmax": _lista(f["Precio_Max_Oferta_USD"], 0),
+        "desc": _lista(f["Descuento_Requerido_pct"], 1),
         "roic": _lista(f["ROI_Conservador_pct"], 1),
         "roib": _lista(f["ROI_Base_pct"], 1),
         "roio": _lista(f["ROI_Optimista_pct"], 1),
         "obra": _lista(f["Costo_Obra_Base_USD"], 0),
         "dec": _lista(f["Decision"]),
+        "pub": _lista(f["Estado_Publicacion"].map(ESTADOS_PUBLICACION).fillna("Sin dato")),
         "alertas": _lista(f["Cantidad_Alertas"]),
         "link": _lista(_link_corto(f["Link"])),
     }
@@ -112,14 +135,18 @@ def generar_dashboard(destino=DESTINO):
         "base": PREFIJO_LINK,
         "margen": MARGEN_MINIMO_PCT,
         "desc_neg": DESCUENTO_NEGOCIABLE_PCT,
+        "gap": UMBRAL_GAP,
         "pie": (f"{len(d):,}".replace(",", ".") + " avisos de departamentos en venta de RE/MAX (corte de extracción aproximado: 26/09/2026), "
                 "sin valores extremos ni ambientes dudosos. Son precios de publicación, no de cierre. "
-                f"Brecha = % por debajo del precio esperado; barata = brecha de al menos {UMBRAL_GAP} % y USD/m² en el cuartil inferior de sus comparables. "
+                f"Brecha = % por debajo del precio esperado. Según el benchmark de comparables, barata = brecha de al menos {UMBRAL_GAP} % "
+                f"y USD/m² en el cuartil inferior de sus comparables; según el benchmark ajustado, brecha de al menos {UMBRAL_GAP} %. "
+                "Estado de publicación y links corresponden a la fecha de extracción: un aviso puede haberse vendido o dado de baja "
+                "después, y en ese caso el link lleva a la página principal de RE/MAX. "
                 "El benchmark ajustado controla antigüedad y características publicadas, pero no el estado del edificio, "
                 "el piso ni las terminaciones: sirve para priorizar y contrastar, no para tasar. "
                 f"Flipping: {len(f)} unidades que necesitan obra, con costos de obra, transacción, tenencia y costo de oportunidad "
-                "según data/supuestos_flipping.csv (notebook 07); el precio máximo de oferta deja un ROI de "
-                f"{MARGEN_MINIMO_PCT} % en el escenario base. Los costos de obra son supuestos con fuente secundaria, no cotizaciones."
+                "según data/supuestos_flipping.csv (notebook 07); el precio máximo de oferta es el mayor precio al que el ROI base "
+                f"es de al menos {MARGEN_MINIMO_PCT} %, el ROI conservador no es negativo y la brecha es de al menos {UMBRAL_GAP} %. Los costos de obra son supuestos con fuente secundaria, no cotizaciones."
                 ),
     }
     html = (PLANTILLA.read_text(encoding="utf-8")

@@ -14,7 +14,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from src import flipping as fl
-from src.config import MARGEN_MINIMO_PCT
+from src.config import MARGEN_MINIMO_PCT, PROCESSED_DIR, UMBRAL_GAP
 
 
 def aviso(**kw):
@@ -22,7 +22,7 @@ def aviso(**kw):
                 Barrio_Oficial="Caballito", Precio_Valor=100_000.0,
                 Superficie_Cubierta_m2=50.0, Expensas_Imputadas=0.0,
                 PER_Conservador=130_000.0, PER_Base=150_000.0, PER_Optimista=170_000.0,
-                PER_N_Comparables=15, PER_Nivel=1, Flag_Senal_Contradictoria=False,
+                PER_N_Comparables=15, PER_Nivel=1, Precio_Esperado=160_000.0, Flag_Senal_Contradictoria=False,
                 Flag_Expensas_Imputadas=False)
     base.update(kw)
     return pd.DataFrame([base])
@@ -93,13 +93,40 @@ def test_descuento_de_compra_mejora_el_roi(supuestos):
 
 def test_regla_de_decision():
     df = pd.DataFrame({
-        "PER_N_Comparables": [15, 15, 15, 5],
-        "Inversion_Total_Base_USD": [100_000] * 4,
-        "Cantidad_Alertas": [0, 0, 1, 0],
-        "ROI_Base_pct": [20, 5, 20, 20],
-        "ROI_Conservador_pct": [1, -5, 1, 1],
-        "Descuento_Requerido_Base_pct": [-3, 8, -3, -3],
+        "PER_N_Comparables": [15, 15, 15, 5, 15],
+        "Inversion_Base_Oferta_USD": [100_000] * 5,
+        "Cantidad_Alertas": [0, 0, 1, 0, 0],
+        "Descuento_Requerido_pct": [-3, 8, -3, -3, 25],
     })
     assert list(fl.aplicar_regla(df, margen=15, descuento_max=10)) == [
         "Comprar al precio publicado", "Ofertar con descuento",
-        "Revisar manualmente", "Descartar"]
+        "Revisar manualmente", "Descartar", "Descartar"]
+
+
+@pytest.mark.parametrize("per_cons", [90_000.0, 130_000.0, 160_000.0])
+def test_al_precio_ofertado_se_cumplen_todas_las_condiciones(supuestos, per_cons):
+    """La oferta deja ROI base ≥ margen, ROI conservador ≥ 0 y gap ≥ umbral,
+    con la restricción activa como igualdad."""
+    df = aviso(PER_Conservador=per_cons).assign(Nivel_Obra="Media")
+    df = fl.calcular_escenarios(df, supuestos, premium=set())
+    df = pd.concat([df, fl.precio_max_oferta(df)], axis=1)
+    v = fl.verificar_oferta(df, supuestos, premium=set()).iloc[0]
+    assert v["ROI_Base_Oferta_pct"] >= MARGEN_MINIMO_PCT - 1e-6
+    assert v["ROI_Conservador_Oferta_pct"] >= -1e-6
+    assert v["Gap_Oferta_pct"] >= UMBRAL_GAP - 1e-6
+    activa = df["Restriccion_Activa"].iloc[0]
+    valor = {"ROI base ≥ margen": v["ROI_Base_Oferta_pct"] - MARGEN_MINIMO_PCT,
+             "ROI conservador ≥ 0": v["ROI_Conservador_Oferta_pct"],
+             "Gap ≥ umbral": v["Gap_Oferta_pct"] - UMBRAL_GAP}[activa]
+    assert valor == pytest.approx(0, abs=1e-6)
+
+
+def test_ranking_exportado_cumple_la_regla_al_precio_ofertado():
+    """Ninguna unidad que no se descarta queda con ROI conservador negativo
+    o gap bajo el umbral al precio máximo de oferta (por ejemplo, el aviso 550445)."""
+    r = pd.read_csv(PROCESSED_DIR / "flipping_modelo_economico.csv")
+    ok = r["Decision"] != "Descartar"
+    assert (r.loc[ok, "ROI_Conservador_Oferta_pct"] >= -1e-6).all()
+    assert (r.loc[ok, "ROI_Base_Oferta_pct"] >= MARGEN_MINIMO_PCT - 1e-6).all()
+    assert (r.loc[ok, "Gap_Oferta_pct"] >= UMBRAL_GAP - 1e-6).all()
+    assert (r["Precio_Max_Oferta_USD"] <= r["Precio_Max_Oferta_Base_USD"] + 1e-6).all()

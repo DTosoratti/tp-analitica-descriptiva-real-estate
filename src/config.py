@@ -64,8 +64,8 @@ ESCENARIOS = list(ESCENARIOS_PER)
 
 # COSTOS DE LA OPERACIÓN
 
-# Costos de transacción totales (compra + venta, % del precio) usados en la
-# PreEntrega 2 como primera vara del potencial bruto. El desglose por
+# Costos de transacción totales (compra + venta, % del precio), usados como
+# primera vara del potencial bruto en el EDA (notebook 04). El desglose por
 # componente y escenario está en data/supuestos_flipping.csv.
 COSTOS_TRANSACCION_PCT = 12
 
